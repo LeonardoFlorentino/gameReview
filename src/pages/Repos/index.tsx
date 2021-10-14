@@ -1,16 +1,29 @@
 import {
   ContainerRepos,
   ContainerHeader,
+  GoBackButton,
   NumberOfFollowers,
   ContainerBody,
-  ContainerRepo
-} from './styles' 
+  ContainerRepo,
+  NameContainer,
+  RepoName,
+  RepoDescription,
+  IconsContainer,
+  IconLock,
+  IconUnLock,
+  StarContainer,
+  StarNumbers,
+  IconStar,
+  IconLockContainer
+} from './styles'
 
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
 import { data } from '../../data/data'
+import { dataRepos } from '../../data/dataRepos'
+import { Square } from '../Profile/styles';
 // const URL = 'https://api.github.com/users/LeonardoFlorentino'
 interface dataTypes {
   name?: string,
@@ -41,17 +54,62 @@ export const Repos = () => {
   //   fetchData();
   // });
   if (data) {
-    const { public_repos} = data
+    const { public_repos } = data
+    const { name, description, stargazers_count } = dataRepos[0]
     return (
       <ContainerRepos>
         <ContainerHeader>
+          <GoBackButton />
           <NumberOfFollowers>
             {public_repos} repositórios
           </NumberOfFollowers>
         </ContainerHeader>
         <ContainerBody>
           <ContainerRepo>
-
+            <NameContainer>
+              <Square />
+              <RepoName>
+                {name}
+              </RepoName>
+            </NameContainer>
+            <RepoDescription>
+              {description}
+            </RepoDescription>
+            <IconsContainer>
+              <StarContainer>
+                <IconStar />
+                <StarNumbers>
+                  {stargazers_count}
+                </StarNumbers>
+              </StarContainer>
+              <IconLockContainer>
+                <IconUnLock />
+                <IconLock />
+              </IconLockContainer>
+            </IconsContainer>
+          </ContainerRepo>
+          <ContainerRepo>
+            <NameContainer>
+              <Square />
+              <RepoName>
+                {name}
+              </RepoName>
+            </NameContainer>
+            <RepoDescription>
+              {description}
+            </RepoDescription>
+            <IconsContainer>
+              <StarContainer>
+                <IconStar />
+                <StarNumbers>
+                  {stargazers_count}
+                </StarNumbers>
+              </StarContainer>
+              <IconLockContainer>
+                <IconUnLock />
+                <IconLock />
+              </IconLockContainer>
+            </IconsContainer>
           </ContainerRepo>
         </ContainerBody>
       </ContainerRepos>
