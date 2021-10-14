@@ -1,22 +1,27 @@
-import { FiArrowRight } from 'react-icons/fi'
-import { LoginContainer, Button, Input, Logo} from "./styles"
+import {useState} from 'react'
+import { LoginContainer, Button, Input, Logo, NameButton} from "./styles"
+import { useHistory } from 'react-router-dom';
 
-const Login = () => {
-    const arrowRightIconStyle = {
-        size: 20,
-        marginLeft: '4px'
+
+export const Login = () => {
+    const history = useHistory();
+    const [name, setName] = useState("");
+
+    const updateName = (event: any) => {
+      setName(event.target.value);
+    };
+    const onSubmit = (event: any) => {
+       history.push(`/user/${name}`)
     }
 
     return (
         <LoginContainer>
             <Logo/>
-            <Input placeholder="Usuário" />
-            <Button >
+            <Input onChange={(event) => updateName(event)} placeholder="Usuário" />
+            <Button onClick={onSubmit}>
                 ENTRAR
-                <FiArrowRight style={arrowRightIconStyle}/>
+                <NameButton/>
             </Button>
         </LoginContainer>
     )
 }
-
-export default Login

@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "outDir": "./dist",
-    "inlineSourceMap": true,
     "lib": [
       "dom",
       "dom.iterable",

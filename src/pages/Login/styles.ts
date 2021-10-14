@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 // import {GitHub} from '@styled-icons/bootstrap/Github'
 import { AiFillGithub } from 'react-icons/ai'
+import { FiArrowRight } from 'react-icons/fi'
 
 export const LoginContainer = styled.div`
     height: 100vh;
@@ -16,7 +17,6 @@ export const Logo = styled(AiFillGithub)`
     width: 200px;
     height: 200px;
     padding-bottom: 50px;
-
 `
 
 export const Input = styled.input`
@@ -44,4 +44,10 @@ export const Button = styled.button`
     background-color: #ffce00;
     color: #292929;
 `
+
+export const NameButton = styled(FiArrowRight)`
+        size: 20;
+        margin-left: 4px;
+`
+
 

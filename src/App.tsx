@@ -1,11 +1,10 @@
-import Router from './routes/app.routes';
 
-function App() {
+import { Router } from './routes/app.routes';
+
+const App = () => {
   return (
-    <div>
-      <Router />
-    </div>
+    <Router/>
   );
 }
 
-export default App;
+export default App
