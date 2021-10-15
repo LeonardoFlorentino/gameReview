@@ -63,8 +63,8 @@ export const ProfilePic = styled.img`
     border-radius: 100%;
     height: 15vw;
     width:15vw;
-    max-width: 120px ;
-    max-height: 120px ;
+    max-width: 80px ;
+    max-height: 80px ;
     min-width: 60px ;
     min-height: 60px ;
 `
