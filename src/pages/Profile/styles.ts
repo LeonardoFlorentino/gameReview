@@ -49,7 +49,7 @@ export const ProfilePic = styled.img`
     align-items: center;
     background-color: #eee;
     border: 3px solid white;
-    border-radius: 150px;
+    border-radius: 100%;
     height: 150px;
     width:150px;
 `
@@ -122,4 +122,10 @@ export const ContainerBio = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    height: 100px;
+`
+
+export const Footer = styled.div`
+    position: fixed;
+    bottom: 0px;
 `

@@ -77,3 +77,8 @@ export const LoginName = styled.div`
 export const AcessButton = styled(FiArrowRight)`
 
 `
+export const Footer = styled.div`
+    position: fixed;
+    left: 0;
+    bottom: 0;
+`

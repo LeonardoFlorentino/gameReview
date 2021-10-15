@@ -8,12 +8,15 @@ import {
   Square,
   ProfilePic,
   LoginName,
-  AcessButton
+  AcessButton,
+  Footer
 } from './styles'
 
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
+
+import { Navbar } from '../../components/Navbar'
 
 import { data } from '../../data/data'
 // const URL = 'https://api.github.com/users/LeonardoFlorentino'
@@ -71,6 +74,9 @@ export const Followers = () => {
             <AcessButton/>
           </ProfileContainer>
         </ContainerBody>
+        <Footer>
+          <Navbar/>
+        </Footer>
       </ContainerFollowers>
     )
   }

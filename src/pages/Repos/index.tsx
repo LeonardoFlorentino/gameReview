@@ -14,12 +14,15 @@ import {
   StarContainer,
   StarNumbers,
   IconStar,
-  IconLockContainer
+  IconLockContainer,
+  Footer
 } from './styles'
 
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
+
+import { Navbar } from '../../components/Navbar'
 
 import { data } from '../../data/data'
 import { dataRepos } from '../../data/dataRepos'
@@ -112,6 +115,9 @@ export const Repos = () => {
             </IconsContainer>
           </ContainerRepo>
         </ContainerBody>
+        <Footer>
+          <Navbar />
+        </Footer>
       </ContainerRepos>
     )
   }

@@ -114,3 +114,9 @@ export const IconStar = styled(AiOutlineStar)`
     margin-left: 32px;
     color: yellow;
 `
+
+export const Footer = styled.div`
+    position: fixed;
+    left: 0;
+    bottom: 0;
+`

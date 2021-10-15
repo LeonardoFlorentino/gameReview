@@ -5,7 +5,6 @@ import { Profile } from '../pages/Profile';
 import { Followers } from '../pages/Followers';
 import { Following } from '../pages/Following';
 import { Repos } from '../pages/Repos';
-import { Navbar } from '../components/Navbar'
 
 export function Router() {
   return (
@@ -14,21 +13,17 @@ export function Router() {
         <Route path="/" exact>
           <Login />
         </Route>
-        <Route path="/user/LeonardoFlorentino">
+        <Route path="/user/LeonardoFlorentino" exact>
           <Profile />
-          <Navbar />
         </Route>
-        <Route path="/following">
-          <Following />
-          <Navbar />
-        </Route>
-        <Route path="/followers">
-          <Followers />
-          <Navbar />
-        </Route>
-        <Route path="/repos">
+        <Route path="/user/LeonardoFlorentino/repos">
           <Repos />
-          <Navbar />
+        </Route>
+        <Route path="/user/LeonardoFlorentino/followers">
+          <Followers />
+        </Route>
+        <Route path="/user/LeonardoFlorentino/following">
+          <Following />
         </Route>
       </Switch>
     </BrowserRouter>

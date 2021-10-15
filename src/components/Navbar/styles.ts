@@ -11,14 +11,23 @@ export const Nav = styled.nav`
   background-color: #eee;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  height: 80px;
+  height: 60px;
   width: 100vw;
-  display: flex;
-  justify-content:space-around;
-  align-items: center;
   @media (max-width: 360px) {
-    width: 360px;
+    width: 300px;
   }
+`;
+
+export const NavMenu = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  align-items: center;
+  justify-content: center;
+
+  /* @media (min-width: 300px) {
+    width: 200px;
+  } */
 `;
 
 export const NavLink = styled(Link)`
@@ -27,7 +36,6 @@ export const NavLink = styled(Link)`
   align-items: center;
   color:#aaa;
   text-decoration: none;
-  padding: 0px 8vw;
   cursor: pointer;
 
   &:active {
@@ -39,18 +47,11 @@ export const NavLink = styled(Link)`
 `;
 
 
-export const NavMenu = styled.div`
-  display: flex;
-  justify-content: center;
-
-  @media (min-width: 300px) {
-    width: 300px;
-  }
-`;
+const sizeIcon = 25
 
 export const IconHome = styled(BiHomeAlt)`
-    width: 30px;
-    height: 30px;
+    width: ${sizeIcon}px;
+    height: ${sizeIcon}px;
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -59,8 +60,8 @@ export const IconHome = styled(BiHomeAlt)`
 `
 
 export const IconRepos = styled(FiGithub)`
-    width: 30px;
-    height: 30px;
+    width: ${sizeIcon}px;
+    height: ${sizeIcon}px;
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -70,8 +71,8 @@ export const IconRepos = styled(FiGithub)`
 `
 
 export const IconFollowers = styled(BiGroup)`
-    width: 30px;
-    height: 30px;
+    width: ${sizeIcon}px;
+    height: ${sizeIcon}px;
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -81,8 +82,8 @@ export const IconFollowers = styled(BiGroup)`
 `
 
 export const IconFollowing = styled(BiGroup)`
-    width: 30px;
-    height: 30px;
+    width: ${sizeIcon}px;
+    height: ${sizeIcon}px;
     display: flex;
     flex-direction: column;
     align-items: center; 

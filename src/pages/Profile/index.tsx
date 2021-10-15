@@ -14,11 +14,13 @@ import {
     ContainerInfoFollowers,
     ContainerInfoFollower,
     InfoFollower,
-    ContainerBio
+    ContainerBio,
+    Footer
 
 } from './styles';
 
 // import { data } from '../../data/data'
+import { Navbar } from '../../components/Navbar'
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
@@ -110,6 +112,9 @@ export const Profile = () => {
                         </InfoContainer>
                     </ContainerBio>
                 </HomeBody>
+                <Footer>
+                    <Navbar />
+                </Footer>
             </HomeContainer>
         )
     } else {
