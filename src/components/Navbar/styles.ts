@@ -5,9 +5,6 @@ import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
   background-color: #eee;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;

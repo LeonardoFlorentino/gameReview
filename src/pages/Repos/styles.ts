@@ -3,7 +3,6 @@ import { FiArrowLeft, FiLock, FiUnlock } from 'react-icons/fi'
 import {AiOutlineStar} from 'react-icons/ai'
 
 export const ContainerRepos = styled.div`
-    height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -38,7 +37,7 @@ export const ContainerBody = styled.div`
     align-items: center;
 `
 export const ContainerRepo = styled.div`
-    height: 120px;
+    padding: 10px 0px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -49,6 +48,7 @@ export const ContainerRepo = styled.div`
     margin-bottom: 3px;
 `
 export const NameContainer = styled.div`
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -62,17 +62,16 @@ export const Square = styled.div`
 `
 
 export const RepoName = styled.div`
-   font-size: 0.8rem;
    font-weight: bold;
 `
 
 export const RepoDescription = styled.div`
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     padding-left: 32px;
 `
 
 export const IconsContainer = styled.div`
-    padding: 20px 0px;
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
 

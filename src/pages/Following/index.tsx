@@ -55,7 +55,7 @@ export const Following = () => {
         <ContainerHeader>
           <GoBackButton />
           <NumberOfFollowers>
-            {followers} seguidores
+            Seguindo {followers} 
           </NumberOfFollowers>
         </ContainerHeader>
         <ContainerBody>
