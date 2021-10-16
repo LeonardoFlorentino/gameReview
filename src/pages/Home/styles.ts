@@ -45,6 +45,7 @@ export const HomeBody = styled.div`
 export const ProfileContainer = styled.div`
     display: flex;
     width: 100vw;
+    padding: 20px 0px;
     justify-content: center;
     background: conic-gradient(#292929 0.25turn, #343434 0.25turn 0.5turn, #343434 0.5turn 0.75turn, #292929 0.75turn);
 `
