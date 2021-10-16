@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Login } from '../pages/Login';
-import { Profile } from '../pages/Profile';
+import { Home } from '../pages/Home';
 import { Followers } from '../pages/Followers';
 import { Following } from '../pages/Following';
 import { Repos } from '../pages/Repos';
@@ -13,8 +13,8 @@ export function Router() {
         <Route path="/" exact>
           <Login />
         </Route>
-        <Route path="/user/LeonardoFlorentino" exact>
-          <Profile />
+        <Route path="/user/LeonardoFlorentino/" exact>
+          <Home />
         </Route>
         <Route path="/user/LeonardoFlorentino/repos">
           <Repos />

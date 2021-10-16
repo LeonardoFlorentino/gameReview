@@ -9,7 +9,7 @@ export const HomeContainer = styled.div`
 `
 
 export const HomeHeader = styled.div`
-    margin-top: 20px;
+    padding: 20px 0px;
     width: 100vw;
     display: flex;
     flex-direction: line;
@@ -18,34 +18,38 @@ export const HomeHeader = styled.div`
 
 export const LoginName = styled.div`
    font-weight: bold;
-   margin-left: 10px;
+   margin-left: 20px;
 `
 export const ExitContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-right: 20px;
 
 `
 export const Exit = styled(FiLogOut)`
     width: 25px;
     height: 25px;
     color: #BB3C3E;
-    margin-right: 20px;
     margin-left: 10px;
 `
 export const HomeBody = styled.div`
     height: 100%;
     background-color: #343434;
-    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
 `
 
+export const ProfileContainer = styled.div`
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    background: conic-gradient(#292929 0.25turn, #343434 0.25turn 0.5turn, #343434 0.5turn 0.75turn, #292929 0.75turn);
+`
+
 export const ProfilePic = styled.img`
-    position: relative;
-    bottom: 80px;
     align-items: center;
     background-color: #eee;
     border: 3px solid white;

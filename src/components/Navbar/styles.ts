@@ -13,9 +13,9 @@ export const Nav = styled.nav`
   border-top-right-radius: 20px;
   height: 60px;
   width: 100vw;
-  @media (max-width: 360px) {
+  /* @media (max-width: 360px) {
     width: 300px;
-  }
+  } */
 `;
 
 export const NavMenu = styled.div`

@@ -26,7 +26,7 @@ import { Navbar } from '../../components/Navbar'
 
 import { data } from '../../data/data'
 import { dataRepos } from '../../data/dataRepos'
-import { Square } from '../Profile/styles';
+import { Square } from '../Home/styles';
 // const URL = 'https://api.github.com/users/LeonardoFlorentino'
 interface dataTypes {
   name?: string,

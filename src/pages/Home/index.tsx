@@ -5,6 +5,7 @@ import {
     ExitContainer,
     Exit,
     HomeBody,
+    ProfileContainer,
     ProfilePic,
     Name,
     InfoNameContainer,
@@ -46,7 +47,7 @@ interface RouteParams {
     username: string;
 }
 
-export const Profile = () => {
+export const Home = () => {
     const { username }: RouteParams = useParams();
     const [data, setData] = useState<dataTypes | null>(null);
     useEffect(() => {
@@ -79,7 +80,9 @@ export const Profile = () => {
                     </ExitContainer>
                 </HomeHeader>
                 <HomeBody>
-                    <ProfilePic src={avatar_url} />
+                    <ProfileContainer>
+                        <ProfilePic src={avatar_url} />
+                    </ProfileContainer>
                     <InfoNameContainer>
                         <Name>
                             <Square />{name.toUpperCase()}

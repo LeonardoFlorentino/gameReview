@@ -19,11 +19,11 @@ export const Navbar = (props: Props) => {
     <>
       <Nav>
         <NavMenu>
-          <NavLink to='/user/LeonardoFlorentino' >
+          <NavLink to='/user/LeonardoFlorentino/' >
             <IconHome />
             <Text>Home</Text>
           </NavLink>
-          <NavLink to='/user/LeonardoFLorentino/Repos' >
+          <NavLink to='/user/LeonardoFlorentino/Repos' >
             <IconRepos/>
             <Text>Repos</Text>
           </NavLink>
