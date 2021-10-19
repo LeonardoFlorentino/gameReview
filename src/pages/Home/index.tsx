@@ -20,63 +20,38 @@ import {
 
 } from './styles';
 
+import { RouteParams } from '../../interface'
+
 // import { data } from '../../data/data'
 import { Navbar } from '../../components/Navbar'
 
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 
 
+// import { data } from '../../data'
 
 
-interface dataTypes {
-    name: string,
-    login: string,
-    avatar_url: string,
-    email: string,
-    location: string,
-    followers: number,
-    following: number,
-    public_repos: number,
-    bio: string
+export const Home = (props: any) => {
+    const { id }: RouteParams = useParams()
+    const { userName, user, fetchData, setUserName } = props
 
-}
+    const data = async () => {
+        if (userName !== id) {
+            await setUserName(id)
+        }
+        else {
+            await fetchData
+        }
+    }
 
-interface RouteParams {
-    username: string,
-    id: string
-}
-
-const URL= 'https://api.github.com/users'
-
-export const Home = () => {
-    // const { username }: RouteParams = useParams();
-    const {id}: RouteParams = useParams()
-    const [data, setData] = useState<dataTypes | null>(null);
-    useEffect(() => {
-        const fetchData = async () => {
-            // const newUrl = `${URL}/${username}`
-            const response = await fetch(`${URL}/${id}`);
-            const newData = await response.json();
-            setData(newData);
-        };
-        fetchData();
-    });
-    if (data) {
-        const { login,
-            avatar_url,
-            name,
-            email,
-            location,
-            followers,
-            following,
-            public_repos,
-            bio } = data
+    data()
+    if (user !== {}) {
         return (
             <HomeContainer>
                 <HomeHeader>
                     <LoginName>
-                        #{login}
+                        #{user.login}
                     </LoginName>
                     <ExitContainer>
                         Sair<Exit />
@@ -84,28 +59,28 @@ export const Home = () => {
                 </HomeHeader>
                 <HomeBody>
                     <ProfileContainer>
-                        <ProfilePic src={avatar_url} />
+                        <ProfilePic src={user.avatar_url} />
                     </ProfileContainer>
                     <InfoNameContainer>
                         <Name>
-                            <Square />{name.toUpperCase()}
+                            <Square />{user.name}
                         </Name>
                         <InfoContainer>
-                            <Info>{email}</Info>
-                            <Info>{location}</Info>
+                            <Info>{user.email}</Info>
+                            <Info>{user.location}</Info>
                         </InfoContainer>
                     </InfoNameContainer>
                     <ContainerInfoFollowers>
                         <ContainerInfoFollower>
-                            <InfoFollower>{followers}</InfoFollower>
+                            <InfoFollower>{user.followers}</InfoFollower>
                             <Info>Seguidores</Info>
                         </ContainerInfoFollower>
                         <ContainerInfoFollower>
-                            <InfoFollower>{following}</InfoFollower>
+                            <InfoFollower>{user.following}</InfoFollower>
                             <Info>Seguindo</Info>
                         </ContainerInfoFollower>
                         <ContainerInfoFollower>
-                            <InfoFollower>{public_repos}</InfoFollower>
+                            <InfoFollower>{user.public_repos}</InfoFollower>
                             <Info>Repos</Info>
                         </ContainerInfoFollower>
                     </ContainerInfoFollowers>
@@ -114,7 +89,7 @@ export const Home = () => {
                             <Square />{'Bio'.toUpperCase()}
                         </Name>
                         <InfoContainer>
-                            <Info>{bio}</Info>
+                            <Info>{user.bio}</Info>
                         </InfoContainer>
                     </ContainerBio>
                 </HomeBody>
@@ -123,8 +98,10 @@ export const Home = () => {
                 </Footer>
             </HomeContainer>
         )
-    } else {
-        return null;
+    }
+    else {
+        return null
     }
 }
+
 

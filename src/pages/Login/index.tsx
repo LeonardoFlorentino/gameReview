@@ -1,17 +1,18 @@
-import {useState} from 'react'
+// import {useState} from 'react'
 import { LoginContainer, Button, Input, Logo, NameButton} from "./styles"
 import { useHistory } from 'react-router-dom';
 
 
-export const Login = () => {
+export const Login = (props:any) => {
     const history = useHistory();
-    const [name, setName] = useState("");
+    const {userName, updateUserName, fetchData} = props
 
     const updateName = (event: any) => {
-      setName(event.target.value);
+      updateUserName(event.target.value);
     };
-    const onSubmit = (event: any) => {
-       history.push(`/user/${name}`)
+    const onSubmit = async (event: any) => {
+       await fetchData(userName)
+       history.push(`/user/${userName}`)
     }
 
     return (

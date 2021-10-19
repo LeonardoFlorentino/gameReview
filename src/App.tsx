@@ -3,7 +3,7 @@ import { Router } from './routes/app.routes';
 
 const App = () => {
   return (
-    <Router/>
+    <Router />
   );
 }
 

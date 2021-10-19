@@ -28,24 +28,24 @@ import { Navbar } from '../../components/Navbar'
 // import { dataRepos } from '../../data/dataRepos'
 import { Square } from '../Home/styles';
 const URL = 'https://api.github.com/users'
-interface dataTypes {
-  name?: string,
-  login?: string,
-  avatar_url?: string,
-  email?: string,
-  location?: string,
-  followers?: number,
-  following?: number,
-  public_repos?: number,
-  bio?: string
+// interface dataTypes {
+//   name?: string,
+//   login?: string,
+//   avatar_url?: string,
+//   email?: string,
+//   location?: string,
+//   followers?: number,
+//   following?: number,
+//   public_repos?: number,
+//   bio?: string
 
-}
+// }
 
-interface dataReposTypes {
-  name?: string,
-  description?: string,
-  stargazers_count?: string
-}
+// interface dataReposTypes {
+//   name?: string,
+//   description?: string,
+//   stargazers_count?: string
+// }
 interface RouteParams {
   username: string,
   id:string
