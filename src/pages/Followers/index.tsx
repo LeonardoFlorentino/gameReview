@@ -18,8 +18,8 @@ import { useEffect, useState } from 'react'
 
 import { Navbar } from '../../components/Navbar'
 
-import { data } from '../../data/data'
-// const URL = 'https://api.github.com/users/LeonardoFlorentino'
+// import { data } from '../../data/data'
+const URL = 'https://api.github.com/users'
 interface dataTypes {
   name?: string,
   login?: string,
@@ -33,21 +33,22 @@ interface dataTypes {
 
 }
 interface RouteParams {
-  username: string;
+  username: string,
+  id:string
 }
 
 export const Followers = () => {
-  // const { username }: RouteParams = useParams();
-  // const [data, setData] = useState<dataTypes | null>(null);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // const newUrl = `${URL}/${username}`
-  //     const response = await fetch(URL);
-  //     const newData = await response.json();
-  //     setData(newData);
-  //   };
-  //   fetchData();
-  // });
+  const {id}: RouteParams = useParams();
+  const [data, setData] = useState<dataTypes | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const newUrl = `${URL}/${id}`
+      const response = await fetch(newUrl);
+      const newData = await response.json();
+      setData(newData);
+    };
+    fetchData();
+  });
   if (data) {
     const { followers, avatar_url, login} = data
     return (

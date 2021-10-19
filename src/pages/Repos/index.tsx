@@ -24,10 +24,10 @@ import { useEffect, useState } from 'react'
 
 import { Navbar } from '../../components/Navbar'
 
-import { data } from '../../data/data'
-import { dataRepos } from '../../data/dataRepos'
+// import { data } from '../../data/data'
+// import { dataRepos } from '../../data/dataRepos'
 import { Square } from '../Home/styles';
-// const URL = 'https://api.github.com/users/LeonardoFlorentino'
+const URL = 'https://api.github.com/users'
 interface dataTypes {
   name?: string,
   login?: string,
@@ -40,23 +40,43 @@ interface dataTypes {
   bio?: string
 
 }
+
+interface dataReposTypes {
+  name?: string,
+  description?: string,
+  stargazers_count?: string
+}
 interface RouteParams {
-  username: string;
+  username: string,
+  id:string
 }
 
+
 export const Repos = () => {
-  // const { username }: RouteParams = useParams();
-  // const [data, setData] = useState<dataTypes | null>(null);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // const newUrl = `${URL}/${username}`
-  //     const response = await fetch(URL);
-  //     const newData = await response.json();
-  //     setData(newData);
-  //   };
-  //   fetchData();
-  // });
-  if (data) {
+  const {id}: RouteParams = useParams();
+  const [data, setData] = useState<any | null>(null);
+  const [dataRepos, setDataRepos] = useState<any | null> (null)
+
+  const newUrl = `${URL}/${id}`
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(newUrl);
+      const newData = await response.json();
+      setData(newData);
+    };
+    fetchData();
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const responseRepos = await fetch(`${newUrl}/repos`)
+      const newDataRepos = await responseRepos.json()
+      setDataRepos(newDataRepos)       
+    };
+    fetchData();
+  });
+
+  if (data && dataRepos) {
     const { public_repos } = data
     const { name, description, stargazers_count } = dataRepos[0]
     return (

@@ -26,7 +26,6 @@ import { Navbar } from '../../components/Navbar'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
-const URL = 'https://api.github.com/users/LeonardoFlorentino'
 
 
 
@@ -44,16 +43,20 @@ interface dataTypes {
 }
 
 interface RouteParams {
-    username: string;
+    username: string,
+    id: string
 }
 
+const URL= 'https://api.github.com/users'
+
 export const Home = () => {
-    const { username }: RouteParams = useParams();
+    // const { username }: RouteParams = useParams();
+    const {id}: RouteParams = useParams()
     const [data, setData] = useState<dataTypes | null>(null);
     useEffect(() => {
         const fetchData = async () => {
             // const newUrl = `${URL}/${username}`
-            const response = await fetch(URL);
+            const response = await fetch(`${URL}/${id}`);
             const newData = await response.json();
             setData(newData);
         };
