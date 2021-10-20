@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route  } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Login } from '../pages/Login';
 import { Home } from '../pages/Home';
@@ -17,32 +17,38 @@ const URL = 'https://api.github.com/users'
 
 export function Router() {
 
-  const [userName,setUserName] = useState<string>('')
-  const [user,setUser] = useState<object>({})
+  const [userName, setUserName] = useState<string>('')
+  const [user, setUser] = useState<object>({})
 
-  const fetchData = async () =>{
-    if(userName === ''){
-      return null
-    }
-    else{
-      const newURL = `${URL}/${userName}`
+  const fetchData = async (id: string) => {
+    try {
+      const newURL = `${URL}/${id}`
       const response = await fetch(newURL);
       const newData = await response.json();
-      setUser(newData) 
+      console.log("newData: ", newData)
+      setUser(newData)
+      if (id !== userName) {
+        console.log(id)
+        setUserName(id)
+      }
+    }
+    catch (e) {
+      console.log("Não foi possível atender a requisição")
     }
   }
 
+  console.log("user 2: ", user)
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Login userName = {userName} updateUserName={setUserName} fetchData={fetchData}/>
+          <Login userName={userName} updateUserName={setUserName} fetchData={fetchData} />
         </Route>
         <Route path="/user/:id" exact>
-          <Home user={user} 
-          fetchData={fetchData} 
-          userName={userName} 
-          setUserName={setUserName}/>
+          <Home user={user}
+            fetchData={fetchData}
+            userName={userName}
+            setUserName={setUserName} />
         </Route>
         <Route path="/user/:id/repos">
           <Repos />

@@ -17,7 +17,6 @@ import {
     InfoFollower,
     ContainerBio,
     Footer
-
 } from './styles';
 
 import { RouteParams } from '../../interface'
@@ -30,22 +29,17 @@ import { useParams } from 'react-router-dom';
 
 
 // import { data } from '../../data'
-
+let i = 1;
 
 export const Home = (props: any) => {
     const { id }: RouteParams = useParams()
-    const { userName, user, fetchData, setUserName } = props
-
-    const data = async () => {
-        if (userName !== id) {
-            await setUserName(id)
-        }
-        else {
-            await fetchData
-        }
+    const { user, fetchData } = props
+    while (i <= 1) {
+        console.log("heelo")
+        fetchData(id)
+        i++;
     }
 
-    data()
     if (user !== {}) {
         return (
             <HomeContainer>

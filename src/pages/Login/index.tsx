@@ -5,13 +5,12 @@ import { useHistory } from 'react-router-dom';
 
 export const Login = (props:any) => {
     const history = useHistory();
-    const {userName, updateUserName, fetchData} = props
+    const {userName, updateUserName } = props
 
     const updateName = (event: any) => {
       updateUserName(event.target.value);
     };
     const onSubmit = async (event: any) => {
-       await fetchData(userName)
        history.push(`/user/${userName}`)
     }
 
