@@ -18,46 +18,90 @@ const URL = 'https://api.github.com/users'
 export function Router() {
 
   const [userName, setUserName] = useState<string>('')
-  const [user, setUser] = useState<object>({})
+  const [user, setUser] = useState<Object>({})
+  const [followings, setFollowing] = useState<Array<object>>([])
+  const [followers, setFollowers] = useState<Array<object>>([])
+  const [repos, setRepos] = useState<Array<object>>([])
 
-  const fetchData = async (id: string) => {
-    try {
-      const newURL = `${URL}/${id}`
-      const response = await fetch(newURL);
-      const newData = await response.json();
-      console.log("newData: ", newData)
-      setUser(newData)
-      if (id !== userName) {
-        console.log(id)
+  const getUser = async (id: string) => {
+    if (id !== userName || Object.entries(user).length === 0) {
+      try {
+        const newURL = `${URL}/${id}`
+        const response = await fetch(newURL);
+        const newData = await response.json();
+        setUser(newData)
         setUserName(id)
       }
-    }
-    catch (e) {
-      console.log("Não foi possível atender a requisição")
+      catch (e) {
+        console.log("Requisão com o seguinte erro: ", e)
+      }
     }
   }
 
-  console.log("user 2: ", user)
+  const getFollowers = async (id: string) => {
+    if (id !== userName || followers === []) {
+      try {
+        const newURL = `${URL}/${id}/followers`
+        const response = await fetch(newURL);
+        const newData = await response.json();
+        setFollowers(newData)
+        setUser({})
+        setFollowing([])
+        setRepos([])
+      }
+      catch (e) {
+        console.log("Requisão com o seguinte erro: ", e)
+      }
+    }
+  }
+
+
+  const getFollowings = async (id: string) => {
+    if (id !== userName || followings === []) {
+      try {
+        const newURL = `${URL}/${id}/following`
+        const response = await fetch(newURL);
+        const newData = await response.json();
+        setFollowing(newData)
+        setUser({})
+        setFollowers([])
+        setRepos([])
+      }
+      catch (e) {
+        console.log("Requisão com o seguinte erro: ", e)
+      }
+    }
+  }
+
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Login userName={userName} updateUserName={setUserName} fetchData={fetchData} />
+          <Login userName={userName} setUserName={setUserName} getUser={getUser} />
         </Route>
         <Route path="/user/:id" exact>
-          <Home user={user}
-            fetchData={fetchData}
-            userName={userName}
-            setUserName={setUserName} />
+          <Home
+            user={user}
+            getUser={getUser}
+          />
         </Route>
         <Route path="/user/:id/repos">
           <Repos />
         </Route>
         <Route path="/user/:id/followers">
-          <Followers />
+          <Followers
+            user={user}
+            getUser={getUser}
+            followers={followers}
+            getFollowers={getFollowers} />
         </Route>
         <Route path="/user/:id/following">
-          <Following />
+          <Following
+            user={user}
+            getUser={getUser}
+            followings={followings}
+            getFollowings={getFollowings} />
         </Route>
       </Switch>
     </BrowserRouter>

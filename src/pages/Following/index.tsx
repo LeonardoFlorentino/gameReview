@@ -10,78 +10,55 @@ import {
   LoginName,
   AcessButton,
   Footer
-} from './styles' 
+} from './styles'
 
+import { dataTypes } from '../../interface'
 
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react'
 
 import { Navbar } from '../../components/Navbar'
 
 // import { data } from '../../data/data'
-const URL = 'https://api.github.com/users'
-interface dataTypes {
-  name?: string,
-  login?: string,
-  avatar_url?: string,
-  email?: string,
-  location?: string,
-  followers?: number,
-  following?: number,
-  public_repos?: number,
-  bio?: string
-
-}
 interface RouteParams {
   username: string,
   id: string
 }
 
-export const Following = () => {
-  const { id }: RouteParams = useParams();
-  const [data, setData] = useState<dataTypes | null>(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      const newUrl = `${URL}/${id}`
-      const response = await fetch(newUrl);
-      const newData = await response.json();
-      setData(newData);
-    };
-    fetchData();
-  });
-  if (data) {
-    const { followers, avatar_url, login} = data
-    return (
-      <ContainerFollowers>
-        <ContainerHeader>
-          <GoBackButton />
-          <NumberOfFollowers>
-            Seguindo {followers} 
-          </NumberOfFollowers>
-        </ContainerHeader>
-        <ContainerBody>
-          <ProfileContainer>
-            <Square/>
-            <ProfilePic  src={avatar_url}/>
-            <LoginName>#{login}</LoginName>
-            <AcessButton/>
-          </ProfileContainer>
-        </ContainerBody>
-        <ContainerBody>
-          <ProfileContainer>
-            <Square/>
-            <ProfilePic  src={avatar_url}/>
-            <LoginName>#{login}</LoginName>
-            <AcessButton/>
-          </ProfileContainer>
-        </ContainerBody>
-        <Footer>
-          <Navbar/>
-        </Footer>
-      </ContainerFollowers>
-    )
+
+
+let i = 1;
+
+export const Following = (props: any) => {
+  const { id }: RouteParams = useParams()
+  const { user, getUser, followings, getFollowings } = props
+
+  while (i <= 1) {
+    getUser(id)
+    getFollowings(id)
+    i++;
   }
-  else {
-    return null;
-  }
+  return (
+    <ContainerFollowers>
+      <ContainerHeader>
+        <GoBackButton />
+        <NumberOfFollowers>
+          Seguindo {user.following}
+        </NumberOfFollowers>
+      </ContainerHeader>
+      <ContainerBody>
+        {
+          followings.map((following: dataTypes) => (
+            <ProfileContainer key={following.node_id}>
+              <Square />
+              <ProfilePic src={following.avatar_url} />
+              <LoginName>#{following.login}</LoginName>
+              <AcessButton />
+            </ProfileContainer>))
+        }
+      </ContainerBody>
+      <Footer>
+        <Navbar activePage='followings' />
+      </Footer>
+    </ContainerFollowers>
+  )
 }

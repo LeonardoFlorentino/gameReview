@@ -1,6 +1,6 @@
 
 export interface dataTypes {
-    user: Object,
+    user?: Object,
     name?: string,
     login?: string,
     avatar_url?: string,
@@ -9,7 +9,8 @@ export interface dataTypes {
     followers?: number,
     following?: number,
     public_repos?: number,
-    bio?: string
+    bio?: string,
+    node_id ?: string
 
 }
 

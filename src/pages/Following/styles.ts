@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 
 export const ContainerFollowers = styled.div`
-    height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -20,7 +19,7 @@ export const ContainerHeader = styled.div`
 `
 
 export const GoBackButton = styled(FiArrowLeft)`
-    margin-left: 20px;
+    margin-left: 40px;
     height: 25px;
     width: 25px;
 `
@@ -30,7 +29,7 @@ export const NumberOfFollowers = styled.div`
 `
 
 export const ContainerBody = styled.div`
-    background-color: #3f3f3f;
+    background-color: #4f4f4f;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -41,12 +40,11 @@ export const ProfileContainer = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 0.1fr 0.6fr 2fr 0.3fr;
-    justify-items: flex-start;
     align-items: center;
     font-weight: bold;
     font-size: 1.5rem;
     background-color: #343434;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 `
 
 export const Square = styled.div`

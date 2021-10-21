@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 
 export const ContainerFollowers = styled.div`
-    height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -11,7 +10,7 @@ export const ContainerFollowers = styled.div`
 
 export const ContainerHeader = styled.div`
     width: 100vw;
-    height: 90px;
+    height: 150px;
     display: grid;
     grid-template-columns: 40px 1fr 50px;
     align-items: center;

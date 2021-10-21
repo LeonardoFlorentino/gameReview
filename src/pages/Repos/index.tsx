@@ -136,7 +136,7 @@ export const Repos = () => {
           </ContainerRepo>
         </ContainerBody>
         <Footer>
-          <Navbar />
+          <Navbar activePage='repos'/>
         </Footer>
       </ContainerRepos>
     )

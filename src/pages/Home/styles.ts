@@ -4,8 +4,10 @@ import { FiLogOut } from 'react-icons/fi'
 export const HomeContainer = styled.div`
     height: 100vh;
     width: 100vw;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    overflow-x: hidden;
 `
 
 export const HomeHeader = styled.div`
@@ -35,11 +37,16 @@ export const Exit = styled(FiLogOut)`
     margin-left: 10px;
 `
 export const HomeBody = styled.div`
-    height: 100%;
     background-color: #343434;
     display: flex;
     flex-direction: column;
     align-items: center;
+    &:after{
+        content: "";
+        display: block;
+        height: 50px;
+        width: 100%
+    }
 `
 
 export const ProfileContainer = styled.div`
@@ -97,7 +104,7 @@ export const InfoContainer = styled.div`
     padding-bottom: 40px;
 `
 
-export const Info = styled.div `
+export const Info = styled.div`
     font-size: 0.8rem;
 `
 
@@ -116,7 +123,7 @@ export const ContainerInfoFollower = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-` 
+`
 
 export const InfoFollower = styled.div`
     font-weight: bold;
@@ -129,6 +136,8 @@ export const ContainerBio = styled.div`
     flex-direction: column;
 `
 
-export const Footer = styled.div`
-    justify-content: flex-end;
+export const HomeFooter = styled.div`
+    position: fixed;
+    left: 0;
+    bottom: 0;
 `
