@@ -31,6 +31,7 @@ export function Router() {
         const newData = await response.json();
         setUser(newData)
         if (id !== userName) {
+          setUserName(id)
           setFollowers([])
           setFollowings([])
           setRepos([])
@@ -87,6 +88,29 @@ export function Router() {
     }
   }
 
+  const getRepos = async (id: string) => {
+    if (id !== userName || repos.length === 0) {
+      try {
+        const newURL = `${URL}/${id}/repos`
+        const response = await fetch(newURL);
+        const newData = await response.json();
+        setRepos(newData)
+        if (id !== userName) {
+          setUserName(id)
+          userName = id
+          getUser(id)
+          setFollowers([])
+          setFollowings([])
+          setUser({})
+          
+        }
+      }
+      catch (e) {
+        console.log("Requisão com o seguinte erro: ", e)
+      }
+    }
+  }
+
 
   return (
     <BrowserRouter>
@@ -101,7 +125,10 @@ export function Router() {
           />
         </Route>
         <Route path="/user/:id/repos">
-          <Repos />
+          <Repos 
+            user={user}
+            repos={repos}
+            getRepos={getRepos}/>
         </Route>
         <Route path="/user/:id/followers">
           <Followers

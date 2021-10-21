@@ -1,147 +1,84 @@
 import {
-  ContainerRepos,
-  ContainerHeader,
+  ReposContainer,
+  ReposHaeder,
   GoBackButton,
   NumberOfFollowers,
-  ContainerBody,
-  ContainerRepo,
+  ReposBody,
+  RepoContainer,
   NameContainer,
   RepoName,
   RepoDescription,
   IconsContainer,
   IconLock,
   IconUnLock,
+  Square,
   StarContainer,
   StarNumbers,
   IconStar,
   IconLockContainer,
-  Footer
+  ReposFooter
 } from './styles'
 
 
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react'
 
 import { Navbar } from '../../components/Navbar'
 
-// import { data } from '../../data/data'
-// import { dataRepos } from '../../data/dataRepos'
-import { Square } from '../Home/styles';
-const URL = 'https://api.github.com/users'
-// interface dataTypes {
-//   name?: string,
-//   login?: string,
-//   avatar_url?: string,
-//   email?: string,
-//   location?: string,
-//   followers?: number,
-//   following?: number,
-//   public_repos?: number,
-//   bio?: string
-
-// }
-
-// interface dataReposTypes {
-//   name?: string,
-//   description?: string,
-//   stargazers_count?: string
-// }
 interface RouteParams {
   username: string,
-  id:string
+  id: string
 }
 
 
-export const Repos = () => {
-  const {id}: RouteParams = useParams();
-  const [data, setData] = useState<any | null>(null);
-  const [dataRepos, setDataRepos] = useState<any | null> (null)
+let i = 1;
 
-  const newUrl = `${URL}/${id}`
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(newUrl);
-      const newData = await response.json();
-      setData(newData);
-    };
-    fetchData();
-  });
+export const Repos = (props: any) => {
+  const { id }: RouteParams = useParams();
+  const { user, repos, getRepos } = props
+  while (i <= 1) {
+    getRepos(id)
+    i++;
+  }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const responseRepos = await fetch(`${newUrl}/repos`)
-      const newDataRepos = await responseRepos.json()
-      setDataRepos(newDataRepos)       
-    };
-    fetchData();
-  });
-
-  if (data && dataRepos) {
-    const { public_repos } = data
-    const { name, description, stargazers_count } = dataRepos[0]
-    return (
-      <ContainerRepos>
-        <ContainerHeader>
-          <GoBackButton />
-          <NumberOfFollowers>
-            {public_repos} repositórios
-          </NumberOfFollowers>
-        </ContainerHeader>
-        <ContainerBody>
-          <ContainerRepo>
+  return (
+    <ReposContainer>
+      <ReposHaeder>
+        <GoBackButton />
+        <NumberOfFollowers>
+          {user.public_repos} repositórios 
+        </NumberOfFollowers>
+      </ReposHaeder>
+        <ReposBody>
+        {
+          repos.map((repo: any) => (
+          <RepoContainer key={repo.node_id}>
             <NameContainer>
               <Square />
               <RepoName>
-                {name}
+                {repo.name}
               </RepoName>
             </NameContainer>
             <RepoDescription>
-              {description}
+              {repo.description}
             </RepoDescription>
             <IconsContainer>
               <StarContainer>
                 <IconStar />
                 <StarNumbers>
-                  {stargazers_count}
+                  {repo.stargazers_count}
                 </StarNumbers>
               </StarContainer>
               <IconLockContainer>
                 <IconUnLock />
-                <IconLock />
+                <IconLock/>
               </IconLockContainer>
             </IconsContainer>
-          </ContainerRepo>
-          <ContainerRepo>
-            <NameContainer>
-              <Square />
-              <RepoName>
-                {name}
-              </RepoName>
-            </NameContainer>
-            <RepoDescription>
-              {description}
-            </RepoDescription>
-            <IconsContainer>
-              <StarContainer>
-                <IconStar />
-                <StarNumbers>
-                  {stargazers_count}
-                </StarNumbers>
-              </StarContainer>
-              <IconLockContainer>
-                <IconUnLock />
-                <IconLock />
-              </IconLockContainer>
-            </IconsContainer>
-          </ContainerRepo>
-        </ContainerBody>
-        <Footer>
+          </RepoContainer>))
+        }
+        </ReposBody>
+        <ReposFooter>
           <Navbar activePage='repos'/>
-        </Footer>
-      </ContainerRepos>
-    )
-  }
-  else {
-    return null;
-  }
+        </ReposFooter>
+    </ReposContainer >
+  )
 }

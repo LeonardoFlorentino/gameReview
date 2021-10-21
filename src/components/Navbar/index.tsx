@@ -31,7 +31,7 @@ export const Navbar = ({activePage}:any) => {
             <IconHome />
             <Text>Home</Text>
           </NavLink>
-          <NavLink to={`/user/${id}/repos`} color={activePage === 'respos'? '#222': '#aaa'}>
+          <NavLink to={`/user/${id}/repos`} color={activePage === 'repos'? '#222': '#aaa'}>
             <IconRepos/>
             <Text>Repos</Text>
           </NavLink>

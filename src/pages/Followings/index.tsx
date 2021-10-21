@@ -9,7 +9,7 @@ import {
   ProfilePic,
   LoginName,
   AcessButton,
-  Footer
+  FollowingsFooter
 } from './styles'
 
 import { dataTypes } from '../../interface'
@@ -55,9 +55,9 @@ export const Followings = (props: any) => {
             </FollowingContainer>))
         }
       </FollowingsBody>
-      <Footer>
+      <FollowingsFooter>
         <Navbar activePage='followings' />
-      </Footer>
+      </FollowingsFooter>
     </FollowingsContainer>
   )
 }
