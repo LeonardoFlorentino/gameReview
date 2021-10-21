@@ -1,21 +1,22 @@
 import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 
-export const ContainerFollowers = styled.div`
+export const FollowingsContainer = styled.div`
+    height: 100vh;
     width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    overflow-x: hidden;
 `
 
-export const ContainerHeader = styled.div`
+export const FollowingsHeader = styled.div`
     width: 100vw;
-    height: 90px;
+    height: 60px;
     display: grid;
     grid-template-columns: 40px 1fr 50px;
     align-items: center;
     justify-items: center;
-    
 `
 
 export const GoBackButton = styled(FiArrowLeft)`
@@ -28,14 +29,20 @@ export const NumberOfFollowers = styled.div`
     font-size: 1.2rem;
 `
 
-export const ContainerBody = styled.div`
-    background-color: #4f4f4f;
+export const FollowingsBody = styled.div`
+    background-color: #3f3f3f;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    &:after{
+        content: "";
+        display: block;
+        height: 60px;
+        width: 100%
+    }
 `
-export const ProfileContainer = styled.div`
+export const FollowingContainer = styled.div`
     height: 100px;
     width: 100%;
     display: grid;

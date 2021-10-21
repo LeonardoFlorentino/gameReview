@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Login } from '../pages/Login';
 import { Home } from '../pages/Home';
 import { Followers } from '../pages/Followers';
-import { Following } from '../pages/Following';
+import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
 
 
@@ -66,15 +66,20 @@ export function Router() {
 
 
   const getFollowings = async (id: string) => {
-    if (id !== userName) {
+    if (id !== userName || followings.length === 0) {
       try {
         const newURL = `${URL}/${id}/followers`
         const response = await fetch(newURL);
         const newData = await response.json();
         setFollowings(newData)
-        setFollowers([])
-        setRepos([])
-        setUserName(id)
+        if (id !== userName) {
+          setUserName(id)
+          userName = id
+          getUser(id)
+          setFollowers([])
+          setUser({})
+          setRepos([])
+        }
       }
       catch (e) {
         console.log("Requisão com o seguinte erro: ", e)
@@ -105,7 +110,7 @@ export function Router() {
             getFollowers={getFollowers} />
         </Route>
         <Route path="/user/:id/following">
-          <Following
+          <Followings
             user={user}
             followings={followings}
             getFollowings={getFollowings} />

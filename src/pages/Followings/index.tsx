@@ -1,10 +1,10 @@
 import {
-  ContainerFollowers,
-  ContainerHeader,
+  FollowingsContainer,
+  FollowingsHeader,
   GoBackButton,
   NumberOfFollowers,
-  ContainerBody,
-  ProfileContainer,
+  FollowingsBody,
+  FollowingContainer,
   Square,
   ProfilePic,
   LoginName,
@@ -28,37 +28,36 @@ interface RouteParams {
 
 let i = 1;
 
-export const Following = (props: any) => {
+export const Followings = (props: any) => {
   const { id }: RouteParams = useParams()
-  const { user, getUser, followings, getFollowings } = props
+  const { user, followings, getFollowings } = props
 
   while (i <= 1) {
-    getUser(id)
     getFollowings(id)
     i++;
   }
   return (
-    <ContainerFollowers>
-      <ContainerHeader>
+    <FollowingsContainer>
+      <FollowingsHeader>
         <GoBackButton />
         <NumberOfFollowers>
           Seguindo {user.following}
         </NumberOfFollowers>
-      </ContainerHeader>
-      <ContainerBody>
+      </FollowingsHeader>
+      <FollowingsBody>
         {
           followings.map((following: dataTypes) => (
-            <ProfileContainer key={following.node_id}>
+            <FollowingContainer key={following.node_id}>
               <Square />
               <ProfilePic src={following.avatar_url} />
               <LoginName>#{following.login}</LoginName>
               <AcessButton />
-            </ProfileContainer>))
+            </FollowingContainer>))
         }
-      </ContainerBody>
+      </FollowingsBody>
       <Footer>
         <Navbar activePage='followings' />
       </Footer>
-    </ContainerFollowers>
+    </FollowingsContainer>
   )
 }

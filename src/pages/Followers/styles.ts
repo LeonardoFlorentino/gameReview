@@ -21,7 +21,7 @@ export const FollowersHeader = styled.div`
 `
 
 export const GoBackButton = styled(FiArrowLeft)`
-    margin-left: 20px;
+    margin-left: 40px;
     height: 25px;
     width: 25px;
 `
@@ -53,7 +53,7 @@ export const FollowerContainer = styled.div`
     font-weight: bold;
     font-size: 1.5rem;
     background-color: #343434;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 `
 
 export const Square = styled.div`
