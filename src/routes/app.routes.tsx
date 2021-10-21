@@ -68,7 +68,7 @@ export function Router() {
   const getFollowings = async (id: string) => {
     if (id !== userName || followings.length === 0) {
       try {
-        const newURL = `${URL}/${id}/followers`
+        const newURL = `${URL}/${id}/following`
         const response = await fetch(newURL);
         const newData = await response.json();
         setFollowings(newData)
