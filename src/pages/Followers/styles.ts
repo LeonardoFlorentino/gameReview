@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 
-export const ContainerFollowers = styled.div`
+export const FollowersContainer = styled.div`
+    height: 100vh;
     width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    overflow-x: hidden;
 `
 
-export const ContainerHeader = styled.div`
+export const FollowersHeader = styled.div`
     width: 100vw;
-    height: 150px;
+    height: 60px;
     display: grid;
     grid-template-columns: 40px 1fr 50px;
     align-items: center;
@@ -28,14 +30,20 @@ export const NumberOfFollowers = styled.div`
     font-size: 1.2rem;
 `
 
-export const ContainerBody = styled.div`
+export const FollowersBody = styled.div`
     background-color: #3f3f3f;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    &:after{
+        content: "";
+        display: block;
+        height: 60px;
+        width: 100%
+    }
 `
-export const ProfileContainer = styled.div`
+export const FollowerContainer = styled.div`
     height: 100px;
     width: 100%;
     display: grid;
@@ -76,7 +84,7 @@ export const LoginName = styled.div`
 export const AcessButton = styled(FiArrowRight)`
 
 `
-export const Footer = styled.div`
+export const FollowersFooter = styled.div`
     position: fixed;
     left: 0px;
     bottom: 0px;

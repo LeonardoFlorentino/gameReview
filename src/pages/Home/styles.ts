@@ -11,6 +11,7 @@ export const HomeContainer = styled.div`
 `
 
 export const HomeHeader = styled.div`
+    height: 60px;
     padding: 20px 0px;
     width: 100vw;
     display: flex;
@@ -18,17 +19,32 @@ export const HomeHeader = styled.div`
     justify-content: space-between;
 `
 
-export const LoginName = styled.div`
+export const LoginName = styled.button`
    font-weight: bold;
    margin-left: 20px;
+   cursor: pointer;
+   background: none;
+   color: inherit;
+   border: none;
+   padding: 0;
+   font: inherit;
+   cursor: pointer;
+   outline: inherit;
 `
-export const ExitContainer = styled.div`
+export const ExitContainer = styled.button`
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-right: 20px;
-
+    cursor: pointer;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 `
 export const Exit = styled(FiLogOut)`
     width: 25px;
@@ -44,7 +60,7 @@ export const HomeBody = styled.div`
     &:after{
         content: "";
         display: block;
-        height: 50px;
+        height: 60px;
         width: 100%
     }
 `

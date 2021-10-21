@@ -17,11 +17,11 @@ const URL = 'https://api.github.com/users'
 
 export function Router() {
 
-  const [userName, setUserName] = useState<string>('')
-  const [user, setUser] = useState<Object>({})
-  const [followings, setFollowing] = useState<Array<object>>([])
-  const [followers, setFollowers] = useState<Array<object>>([])
-  const [repos, setRepos] = useState<Array<object>>([])
+  let [userName, setUserName] = useState<string>('')
+  let [user, setUser] = useState<Object>({})
+  let [followings, setFollowings] = useState<Array<object>>([])
+  let [followers, setFollowers] = useState<Array<object>>([])
+  let [repos, setRepos] = useState<Array<object>>([])
 
   const getUser = async (id: string) => {
     if (id !== userName || Object.entries(user).length === 0) {
@@ -30,7 +30,11 @@ export function Router() {
         const response = await fetch(newURL);
         const newData = await response.json();
         setUser(newData)
-        setUserName(id)
+        if (id !== userName) {
+          setFollowers([])
+          setFollowings([])
+          setRepos([])
+        }
       }
       catch (e) {
         console.log("Requisão com o seguinte erro: ", e)
@@ -39,15 +43,20 @@ export function Router() {
   }
 
   const getFollowers = async (id: string) => {
-    if (id !== userName || followers === []) {
+    if (id !== userName || followers.length === 0) {
       try {
         const newURL = `${URL}/${id}/followers`
         const response = await fetch(newURL);
         const newData = await response.json();
         setFollowers(newData)
-        setUser({})
-        setFollowing([])
-        setRepos([])
+        if (id !== userName) {
+          setUserName(id)
+          userName = id
+          getUser(id)
+          setFollowings([])
+          setUser({})
+          setRepos([])
+        }
       }
       catch (e) {
         console.log("Requisão com o seguinte erro: ", e)
@@ -57,15 +66,15 @@ export function Router() {
 
 
   const getFollowings = async (id: string) => {
-    if (id !== userName || followings === []) {
+    if (id !== userName) {
       try {
-        const newURL = `${URL}/${id}/following`
+        const newURL = `${URL}/${id}/followers`
         const response = await fetch(newURL);
         const newData = await response.json();
-        setFollowing(newData)
-        setUser({})
+        setFollowings(newData)
         setFollowers([])
         setRepos([])
+        setUserName(id)
       }
       catch (e) {
         console.log("Requisão com o seguinte erro: ", e)
@@ -92,14 +101,12 @@ export function Router() {
         <Route path="/user/:id/followers">
           <Followers
             user={user}
-            getUser={getUser}
             followers={followers}
             getFollowers={getFollowers} />
         </Route>
         <Route path="/user/:id/following">
           <Following
             user={user}
-            getUser={getUser}
             followings={followings}
             getFollowings={getFollowings} />
         </Route>

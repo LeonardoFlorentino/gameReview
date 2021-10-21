@@ -1,15 +1,15 @@
 import {
-  ContainerFollowers,
-  ContainerHeader,
+  FollowersContainer,
+  FollowersHeader,
   GoBackButton,
   NumberOfFollowers,
-  ContainerBody,
-  ProfileContainer,
+  FollowersBody,
+  FollowerContainer,
   Square,
   ProfilePic,
   LoginName,
   AcessButton,
-  Footer
+  FollowersFooter
 } from './styles'
 
 
@@ -22,34 +22,33 @@ let i = 1;
 
 export const Followers = (props: any) => {
   const { id }: RouteParams = useParams()
-  const { user, getUser, followers, getFollowers } = props
+  const { user, followers, getFollowers } = props
   while (i <= 1) {
-    getUser(id)
     getFollowers(id)
     i++;
   }
   return (
-    <ContainerFollowers>
-      <ContainerHeader>
+    <FollowersContainer>
+      <FollowersHeader>
         <GoBackButton />
         <NumberOfFollowers>
           {user.followers} seguidores
         </NumberOfFollowers>
-      </ContainerHeader>
-      <ContainerBody>
+      </FollowersHeader>
+      <FollowersBody>
         {
-          followers.map((follower: dataTypes) => (
-            <ProfileContainer key={follower.node_id}>
+          followers.map((following: dataTypes) => (
+            <FollowerContainer key={following.node_id}>
               <Square />
-              <ProfilePic src={follower.avatar_url} />
-              <LoginName>#{follower.login}</LoginName>
+              <ProfilePic src={following.avatar_url} />
+              <LoginName>#{following.login}</LoginName>
               <AcessButton />
-            </ProfileContainer>))
+            </FollowerContainer>))
         }
-      </ContainerBody>
-      <Footer>
+      </FollowersBody>
+      <FollowersFooter>
         <Navbar activePage='followers' />
-      </Footer>
-    </ContainerFollowers>
+      </FollowersFooter>
+    </FollowersContainer>
   )
 }
