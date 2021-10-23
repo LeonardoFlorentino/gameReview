@@ -1,3 +1,4 @@
+
 import {
     HomeContainer,
     HomeHeader,
@@ -27,14 +28,14 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
 
 
-export const Home = (props: any) => {
+export const FollowProfile = (props:any) => {
     console.log("Passou na Home")
     const { id }: RouteParams = useParams()
-    const { user, getUser } = props
+    const { user, getFollowProfile, followProfile  } = props
 
     useEffect(() => {
         const loadData = async () => {
-            await getUser(id)
+            await getFollowProfile(id)
         }
         loadData()
     },)

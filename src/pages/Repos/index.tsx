@@ -21,7 +21,7 @@ import {
 
 
 import { useParams } from 'react-router-dom';
-
+import { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar'
 
 interface RouteParams {
@@ -30,15 +30,17 @@ interface RouteParams {
 }
 
 
-let i = 1;
 
 export const Repos = (props: any) => {
   const { id }: RouteParams = useParams();
   const { user, repos, getRepos } = props
-  while (i <= 1) {
-    getRepos(id)
-    i++;
-  }
+
+    useEffect(() => {
+        const loadData = async () => {
+            await getRepos(id) 
+        }
+        loadData()
+    },)
 
   return (
     <ReposContainer>

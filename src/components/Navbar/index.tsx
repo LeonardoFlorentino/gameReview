@@ -12,10 +12,6 @@ import {
 
 import {useParams} from 'react-router-dom'
 
-interface Props{
-  path?: string,
-  activePage?: string
-}
 
 interface RouteParams{
   id:string

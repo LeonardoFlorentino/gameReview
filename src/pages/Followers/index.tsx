@@ -1,14 +1,16 @@
 import {
   FollowersContainer,
   FollowersHeader,
-  GoBackButton,
+  ExitContainer,
+  ExitIcon,
   NumberOfFollowers,
   FollowersBody,
   FollowerContainer,
   Square,
   ProfilePic,
   LoginName,
-  AcessButton,
+  AcessFollowerIcon,
+  AcessContainerFollower,
   FollowersFooter
 } from './styles'
 
@@ -16,21 +18,28 @@ import {
 import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
 import { dataTypes, RouteParams } from '../../interface'
+import { useEffect } from 'react'
+import { AcessFollowingIcon } from '../Followings/styles';
 
 
-let i = 1;
 
 export const Followers = (props: any) => {
   const { id }: RouteParams = useParams()
   const { user, followers, getFollowers } = props
-  while (i <= 1) {
-    getFollowers(id)
-    i++;
-  }
+
+  useEffect(() => {
+    const loadData = async () => {
+      await getFollowers(id)
+    }
+    loadData()
+  })
+
   return (
     <FollowersContainer>
       <FollowersHeader>
-        <GoBackButton />
+        <ExitContainer to='/'>
+          <ExitIcon />
+        </ExitContainer>
         <NumberOfFollowers>
           {user.followers} seguidores
         </NumberOfFollowers>
@@ -42,7 +51,9 @@ export const Followers = (props: any) => {
               <Square />
               <ProfilePic src={following.avatar_url} />
               <LoginName>#{following.login}</LoginName>
-              <AcessButton />
+              <AcessContainerFollower to={`/user/${id}/${following.login}`}>
+                <AcessFollowerIcon />
+              </AcessContainerFollower>
             </FollowerContainer>))
         }
       </FollowersBody>

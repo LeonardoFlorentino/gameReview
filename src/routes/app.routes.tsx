@@ -5,13 +5,10 @@ import { Home } from '../pages/Home';
 import { Followers } from '../pages/Followers';
 import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
+import {FollowProfile} from '../pages/FollowProfile'
 
 
-// import { useParams } from 'react-router';
 import { useState } from 'react';
-
-// import {data} from '../data/index'
-// import { RouteParams,dataTypes  } from '../interface';
 
 const URL = 'https://api.github.com/users'
 
@@ -22,16 +19,20 @@ export function Router() {
   let [followings, setFollowings] = useState<Array<object>>([])
   let [followers, setFollowers] = useState<Array<object>>([])
   let [repos, setRepos] = useState<Array<object>>([])
+  let [follow, setFollow] = useState<Array<object>>([])
 
-  const getUser = async (id: string) => {
-    if (id !== userName || Object.entries(user).length === 0) {
+  const getUser = async (login: string) => {
+    console.log("Passou na Home")
+    const emptyUser =  !Object.keys(user).length
+    const urlUserMatch = login === userName
+    if (!urlUserMatch || emptyUser) {
       try {
-        const newURL = `${URL}/${id}`
+        const newURL = `${URL}/${login}`
         const response = await fetch(newURL);
         const newData = await response.json();
         setUser(newData)
-        if (id !== userName) {
-          setUserName(id)
+        if (!urlUserMatch) {
+          setUserName(login)
           setFollowers([])
           setFollowings([])
           setRepos([])
@@ -43,17 +44,17 @@ export function Router() {
     }
   }
 
-  const getFollowers = async (id: string) => {
-    if (id !== userName || followers.length === 0) {
+  const getFollowers = async (login: string) => {
+    if (login !== userName || followers.length === 0) {
       try {
-        const newURL = `${URL}/${id}/followers`
+        const newURL = `${URL}/${login}/followers`
         const response = await fetch(newURL);
         const newData = await response.json();
         setFollowers(newData)
-        if (id !== userName) {
-          setUserName(id)
-          userName = id
-          getUser(id)
+        if (login !== userName) {
+          setUserName(login)
+          userName = login
+          getUser(login)
           setFollowings([])
           setUser({})
           setRepos([])
@@ -66,17 +67,17 @@ export function Router() {
   }
 
 
-  const getFollowings = async (id: string) => {
-    if (id !== userName || followings.length === 0) {
+  const getFollowings = async (login: string) => {
+    if (login !== userName || followings.length === 0) {
       try {
-        const newURL = `${URL}/${id}/following`
+        const newURL = `${URL}/${login}/following`
         const response = await fetch(newURL);
         const newData = await response.json();
         setFollowings(newData)
-        if (id !== userName) {
-          setUserName(id)
-          userName = id
-          getUser(id)
+        if (login !== userName) {
+          setUserName(login)
+          userName = login
+          getUser(login)
           setFollowers([])
           setUser({})
           setRepos([])
@@ -88,17 +89,17 @@ export function Router() {
     }
   }
 
-  const getRepos = async (id: string) => {
-    if (id !== userName || repos.length === 0) {
+  const getRepos = async (login: string) => {
+    if (login !== userName || repos.length === 0) {
       try {
-        const newURL = `${URL}/${id}/repos`
+        const newURL = `${URL}/${login}/repos`
         const response = await fetch(newURL);
         const newData = await response.json();
         setRepos(newData)
-        if (id !== userName) {
-          setUserName(id)
-          userName = id
-          getUser(id)
+        if (login !== userName) {
+          setUserName(login)
+          userName = login
+          getUser(login)
           setFollowers([])
           setFollowings([])
           setUser({})
@@ -111,6 +112,9 @@ export function Router() {
     }
   }
 
+  const getFollowProfile = async () =>{
+
+  }
 
   return (
     <BrowserRouter>
@@ -141,6 +145,12 @@ export function Router() {
             user={user}
             followings={followings}
             getFollowings={getFollowings} />
+        </Route>
+        <Route path="/user/:id/:page/:userName">
+          <FollowProfile
+            user={user}
+            follow={follow}
+            getFollowProfile={getFollowProfile} />
         </Route>
       </Switch>
     </BrowserRouter>

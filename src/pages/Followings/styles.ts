@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 export const FollowingsContainer = styled.div`
     height: 100vh;
@@ -14,15 +15,24 @@ export const FollowingsHeader = styled.div`
     width: 100vw;
     height: 60px;
     display: grid;
-    grid-template-columns: 40px 1fr 50px;
+    grid-template-columns: 60px 1fr 60px;
     align-items: center;
     justify-items: center;
 `
 
-export const GoBackButton = styled(FiArrowLeft)`
-    margin-left: 40px;
-    height: 25px;
+export const ExitContainer = styled(Link)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+`
+export const ExitIcon = styled(FiArrowLeft)`
     width: 25px;
+    height: 25px;
 `
 
 export const NumberOfFollowers = styled.div`
@@ -79,9 +89,22 @@ export const LoginName = styled.div`
    margin-left: 10px;
 `
 
-export const AcessButton = styled(FiArrowRight)`
+export const AcessContainerFollowing = styled(Link)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+`
+
+export const AcessFollowingIcon = styled(FiArrowRight)`
 
 `
+
+
 export const FollowingsFooter = styled.div`
     position: fixed;
     left: 0;
