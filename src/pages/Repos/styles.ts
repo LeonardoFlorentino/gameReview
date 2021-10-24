@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FiArrowLeft, FiLock, FiUnlock } from 'react-icons/fi'
 import {AiOutlineStar} from 'react-icons/ai'
+import {Link} from 'react-router-dom'
 
 export const ReposContainer = styled.div`
     height: 100vh;
@@ -15,16 +16,24 @@ export const ReposHaeder = styled.div`
     width: 100vw;
     height: 60px;
     display: grid;
-    grid-template-columns: 40px 1fr 50px;
+    grid-template-columns: 60px 1fr 60px;
     align-items: center;
     justify-items: center;
     
 `
 
-export const GoBackButton = styled(FiArrowLeft)`
-    margin-left: 20px;
-    height: 25px;
+export const ExitContainer = styled(Link)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+`
+export const ExitIcon = styled(FiArrowLeft)`
     width: 25px;
+    height: 25px;
 `
 
 export const NumberOfFollowers = styled.div`
@@ -77,14 +86,13 @@ export const RepoName = styled.div`
 export const RepoDescription = styled.div`
     font-size: 0.8rem;
     font-weight: lighter;
-    padding-left: 32px;
+    padding: 0px 32px;
 `
 
 export const IconsContainer = styled.div`
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
-
 `
 
 export const IconLockContainer = styled.div`
@@ -111,11 +119,11 @@ export const StarContainer = styled.div`
 `
 
 export const StarNumbers = styled.div`
-    /* /* position: relative;
-    bottom: 6.5px; */
-    /* font-size: 1.0rem; */
-    /* margin-left: 5px;
-    font-weight: lighter ; */ 
+    position: relative;
+    left: 4px;
+    top:4px;
+    font-size: 1.0rem;
+    font-weight: lighter ; 
 `
 
 export const IconStar = styled(AiOutlineStar)`

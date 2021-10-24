@@ -35,7 +35,7 @@ export const Navbar = ({activePage}:any) => {
             <IconFollowers/>
             <Text>Seguidores</Text>
           </NavLink>
-          <NavLink to={`/user/${id}/following`} color={activePage === 'followings'? '#222': '#aaa'}>
+          <NavLink to={`/user/${id}/followings`} color={activePage === 'followings'? '#222': '#aaa'}>
             <IconFollowing/>
             <Text>Seguindo</Text>
           </NavLink>

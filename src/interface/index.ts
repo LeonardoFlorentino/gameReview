@@ -22,5 +22,6 @@ export interface dataReposTypes {
 
 export interface RouteParams {
     name: string,
+    page: string,
     id: string
 }

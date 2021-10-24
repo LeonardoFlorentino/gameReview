@@ -19,16 +19,10 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar'
 
-interface RouteParams {
-  username: string,
-  id: string
-}
-
-
-
+import { RouteParams } from '../../interface';
 
 export const Followings = (props: any) => {
-  const { id }: RouteParams = useParams()
+  const { id}: RouteParams = useParams()
   const { user, followings, getFollowings } = props
 
   useEffect(() => {
@@ -41,7 +35,7 @@ export const Followings = (props: any) => {
   return (
     <FollowingsContainer>
       <FollowingsHeader>
-        <ExitContainer to='/'>
+        <ExitContainer to={`/user/${id}`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -55,7 +49,7 @@ export const Followings = (props: any) => {
               <Square />
               <ProfilePic src={following.avatar_url} />
               <LoginName>#{following.login}</LoginName>
-              <AcessContainerFollowing to={`/user/${id}/${following.login}`}>
+              <AcessContainerFollowing to={`/user/${id}/followings/${following.login}`}>
                 <AcessFollowingIcon />
               </AcessContainerFollowing>
             </FollowingContainer>))

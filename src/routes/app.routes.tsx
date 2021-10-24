@@ -1,11 +1,10 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Login } from '../pages/Login';
-import { Home } from '../pages/Home';
+import { Profile } from '../pages/Profile';
 import { Followers } from '../pages/Followers';
 import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
-import {FollowProfile} from '../pages/FollowProfile'
 
 
 import { useState } from 'react';
@@ -16,13 +15,13 @@ export function Router() {
 
   let [userName, setUserName] = useState<string>('')
   let [user, setUser] = useState<Object>({})
+  let [userFollowName, setUserFollowName] = useState<string>('')
+  let [userFollow, setUserFollow] = useState<Object>({})
   let [followings, setFollowings] = useState<Array<object>>([])
   let [followers, setFollowers] = useState<Array<object>>([])
   let [repos, setRepos] = useState<Array<object>>([])
-  let [follow, setFollow] = useState<Array<object>>([])
 
   const getUser = async (login: string) => {
-    console.log("Passou na Home")
     const emptyUser =  !Object.keys(user).length
     const urlUserMatch = login === userName
     if (!urlUserMatch || emptyUser) {
@@ -33,9 +32,7 @@ export function Router() {
         setUser(newData)
         if (!urlUserMatch) {
           setUserName(login)
-          setFollowers([])
-          setFollowings([])
-          setRepos([])
+          cleanOthersStates('home')
         }
       }
       catch (e) {
@@ -55,9 +52,7 @@ export function Router() {
           setUserName(login)
           userName = login
           getUser(login)
-          setFollowings([])
-          setUser({})
-          setRepos([])
+          cleanOthersStates('followers')
         }
       }
       catch (e) {
@@ -78,9 +73,7 @@ export function Router() {
           setUserName(login)
           userName = login
           getUser(login)
-          setFollowers([])
-          setUser({})
-          setRepos([])
+          cleanOthersStates('followings')
         }
       }
       catch (e) {
@@ -100,9 +93,7 @@ export function Router() {
           setUserName(login)
           userName = login
           getUser(login)
-          setFollowers([])
-          setFollowings([])
-          setUser({})
+          cleanOthersStates('repos')
           
         }
       }
@@ -112,45 +103,75 @@ export function Router() {
     }
   }
 
-  const getFollowProfile = async () =>{
+  const getUserFollow = async (login: string) => {
+    const emptyUser =  !Object.keys(userFollow).length
+    const urlUserMatch = login === userFollowName
+    if (!urlUserMatch || emptyUser) {
+      try {
+        const newURL = `${URL}/${login}`
+        const response = await fetch(newURL);
+        const newData = await response.json();
+        setUserFollow(newData)
+        if (!urlUserMatch) {
+          setUserFollowName(login)
+        }
+      }
+      catch (e) {
+        console.log("Requisão com o seguinte erro: ", e)
+      }
+    }
+  }
 
+  const cleanOthersStates = async (state:string) =>{
+    if(state !== 'home') setUser({})
+    if(state !== 'repos') setRepos([])
+    if(state !== 'followings') setFollowings([])
+    if(state !== 'followers') setFollowers([])
   }
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Login userName={userName} setUserName={setUserName} getUser={getUser} />
+          <Login userName={userName} 
+          setUserName={setUserName} 
+          getUser={getUser} 
+          clean={cleanOthersStates} />
         </Route>
         <Route path="/user/:id" exact>
-          <Home
+          <Profile
+            profile={'mainUser'}
+            setUserName={setUserName}
+            clean={cleanOthersStates}
             user={user}
             getUser={getUser}
           />
         </Route>
-        <Route path="/user/:id/repos">
+        <Route path="/user/:id/repos" exact>
           <Repos 
             user={user}
             repos={repos}
             getRepos={getRepos}/>
         </Route>
-        <Route path="/user/:id/followers">
+        <Route path="/user/:id/followers" exact>
           <Followers
             user={user}
             followers={followers}
             getFollowers={getFollowers} />
         </Route>
-        <Route path="/user/:id/following">
+        <Route path="/user/:id/followings" exact>
           <Followings
             user={user}
             followings={followings}
             getFollowings={getFollowings} />
         </Route>
-        <Route path="/user/:id/:page/:userName">
-          <FollowProfile
-            user={user}
-            follow={follow}
-            getFollowProfile={getFollowProfile} />
+        <Route path="/user/:id/:page/:name" exact>
+          <Profile
+            profile={'followUser'}
+            setUserName={setUserFollowName}
+            user={userFollow}
+            getUser={getUserFollow}
+          />
         </Route>
       </Switch>
     </BrowserRouter>

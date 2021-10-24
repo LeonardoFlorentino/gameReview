@@ -19,23 +19,6 @@ export const Logo = styled(AiFillGithub)`
     padding-bottom: 50px;
 `
 
-export const Input = styled.input`
-    font-size: 15px;
-    width: 20vw;
-    min-width: 250px;
-    height: 40px;
-    margin: 5px 0px;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    font-weight: 100;
-    color: #555;
-    &:hover{
-        border: 2px solid #ffce00;
-    }
-    &::selection{
-        background: #ffce00 !important;
-    }
-`
 
 export const Button = styled.button`
     font-size: 15px;
@@ -58,10 +41,47 @@ export const Button = styled.button`
 `
 
 export const NameButton = styled.div`
+    font-weight: bold;
     display: flex;
     justify-content: center;
 `
 
 export const IconArrow = styled(FiArrowRight)`
+    position: relative;
+    bottom: 3px;
+    height: 20px;
+    width: 20px;
     margin-left: 4px;
 `
+
+export const InputContainer = styled.div`
+  position: relative;
+  display: flex; 
+  font-size: 0.7rem;
+  justify-content: flex-end;
+  align-items: center;
+`
+
+export const Input = styled.input`
+    font-size: 15px;
+    width: 20vw;
+    min-width: 250px;
+    height: 40px;
+    margin: 5px 0px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    font-weight: 100;
+    color: #555;
+    &:hover{
+        border: 2px solid #ffce00;
+    }
+    &::selection{
+        background: #ffce00 !important;
+    }
+`
+export const InputError = styled.p`
+  position: absolute;
+  right: 0;
+  margin-right: 16px;
+  color: red;
+`;

@@ -5,27 +5,42 @@ import {
     Input,
     Logo,
     NameButton,
-    IconArrow
+    IconArrow,
+    InputContainer,
+    InputError
 } from "./styles"
 
 import { useHistory } from 'react-router-dom';
+import { useState } from "react";
 
 
 export const Login = (props: any) => {
     const history = useHistory();
-    const { userName, setUserName } = props
+    const { userName, setUserName, clean } = props
+    const [submitedNull, setSubmitedNull] = useState(false);
 
     const updateName = (event: any) => {
+        setSubmitedNull(false)
         setUserName(event.target.value);
     };
+
     const onSubmit = async (event: any) => {
-        history.push(`/user/${userName}`)
+        if (userName.length === 0) {
+            setSubmitedNull(true);
+          }
+        else{
+            clean()
+            history.push(`/user/${userName}`)
+        }
     }
 
     return (
         <LoginContainer>
             <Logo />
-            <Input onChange={(event) => updateName(event)} placeholder="Usuário" type="text"/>
+            <InputContainer>
+                <Input onChange={(event) => updateName(event)} placeholder="Usuário" type="text" id='inputGit' />
+                {submitedNull ? <InputError>Campo obrigatório</InputError> : null}
+            </InputContainer>
             <Button onClick={onSubmit}>
                 <NameButton >
                     ENTRAR

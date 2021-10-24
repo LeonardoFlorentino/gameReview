@@ -26,7 +26,6 @@ export const ExitContainer = styled(Link)`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
     cursor: pointer;
     color: inherit;
     text-decoration: none;
