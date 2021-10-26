@@ -1,41 +1,42 @@
-.paginator {
+.content {
     width: 100%;
 }
 
+.content-page{
+    min-height: 80vh;
+}
+
 .pagination {
-    margin: 15px auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: flex-end;
     list-style: none;
     outline: none;
     min-width: 80vw;
-    margin: 10px 5px;
-    padding: 20px;
-}
-
-.pagination>.active>a {
-    background-color: #e6cc12;
-    border-color: #e6cc12;
-    color: #222;
+    /* padding: 10px 0px; */
 }
 
 .pagination>li>a {
-    border: 1px solid #e6cc12;
-    padding: 5px 10px;
-    outline: none;
+    background-color: #444;
     cursor: pointer;
+    color: #ddd;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
 }
 
-.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+.pagination li.active>a {
     background-color: #e6cc12;
-    border-color: #e6cc12;
-    outline: none;
+    color: #555;
 }
 
-.pagination>li>a, .pagination>li>span {
-    color: #eee
+.pagination li:first-child>a {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
-.pagination>li:first-child>a, .pagination>li:first-child>span, .pagination>li:last-child>a, .pagination>li:last-child>span {
-    border-radius: unset
+.pagination li:last-child>a {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

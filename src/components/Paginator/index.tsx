@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import "./styles.css";
 
-const PER_PAGE = 10;
+const PER_PAGE = 7;
 
 export const Paginator = (Props: any) => {
   const { showData, userName, followers } = Props
@@ -10,15 +10,13 @@ export const Paginator = (Props: any) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(currentPage)
-    console.log(data)
     fetchData(currentPage);
-  }, [currentPage ]);
+  }, [currentPage]);
 
   const fetchData = (page: number) => {
-      fetch(`https://api.github.com/users/${userName}/followers?per_page=${PER_PAGE}&page=${page}`)
-        .then((res) => res.json())
-        .then((value) => setData(value))
+    fetch(`https://api.github.com/users/${userName}/followers?per_page=${PER_PAGE}&page=${page}`)
+      .then((res) => res.json())
+      .then((value) => setData(value))
 
   }
 
@@ -36,13 +34,15 @@ export const Paginator = (Props: any) => {
 
 
   return (
-    <div className="paginator">
-      {currentPageData}
+    <div className="content">
+      <div className="content-page">
+        {currentPageData}
+      </div>
       <ReactPaginate
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
-        previousLabel={"← Previous"}
-        nextLabel={"Next →"}
+        previousLabel={"«"}
+        nextLabel={"»"}
         pageCount={pageCount}
         onPageChange={handlePageClick}
         containerClassName={"pagination"}

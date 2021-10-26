@@ -1,10 +1,10 @@
-*{
+* {
   font-family: 'Helvetica';
-  box-sizing: border-box; 
-    border-collapse: separate;
+  box-sizing: border-box;
+  border-collapse: separate;
 }
 
-body{
+body {
   margin: 0;
   background-color: #292929;
   color: #eee;
