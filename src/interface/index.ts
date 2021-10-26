@@ -1,6 +1,7 @@
 
 export interface dataTypes {
     user?: Object,
+    id?: string,
     name?: string,
     login?: string,
     avatar_url?: string,

@@ -18,22 +18,15 @@ import {
 import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
 import { dataTypes, RouteParams } from '../../interface'
-import { useEffect } from 'react'
 import { Paginator } from '../../components/Paginator'
 
 export const Followers = (props: any) => {
   const { id }: RouteParams = useParams()
-  const { user, followers, getFollowers } = props
-  useEffect(() => {
-    const loadData = async () => {
-      await getFollowers(id)
-    }
-    loadData()
-  })
+  const { user } = props
 
   const showData = (follower: dataTypes) => {
     return (
-      <FollowerContainer key={follower.node_id}>
+      <FollowerContainer key={follower.id}>
         <Square />
         <ProfilePic src={follower.avatar_url} />
         <LoginName>#{follower.login}</LoginName>
@@ -54,7 +47,11 @@ export const Followers = (props: any) => {
         </NumberOfFollowers>
       </FollowersHeader>
       <FollowersBody>
-        <Paginator showData={showData} userName={id} followers={user.followers} />
+        <Paginator
+          typePage={'followers'}
+          showData={showData}
+          userName={id}
+          numOfElements={user.followers} />
       </FollowersBody>
       <FollowersFooter>
         <Navbar activePage='followers' />

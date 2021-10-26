@@ -3,7 +3,7 @@ import {
   ReposHaeder,
   ExitContainer,
   ExitIcon,
-  
+
   NumberOfFollowers,
   ReposBody,
   RepoContainer,
@@ -25,24 +25,42 @@ import {
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar'
+import { Paginator } from '../../components/Paginator'
 
-interface RouteParams {
-  username: string,
-  id: string
-}
-
+import { dataTypes, RouteParams } from '../../interface';
 
 
 export const Repos = (props: any) => {
   const { id }: RouteParams = useParams();
-  const { user, repos, getRepos } = props
+  const { user} = props
 
-  useEffect(() => {
-    const loadData = async () => {
-      await getRepos(id)
-    }
-    loadData()
-  })
+
+  const showData = (repo: any) => {
+    return (
+      <RepoContainer key={repo.id}>
+        <NameContainer>
+          <Square />
+          <RepoName>
+            {repo.name}
+          </RepoName>
+        </NameContainer>
+        <RepoDescription>
+          {repo.description}
+        </RepoDescription>
+        <IconsContainer>
+          <StarContainer>
+            <IconStar />
+            <StarNumbers>
+              {repo.stargazers_count}
+            </StarNumbers>
+          </StarContainer>
+          <IconLockContainer>
+            <IconUnLock />
+            <IconLock />
+          </IconLockContainer>
+        </IconsContainer>
+      </RepoContainer>)
+  }
 
   return (
     <ReposContainer>
@@ -55,32 +73,12 @@ export const Repos = (props: any) => {
         </NumberOfFollowers>
       </ReposHaeder>
       <ReposBody>
-        {
-          repos.map((repo: any) => (
-            <RepoContainer key={repo.node_id}>
-              <NameContainer>
-                <Square />
-                <RepoName>
-                  {repo.name}
-                </RepoName>
-              </NameContainer>
-              <RepoDescription>
-                {repo.description}
-              </RepoDescription>
-              <IconsContainer>
-                <StarContainer>
-                  <IconStar />
-                  <StarNumbers>
-                    {repo.stargazers_count}
-                  </StarNumbers>
-                </StarContainer>
-                <IconLockContainer>
-                  <IconUnLock />
-                  <IconLock />
-                </IconLockContainer>
-              </IconsContainer>
-            </RepoContainer>))
-        }
+        <Paginator
+          typePage={'repos'}
+          showData={showData}
+          userName={id}
+          numOfElements={user.public_repos} 
+          per_page={5}/>
       </ReposBody>
       <ReposFooter>
         <Navbar activePage='repos' />

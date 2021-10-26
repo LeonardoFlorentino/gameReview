@@ -1,17 +1,9 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-import { Login } from '../pages/Login';
-import { Profile } from '../pages/Home';
-import { Followers } from '../pages/Followers';
-import { Followings } from '../pages/Followings';
-import { Repos } from '../pages/Repos';
-
 
 import { useState } from 'react';
 
 const URL = 'https://api.github.com/users'
 
-export function Router() {
+export const  Router = () => {
 
   let [userName, setUserName] = useState<string>('')
   let [user, setUser] = useState<Object>({})
@@ -61,49 +53,4 @@ export function Router() {
   const cleanOthersStates = async (state: string) => {
     if (state !== 'home') setUser({})
   }
-
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact>
-          <Login userName={userName}
-            setUserName={setUserName}
-            getUser={getUser}
-            clean={cleanOthersStates} />
-        </Route>
-        <Route path="/user/:id" exact>
-          <Profile
-            profile={'mainUser'}
-            setUserName={setUserName}
-            clean={cleanOthersStates}
-            user={user}
-            getUser={getUser}
-          />
-        </Route>
-        <Route path="/user/:id/repos" exact>
-          <Repos
-            user={user}
-          />
-        </Route>
-        <Route path="/user/:id/followers" exact>
-          <Followers
-            user={user}
-          />
-        </Route>
-        <Route path="/user/:id/followings" exact>
-          <Followings
-            user={user}
-          />
-        </Route>
-        <Route path="/user/:id/:page/:name" exact>
-          <Profile
-            profile={'followUser'}
-            setUserName={setUserFollowName}
-            user={userFollow}
-            getUser={getUserFollow}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
 }

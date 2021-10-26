@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import "./styles.css";
 
-const PER_PAGE = 7;
 
 export const Paginator = (Props: any) => {
-  const { showData, userName, followers } = Props
+  const { showData, userName, numOfElements,typePage, per_page = 7 } = Props
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
 
@@ -14,7 +13,7 @@ export const Paginator = (Props: any) => {
   }, [currentPage]);
 
   const fetchData = (page: number) => {
-    fetch(`https://api.github.com/users/${userName}/followers?per_page=${PER_PAGE}&page=${page}`)
+    fetch(`https://api.github.com/users/${userName}/${typePage}?per_page=${per_page}&page=${page}`)
       .then((res) => res.json())
       .then((value) => setData(value))
 
@@ -24,12 +23,12 @@ export const Paginator = (Props: any) => {
     setCurrentPage(selected + 1);
   }
 
-  const offset = currentPage * PER_PAGE;
+  const offset = currentPage * per_page;
 
   const currentPageData = data
     .map((follower) => showData(follower));
 
-  const pageCount = Math.ceil(followers / PER_PAGE);
+  const pageCount = Math.ceil(numOfElements / per_page);
 
 
 
