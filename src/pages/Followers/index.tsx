@@ -19,18 +19,29 @@ import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
 import { dataTypes, RouteParams } from '../../interface'
 import { useEffect } from 'react'
-
+import { Paginator } from '../../components/Paginator'
 
 export const Followers = (props: any) => {
   const { id }: RouteParams = useParams()
   const { user, followers, getFollowers } = props
-  console.log("page: ", useParams())
   useEffect(() => {
     const loadData = async () => {
       await getFollowers(id)
     }
     loadData()
   })
+
+  const showData = (follower: dataTypes) => {
+    return (
+      <FollowerContainer key={follower.node_id}>
+        <Square />
+        <ProfilePic src={follower.avatar_url} />
+        <LoginName>#{follower.login}</LoginName>
+        <AcessContainerFollower to={`/user/${id}/followers/${follower.login}`}>
+          <AcessFollowerIcon />
+        </AcessContainerFollower>
+      </FollowerContainer>)
+  }
 
   return (
     <FollowersContainer>
@@ -43,17 +54,7 @@ export const Followers = (props: any) => {
         </NumberOfFollowers>
       </FollowersHeader>
       <FollowersBody>
-        {
-          followers.map((following: dataTypes) => (
-            <FollowerContainer key={following.node_id}>
-              <Square />
-              <ProfilePic src={following.avatar_url} />
-              <LoginName>#{following.login}</LoginName>
-              <AcessContainerFollower to={`/user/${id}/followers/${following.login}`}>
-                <AcessFollowerIcon />
-              </AcessContainerFollower>
-            </FollowerContainer>))
-        }
+        <Paginator showData={showData} userName={id} followers={user.followers} />
       </FollowersBody>
       <FollowersFooter>
         <Navbar activePage='followers' />

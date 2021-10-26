@@ -63,6 +63,7 @@ export const InputContainer = styled.div`
 `
 
 export const Input = styled.input`
+    padding-left: 10px;
     font-size: 15px;
     width: 20vw;
     min-width: 250px;

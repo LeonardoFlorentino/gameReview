@@ -31,7 +31,6 @@ import { useEffect } from 'react'
 
 
 export const Profile = (props: any) => {
-    console.log("Passou na Home")
     const { id, page, name }: RouteParams = useParams()
     const { user, getUser, clean, setUserName, profile } = props
 

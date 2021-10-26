@@ -1,5 +1,5 @@
 
-import { Router } from './routes/app.routes';
+import { Router } from '../routes/app.routes';
 
 const App = () => {
   return (
