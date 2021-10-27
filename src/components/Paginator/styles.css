@@ -7,13 +7,12 @@
 }
 
 .pagination {
+    padding: 0px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
     list-style: none;
     outline: none;
-    /* min-width: 80vw; */
-    /* padding: 10px 0px; */
 }
 
 .pagination>li>a {
