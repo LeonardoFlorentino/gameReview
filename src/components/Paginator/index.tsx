@@ -4,38 +4,41 @@ import "./styles.css";
 
 
 export const Paginator = (Props: any) => {
-  const { showData, userName, numOfElements,typePage, per_page = 7 } = Props
+  const { showData, userName, typePage, fetchUserData, mainUserName, numOfElements, per_page = 7 } = Props
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
 
+
   useEffect(() => {
+    const fetchData = (page: number) => {
+      fetch(`https://api.github.com/users/${mainUserName}/${typePage}?per_page=${per_page}&page=${page}`)
+        .then((res) => res.json())
+        .then((value) => setData(value))
+    }
     fetchData(currentPage);
-  }, [currentPage]);
+  }, [currentPage, mainUserName, typePage, per_page ]);
 
-  const fetchData = (page: number) => {
-    fetch(`https://api.github.com/users/${userName}/${typePage}?per_page=${per_page}&page=${page}`)
-      .then((res) => res.json())
-      .then((value) => setData(value))
-
+  useEffect(() => {
+    fetchUserData(mainUserName, 'mainUser')
   }
+    , [userName,fetchUserData, mainUserName])
+
 
   const handlePageClick = ({ selected }: any) => {
     setCurrentPage(selected + 1);
   }
 
-  const offset = currentPage * per_page;
 
-  const currentPageData = data
-    .map((follower) => showData(follower));
+  const currentPageData = () => {
+    return (data.map((follower) => showData(follower)))
+  }
 
   const pageCount = Math.ceil(numOfElements / per_page);
-
-
 
   return (
     <div className="content">
       <div className="content-page">
-        {currentPageData}
+        {currentPageData()}
       </div>
       <ReactPaginate
         marginPagesDisplayed={1}

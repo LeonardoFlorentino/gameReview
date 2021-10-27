@@ -22,7 +22,7 @@ export interface dataReposTypes {
 }
 
 export interface RouteParams {
-    name: string,
-    page: string,
-    id: string
+    mainUserName?: string,
+    pageType?: string,
+    subordinateUserName?: string
 }

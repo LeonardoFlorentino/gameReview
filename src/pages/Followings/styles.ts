@@ -55,7 +55,7 @@ export const FollowingContainer = styled.div`
     height: 100px;
     width: 100%;
     display: grid;
-    grid-template-columns: 0.1fr 0.6fr 2fr 0.3fr;
+    grid-template-columns: 0.1fr 0.6fr 1fr 0.5fr;
     align-items: center;
     font-weight: bold;
     font-size: 1.5rem;

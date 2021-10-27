@@ -23,16 +23,15 @@ import {
 
 
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar'
 import { Paginator } from '../../components/Paginator'
 
-import { dataTypes, RouteParams } from '../../interface';
+import { RouteParams } from '../../interface';
 
 
 export const Repos = (props: any) => {
-  const { id }: RouteParams = useParams();
-  const { user} = props
+  const { mainUserName }: RouteParams = useParams();
+  const { userName, user, fetchData} = props
 
 
   const showData = (repo: any) => {
@@ -65,7 +64,7 @@ export const Repos = (props: any) => {
   return (
     <ReposContainer>
       <ReposHaeder>
-        <ExitContainer to={`/user/${id}`}>
+        <ExitContainer to={`/user/${mainUserName}`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -76,8 +75,10 @@ export const Repos = (props: any) => {
         <Paginator
           typePage={'repos'}
           showData={showData}
-          userName={id}
+          userName={userName}
           numOfElements={user.public_repos} 
+          fetchUserData={fetchData}
+          mainUserName={mainUserName}
           per_page={5}/>
       </ReposBody>
       <ReposFooter>

@@ -14,9 +14,9 @@ import { useHistory } from 'react-router-dom';
 import { useState } from "react";
 
 
-export const Login = (props: any) => {
+export const Login = (Props:any) => {
     const history = useHistory();
-    const { userName, setUserName, clean } = props
+    const {userName, setUserName } = Props
     const [submitedNull, setSubmitedNull] = useState(false);
 
     const updateName = (event: any) => {
@@ -29,7 +29,6 @@ export const Login = (props: any) => {
             setSubmitedNull(true);
           }
         else{
-            clean()
             history.push(`/user/${userName}`)
         }
     }

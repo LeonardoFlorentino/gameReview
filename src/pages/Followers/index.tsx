@@ -21,8 +21,8 @@ import { dataTypes, RouteParams } from '../../interface'
 import { Paginator } from '../../components/Paginator'
 
 export const Followers = (props: any) => {
-  const { id }: RouteParams = useParams()
-  const { user } = props
+  const { mainUserName }: RouteParams = useParams()
+  const { userName, user, fetchData} = props
 
   const showData = (follower: dataTypes) => {
     return (
@@ -30,7 +30,7 @@ export const Followers = (props: any) => {
         <Square />
         <ProfilePic src={follower.avatar_url} />
         <LoginName>#{follower.login}</LoginName>
-        <AcessContainerFollower to={`/user/${id}/followers/${follower.login}`}>
+        <AcessContainerFollower to={`/user/${mainUserName}/followers/${follower.login}`}>
           <AcessFollowerIcon />
         </AcessContainerFollower>
       </FollowerContainer>)
@@ -39,7 +39,7 @@ export const Followers = (props: any) => {
   return (
     <FollowersContainer>
       <FollowersHeader>
-        <ExitContainer to={`/user/${id}`}>
+        <ExitContainer to={`/user/${mainUserName}`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -50,8 +50,10 @@ export const Followers = (props: any) => {
         <Paginator
           typePage={'followers'}
           showData={showData}
-          userName={id}
-          numOfElements={user.followers} />
+          userName={userName}
+          numOfElements={user.following}
+          fetchUserData={fetchData}
+          mainUserName={mainUserName} />
       </FollowersBody>
       <FollowersFooter>
         <Navbar activePage='followers' />

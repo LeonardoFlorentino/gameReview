@@ -12,7 +12,7 @@
     align-items: flex-end;
     list-style: none;
     outline: none;
-    min-width: 80vw;
+    /* min-width: 80vw; */
     /* padding: 10px 0px; */
 }
 
