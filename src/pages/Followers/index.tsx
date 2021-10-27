@@ -51,7 +51,7 @@ export const Followers = (props: any) => {
           typePage={'followers'}
           showData={showData}
           userName={userName}
-          numOfElements={user.following}
+          numOfElements={user.followers}
           fetchUserData={fetchData}
           mainUserName={mainUserName} />
       </FollowersBody>
