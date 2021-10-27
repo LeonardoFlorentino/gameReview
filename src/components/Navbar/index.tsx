@@ -11,34 +11,28 @@ import {
 } from './styles';
 
 import {useParams} from 'react-router-dom'
+import { RouteParams } from '../../interface';
 
-interface Props{
-  path?: string
-}
 
-interface RouteParams{
-  id:string
-}
-
-export const Navbar = (props: Props) => {
-  const {id}:RouteParams = useParams()
+export const Navbar = ({activePage}:any) => {
+  const {mainUserName}:RouteParams = useParams()
   return (
     <>
       <Nav>
         <NavMenu>
-          <NavLink to={`/user/${id}`} >
+          <NavLink to={`/user/${mainUserName}`} color={activePage === 'home'? '#222': '#aaa'}>
             <IconHome />
             <Text>Home</Text>
           </NavLink>
-          <NavLink to={`/user/${id}/repos`} >
+          <NavLink to={`/user/${mainUserName}/repos`} color={activePage === 'repos'? '#222': '#aaa'}>
             <IconRepos/>
             <Text>Repos</Text>
           </NavLink>
-          <NavLink to={`/user/${id}/followers`} >
+          <NavLink to={`/user/${mainUserName}/followers` } color={activePage === 'followers'? '#222': '#aaa'}>
             <IconFollowers/>
             <Text>Seguidores</Text>
           </NavLink>
-          <NavLink to={`/user/${id}/following`} >
+          <NavLink to={`/user/${mainUserName}/followings`} color={activePage === 'followings'? '#222': '#aaa'}>
             <IconFollowing/>
             <Text>Seguindo</Text>
           </NavLink>

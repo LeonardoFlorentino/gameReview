@@ -1,87 +1,63 @@
 import {
-  ContainerFollowers,
-  ContainerHeader,
-  GoBackButton,
+  FollowersContainer,
+  FollowersHeader,
+  ExitContainer,
+  ExitIcon,
   NumberOfFollowers,
-  ContainerBody,
-  ProfileContainer,
+  FollowersBody,
+  FollowerContainer,
   Square,
   ProfilePic,
   LoginName,
-  AcessButton,
-  Footer
+  AcessFollowerIcon,
+  AcessContainerFollower,
+  FollowersFooter
 } from './styles'
 
 
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react'
-
 import { Navbar } from '../../components/Navbar'
+import { dataTypes, RouteParams } from '../../interface'
+import { Paginator } from '../../components/Paginator'
 
-// import { data } from '../../data/data'
-const URL = 'https://api.github.com/users'
-interface dataTypes {
-  name?: string,
-  login?: string,
-  avatar_url?: string,
-  email?: string,
-  location?: string,
-  followers?: number,
-  following?: number,
-  public_repos?: number,
-  bio?: string
+export const Followers = (props: any) => {
+  const { mainUserName }: RouteParams = useParams()
+  const { userName, user, fetchData} = props
 
-}
-interface RouteParams {
-  username: string,
-  id:string
-}
-
-export const Followers = () => {
-  const {id}: RouteParams = useParams();
-  const [data, setData] = useState<dataTypes | null>(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      const newUrl = `${URL}/${id}`
-      const response = await fetch(newUrl);
-      const newData = await response.json();
-      setData(newData);
-    };
-    fetchData();
-  });
-  if (data) {
-    const { followers, avatar_url, login} = data
+  const showData = (follower: dataTypes) => {
     return (
-      <ContainerFollowers>
-        <ContainerHeader>
-          <GoBackButton />
-          <NumberOfFollowers>
-            {followers} seguidores
-          </NumberOfFollowers>
-        </ContainerHeader>
-        <ContainerBody>
-          <ProfileContainer>
-            <Square/>
-            <ProfilePic  src={avatar_url}/>
-            <LoginName>#{login}</LoginName>
-            <AcessButton/>
-          </ProfileContainer>
-        </ContainerBody>
-        <ContainerBody>
-          <ProfileContainer>
-            <Square/>
-            <ProfilePic  src={avatar_url}/>
-            <LoginName>#{login}</LoginName>
-            <AcessButton/>
-          </ProfileContainer>
-        </ContainerBody>
-        <Footer>
-          <Navbar/>
-        </Footer>
-      </ContainerFollowers>
-    )
+      <FollowerContainer key={follower.id}>
+        <Square />
+        <ProfilePic src={follower.avatar_url} />
+        <LoginName>#{follower.login}</LoginName>
+        <AcessContainerFollower to={`/user/${mainUserName}/followers/${follower.login}`}>
+          <AcessFollowerIcon />
+        </AcessContainerFollower>
+      </FollowerContainer>)
   }
-  else {
-    return null;
-  }
+
+  return (
+    <FollowersContainer>
+      <FollowersHeader>
+        <ExitContainer to={`/user/${mainUserName}`}>
+          <ExitIcon />
+        </ExitContainer>
+        <NumberOfFollowers>
+          {user.followers} seguidores
+        </NumberOfFollowers>
+      </FollowersHeader>
+      <FollowersBody>
+        <Paginator
+          typePage={'followers'}
+          showData={showData}
+          userName={userName}
+          numOfElements={user.followers}
+          fetchUserData={fetchData}
+          mainUserName={mainUserName} />
+      </FollowersBody>
+      <FollowersFooter>
+        <Navbar activePage='followers' />
+      </FollowersFooter>
+    </FollowersContainer>
+  )
 }

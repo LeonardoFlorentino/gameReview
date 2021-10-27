@@ -1,9 +1,11 @@
 import {
     HomeContainer,
-    HomeHeaderMain,
+    HomeHeaderFollow,
     LoginName,
+    ExitContainer,
+    ExitIcon,
     ChangeProfileContainer,
-    LogOutIcon,
+    LogInIcon,
     HomeBody,
     ProfileContainer,
     ProfilePic,
@@ -26,26 +28,30 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
 
 
-export const Profile = (props: any) => {
-    const { mainUserName  }: RouteParams = useParams()
-    const { userName, setUserName, user, setUser, fetchData } = props
+export const AnotherUser = (props: any) => {
+    const { mainUserName, pageType, subordinateUserName }: RouteParams = useParams()
+    const { userName, user, setUser, fetchData } = props
 
     useEffect(() => {
-            fetchData(mainUserName, 'mainUser');
-    }, [userName, fetchData,mainUserName]);
-
-
+            fetchData(subordinateUserName, 'subordinateUser');
+    }, [userName, fetchData, subordinateUserName]);
 
     return (
         <HomeContainer>
-            <HomeHeaderMain>
-                <LoginName to={`/user/${mainUserName}`} style={{ marginLeft: '20px' }}>
+            <HomeHeaderFollow>
+                <ExitContainer to={`/user/${mainUserName}/${pageType}`}>
+                    <ExitIcon />
+                </ExitContainer>
+                <LoginName to={`/user/${pageType}/${subordinateUserName}`}>
                     #{user.login}
-                </LoginName  >
-                <ChangeProfileContainer to='/' onClick={() => { setUserName(''); setUser({}) }} style={{ right: '10px' }}>
-                    Sair<LogOutIcon color={'red'} />
+                </LoginName>
+                <ChangeProfileContainer
+                    to={`/user/${subordinateUserName}`}
+                    onClick={() => { fetchData(subordinateUserName, 'mainUser'); setUser({}) }}
+                    style={{ right: '30px' }}>
+                    Salvar<LogInIcon color={'green'} />
                 </ChangeProfileContainer>
-            </HomeHeaderMain>
+            </HomeHeaderFollow>
             <HomeBody>
                 <ProfileContainer>
                     <ProfilePic src={user.avatar_url} />
@@ -81,7 +87,7 @@ export const Profile = (props: any) => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage='home' />
+                <Navbar activePage={`${pageType}`} />
             </HomeFooter>
         </HomeContainer>
     )

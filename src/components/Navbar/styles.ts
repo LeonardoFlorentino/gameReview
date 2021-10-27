@@ -31,7 +31,7 @@ export const NavLink = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color:#aaa;
+  color: ${({ color }) => color};
   text-decoration: none;
   cursor: pointer;
 

@@ -1,13 +1,11 @@
-*{
+* {
   font-family: 'Helvetica';
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  border-collapse: separate;
 }
 
-body{
-  margin: 0px;
+body {
+  margin: 0;
   background-color: #292929;
   color: #eee;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }

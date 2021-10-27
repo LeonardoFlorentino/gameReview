@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export const FollowersContainer = styled.div`
+export const FollowingsContainer = styled.div`
     height: 100vh;
     width: 100vw;
     display: grid;
@@ -11,14 +11,13 @@ export const FollowersContainer = styled.div`
     overflow-x: hidden;
 `
 
-export const FollowersHeader = styled.div`
+export const FollowingsHeader = styled.div`
     width: 100vw;
     height: 60px;
     display: grid;
     grid-template-columns: 60px 1fr 60px;
     align-items: center;
     justify-items: center;
-    
 `
 
 export const ExitContainer = styled(Link)`
@@ -39,7 +38,7 @@ export const NumberOfFollowers = styled.div`
     font-size: 1.2rem;
 `
 
-export const FollowersBody = styled.div`
+export const FollowingsBody = styled.div`
     background-color: #3f3f3f;
     width: 100vw;
     display: flex;
@@ -52,7 +51,7 @@ export const FollowersBody = styled.div`
         width: 100%
     }
 `
-export const FollowerContainer = styled.div`
+export const FollowingContainer = styled.div`
     height: 100px;
     width: 100%;
     display: grid;
@@ -89,7 +88,7 @@ export const LoginName = styled.div`
    margin-left: 10px;
 `
 
-export const AcessContainerFollower = styled(Link)`
+export const AcessContainerFollowing = styled(Link)`
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -100,12 +99,13 @@ export const AcessContainerFollower = styled(Link)`
     text-decoration: none;
 `
 
-export const AcessFollowerIcon = styled(FiArrowRight)`
+export const AcessFollowingIcon = styled(FiArrowRight)`
 
 `
 
-export const FollowersFooter = styled.div`
+
+export const FollowingsFooter = styled.div`
     position: fixed;
-    left: 0px;
-    bottom: 0px;
+    left: 0;
+    bottom: 0;
 `
