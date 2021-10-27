@@ -60,11 +60,6 @@ export const ChangeProfileContainer = styled(Link)`
     text-decoration: none;
 `
 
-export const LogOutIcon = styled(FiLogOut)`
-    margin-left: 5px;
-    width: 25px;
-    height: 25px;
-`
 
 export const LogInIcon = styled(FiLogIn)`
     margin-left: 5px;

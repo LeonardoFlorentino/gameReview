@@ -44,13 +44,8 @@ export const ExitContainer = styled(Link)`
     text-decoration: none;
 `
 
-export const ExitIcon = styled(FiArrowLeft)`
-    width: 25px;
-    height: 25px;
-`
-
 export const ChangeProfileContainer = styled(Link)`
-    position: relative;
+    margin-right: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -66,11 +61,6 @@ export const LogOutIcon = styled(FiLogOut)`
     height: 25px;
 `
 
-export const LogInIcon = styled(FiLogIn)`
-    margin-left: 5px;
-    width: 25px;
-    height: 25px;
-`
 
 export const HomeBody = styled.div`
     background-color: #343434;
