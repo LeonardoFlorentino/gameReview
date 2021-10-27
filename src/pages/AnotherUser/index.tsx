@@ -30,7 +30,7 @@ import { useEffect } from 'react'
 
 export const AnotherUser = (props: any) => {
     const { mainUserName, pageType, subordinateUserName }: RouteParams = useParams()
-    const { userName, setUserName, user, setUser, fetchData } = props
+    const { userName, user, setUser, fetchData } = props
 
     useEffect(() => {
             fetchData(subordinateUserName, 'subordinateUser');
