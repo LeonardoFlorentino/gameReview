@@ -20,7 +20,7 @@ import {
     HomeFooter
 } from './styles';
 
-import { RouteParams } from '../../interface'
+import { profileProps, RouteParams } from '../../interface'
 
 import { Navbar } from '../../components/Navbar'
 
@@ -28,7 +28,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
 
 
-export const AnotherUser = (props: any) => {
+export const AnotherUser = (props: profileProps) => {
     const { mainUserName, pageType, subordinateUserName }: RouteParams = useParams()
     const { userName, user, setUser, fetchData } = props
 
@@ -39,14 +39,14 @@ export const AnotherUser = (props: any) => {
     return (
         <HomeContainer>
             <HomeHeaderFollow>
-                <ExitContainer to={`/user/${mainUserName}/${pageType}`}>
+                <ExitContainer to={`/${mainUserName}/${pageType}`}>
                     <ExitIcon />
                 </ExitContainer>
-                <LoginName to={`/user/${pageType}/${subordinateUserName}`}>
+                <LoginName to={`/${pageType}/${subordinateUserName}`}>
                     #{user.login}
                 </LoginName>
                 <ChangeProfileContainer
-                    to={`/user/${subordinateUserName}`}
+                    to={`/${subordinateUserName}`}
                     onClick={() => { fetchData(subordinateUserName, 'mainUser'); setUser({}) }}
                     style={{ right: '30px' }}>
                     Salvar<LogInIcon color={'green'} />
@@ -65,15 +65,15 @@ export const AnotherUser = (props: any) => {
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
-                    <InfoContainer to={`/user/${mainUserName}/followers`}>
+                    <InfoContainer to={`/${mainUserName}/followers`}>
                         <InfoNumber>{user.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/user/${mainUserName}/followings`}>
+                    <InfoContainer to={`/${mainUserName}/followings`}>
                         <InfoNumber>{user.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/user/${mainUserName}/repos`}>
+                    <InfoContainer to={`/${mainUserName}/repos`}>
                         <InfoNumber>{user.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>

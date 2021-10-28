@@ -28,13 +28,22 @@ import { Paginator } from '../../components/Paginator'
 
 import { RouteParams } from '../../interface';
 
+import {dataTypes} from '../../interface'
 
-export const Repos = (props: any) => {
+
+interface reposProps {
+  user: dataTypes,
+  fetchData: (value1: string, value2: string) => void,
+  userName: string,
+}
+
+
+export const Repos = (props: reposProps) => {
   const { mainUserName }: RouteParams = useParams();
   const { userName, user, fetchData} = props
 
 
-  const showData = (repo: any) => {
+  const showData = (repo: dataTypes) => {
     return (
       <RepoContainer key={repo.id}>
         <NameContainer>
@@ -64,7 +73,7 @@ export const Repos = (props: any) => {
   return (
     <ReposContainer>
       <ReposHaeder>
-        <ExitContainer to={`/user/${mainUserName}`}>
+        <ExitContainer to={`/${mainUserName}`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>

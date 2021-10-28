@@ -1,10 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import ReactPaginate from "react-paginate";
+import { dataTypes } from "../../interface";
 import "./styles.css";
 
+interface paginatorProps {
+  typePage:string,
+  showData: (value:dataTypes) => ReactNode,
+  userName:string,
+  numOfElements:number | undefined,
+  fetchUserData: (value1: string, value2: string) => void, 
+  mainUserName:string,
+  per_page?: number,
+}
 
-export const Paginator = (Props: any) => {
-  const { showData, userName, typePage, fetchUserData, mainUserName, numOfElements, per_page = 7 } = Props
+interface handlePageArgs {
+  selected: number
+}
+
+export const Paginator = (Props: paginatorProps) => {
+  const { showData, userName, typePage, fetchUserData, mainUserName, numOfElements = 0, per_page = 7 } = Props
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
 
@@ -24,7 +38,7 @@ export const Paginator = (Props: any) => {
     , [userName,fetchUserData, mainUserName])
 
 
-  const handlePageClick = ({ selected }: any) => {
+  const handlePageClick = ({selected}: handlePageArgs) => {
     setCurrentPage(selected + 1);
   }
 

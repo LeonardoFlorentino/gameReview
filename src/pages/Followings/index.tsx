@@ -14,16 +14,21 @@ import {
   FollowingsFooter
 } from './styles'
 
-import { dataTypes } from '../../interface'
 import { useParams } from 'react-router-dom';
 import { Paginator } from '../../components/Paginator';
 import { Navbar } from '../../components/Navbar'
 
-import { RouteParams } from '../../interface';
+import { RouteParams, dataTypes } from '../../interface';
 
-export const Followings = (props: any) => {
+interface followingsProps {
+  user: dataTypes,
+  fetchData: (value1: string, value2: string) => void,
+  userName: string,
+}
+
+export const Followings = (props: followingsProps) => {
   const { mainUserName }: RouteParams = useParams()
-  const { user, fetchData, setUserName, userName} = props
+  const { user, fetchData, userName } = props
 
   const showData = (following: dataTypes) => {
     return (
@@ -31,7 +36,7 @@ export const Followings = (props: any) => {
         <Square />
         <ProfilePic src={following.avatar_url} />
         <LoginName>#{following.login}</LoginName>
-        <AcessContainerFollowing to={`/user/${mainUserName}/followings/${following.login}`}>
+        <AcessContainerFollowing to={`/${mainUserName}/followings/${following.login}`}>
           <AcessFollowingIcon />
         </AcessContainerFollowing>
       </FollowingContainer>)
@@ -40,7 +45,7 @@ export const Followings = (props: any) => {
   return (
     <FollowingsContainer>
       <FollowingsHeader>
-        <ExitContainer to={`/user/${mainUserName}`}>
+        <ExitContainer to={`/${mainUserName}`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -55,8 +60,7 @@ export const Followings = (props: any) => {
           numOfElements={user.following}
           fetchUserData={fetchData}
           mainUserName={mainUserName}
-          setUserName={setUserName}
-           />
+        />
       </FollowingsBody>
       <FollowingsFooter>
         <Navbar activePage='followings' />

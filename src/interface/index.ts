@@ -11,8 +11,9 @@ export interface dataTypes {
     following?: number,
     public_repos?: number,
     bio?: string,
-    node_id ?: string
-
+    node_id?: string,
+    description?:string,
+    stargazers_count?: number
 }
 
 export interface dataReposTypes {
@@ -22,7 +23,15 @@ export interface dataReposTypes {
 }
 
 export interface RouteParams {
-    mainUserName?: string,
-    pageType?: string,
-    subordinateUserName?: string
+    mainUserName: string,
+    pageType: string,
+    subordinateUserName: string
+}
+
+export interface profileProps {
+    userName: string,
+    setUserName: (value: string | ((prevState: string) => string)) => void,
+    user: dataTypes,
+    setUser: (value: dataTypes | ((prevState: dataTypes) => dataTypes)) => void,
+    fetchData: (value1: string, value2: string) => void
 }

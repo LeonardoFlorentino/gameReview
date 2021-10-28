@@ -8,7 +8,7 @@ const App = () => {
   const [user, setUser] = useState({})
   const [subordinateUser, setSubordinateUser] = useState({})
 
-  const fetchData = (nameLogin: any, profile: string) => {
+  const fetchData = (nameLogin: string, profile: string) => {
     if (profile === 'mainUser' && (userName !== nameLogin || Object.entries(user).length === 0)) {
       setUserName(nameLogin)
       fetch(`https://api.github.com/users/${nameLogin}`)

@@ -19,8 +19,13 @@ import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
 import { dataTypes, RouteParams } from '../../interface'
 import { Paginator } from '../../components/Paginator'
+interface followersProps {
+  user: dataTypes,
+  fetchData: (value1: string, value2: string) => void,
+  userName: string,
+}
 
-export const Followers = (props: any) => {
+export const Followers = (props: followersProps) => {
   const { mainUserName }: RouteParams = useParams()
   const { userName, user, fetchData} = props
 
@@ -30,7 +35,7 @@ export const Followers = (props: any) => {
         <Square />
         <ProfilePic src={follower.avatar_url} />
         <LoginName>#{follower.login}</LoginName>
-        <AcessContainerFollower to={`/user/${mainUserName}/followers/${follower.login}`}>
+        <AcessContainerFollower to={`/${mainUserName}/followers/${follower.login}`}>
           <AcessFollowerIcon />
         </AcessContainerFollower>
       </FollowerContainer>)
@@ -39,7 +44,7 @@ export const Followers = (props: any) => {
   return (
     <FollowersContainer>
       <FollowersHeader>
-        <ExitContainer to={`/user/${mainUserName}`}>
+        <ExitContainer to={`/${mainUserName}`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
