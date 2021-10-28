@@ -23,13 +23,11 @@ export const Login = ({userName, setUserName }:loginProps) => {
     const [submitedNull, setSubmitedNull] = useState(false);
 
     const updateName = (event: React.ChangeEvent<HTMLInputElement> ) => {
-        console.log(event)
         setSubmitedNull(false)
         setUserName(event.target.value);
     };
 
-    const onSubmit = async (event: React.ChangeEvent<HTMLButtonElement>) => {
-        console.log(typeof event)
+    const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         if (userName.length === 0) {
             setSubmitedNull(true);
           }
