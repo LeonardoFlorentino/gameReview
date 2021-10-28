@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FiLogOut, FiLogIn, FiArrowLeft} from 'react-icons/fi'
+import { FiLogIn, FiArrowLeft} from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
 export const HomeContainer = styled.div`

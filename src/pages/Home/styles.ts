@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FiLogOut, FiLogIn, FiArrowLeft} from 'react-icons/fi'
+import { FiLogOut} from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
 export const HomeContainer = styled.div`
@@ -45,7 +45,7 @@ export const ExitContainer = styled(Link)`
 `
 
 export const ChangeProfileContainer = styled(Link)`
-    margin-right: 30px;
+    margin-right: 15px;
     display: flex;
     flex-direction: row;
     justify-content: center;
