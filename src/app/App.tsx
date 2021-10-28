@@ -16,7 +16,6 @@ const App = () => {
         .then((value) => setUser(value))
     }
     else if(profile === 'subordinateUser'){
-      console.log('passando')
       fetch(`https://api.github.com/users/${nameLogin}`)
         .then((res) => res.json())
         .then((value) => setSubordinateUser(value))

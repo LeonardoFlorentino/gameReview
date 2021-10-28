@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FiLogOut, FiLogIn, FiArrowLeft} from 'react-icons/fi'
+import { FiLogIn, FiArrowLeft} from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
 export const HomeContainer = styled.div`
@@ -60,11 +60,6 @@ export const ChangeProfileContainer = styled(Link)`
     text-decoration: none;
 `
 
-export const LogOutIcon = styled(FiLogOut)`
-    margin-left: 5px;
-    width: 25px;
-    height: 25px;
-`
 
 export const LogInIcon = styled(FiLogIn)`
     margin-left: 5px;
