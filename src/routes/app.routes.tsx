@@ -7,7 +7,7 @@ import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
 import { AnotherUser } from '../pages/AnotherUser'
 
-import { dataTypes, routerProps } from '../interface'
+import {  routerProps } from '../interface'
 
 export const Router = (props: routerProps) => {
   return (
@@ -20,7 +20,7 @@ export const Router = (props: routerProps) => {
           setUserName={props.setUserName}
         />
       </Route>
-      <Route path={["/:mainUserName" ]} exact>
+      <Route path="/:mainUserName"  exact>
         <Profile
           userName={props.userName}
           setUserName={props.setUserName}
@@ -29,28 +29,28 @@ export const Router = (props: routerProps) => {
           fetchUserData={props.fetchUserData}
         />
       </Route>
-      <Route path={["/:mainUserName/repos","/anotheruser/:subordinateUserName/repos"]} exact>
+      <Route path="/:mainUserName/repos" exact>
         <Repos
           user={props.user}
           fetchUserData={props.fetchUserData}
           userName={props.userName}
         />
       </Route>
-      <Route path={["/:mainUserName/followers", "/anotheruser/:subordinateUserName/followers"]} exact>
+      <Route path="/:mainUserName/followers" exact>
         <Followers
           user={props.user}
           fetchUserData={props.fetchUserData}
           userName={props.userName}
         />
       </Route>
-      <Route path={["/:mainUserName/followings", "/anotheruser/:subordinateUserName/followings"]} exact>
+      <Route path="/:mainUserName/followings" exact>
         <Followings
           user={props.user}
           fetchUserData={props.fetchUserData}
           userName={props.userName}
         />
       </Route>
-      <Route path="/anotheruser/:subordinateUserName" exact>
+      <Route path="/:mainUserName/:pageType/:subordinateUserName" exact>
         <AnotherUser
           userName={props.userName}
           setUserName={props.setUserName}

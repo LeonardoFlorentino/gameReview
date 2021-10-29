@@ -21,12 +21,12 @@ import { Navbar } from '../../components/Navbar'
 import { RouteParams, dataTypes, pageProps } from '../../interface';
 
 export const Followings = (props: pageProps) => {
-  const { mainUserName, subordinateUserName }: RouteParams = useParams()
+  const { mainUserName }: RouteParams = useParams()
   const { user, fetchUserData, userName } = props
 
   const showData = (following: dataTypes) => {
     return (
-      <FollowingContainer key={following.id} to={`/anotheruser/${following.login}`}>
+      <FollowingContainer key={following.id} to={`followings/${following.login}`}>
         <Square />
         <ProfilePic src={following.avatar_url} />
         <LoginName>#{following.login}</LoginName>
@@ -40,7 +40,7 @@ export const Followings = (props: pageProps) => {
     <FollowingsContainer>
       <FollowingsHeader>
         <ExitContainer
-          to={userName === mainUserName? `/${mainUserName}`: `/anotheruser/${subordinateUserName}`}
+          to={`/${mainUserName}`}
         >
           <ExitIcon />
         </ExitContainer>
@@ -55,7 +55,6 @@ export const Followings = (props: pageProps) => {
           numOfElements={user.following}
           fetchUserData={fetchUserData}
           mainUserName={mainUserName}
-          subordinateUserName={subordinateUserName}
         />
       </FollowingsBody>
       <FollowingsFooter>

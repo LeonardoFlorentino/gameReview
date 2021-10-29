@@ -32,7 +32,7 @@ import {dataTypes} from '../../interface'
 
 
 export const Repos = (props: pageProps) => {
-  const { mainUserName, subordinateUserName }: RouteParams = useParams();
+  const { mainUserName }: RouteParams = useParams();
   const { userName, user, fetchUserData} = props
 
 
@@ -67,7 +67,7 @@ export const Repos = (props: pageProps) => {
     <ReposContainer>
       <ReposHaeder>
         <ExitContainer  
-          to={userName === mainUserName? `/${mainUserName}`: `/anotheruser/${subordinateUserName}`}
+          to={`/${mainUserName}`}
         >
           <ExitIcon />
         </ExitContainer>
@@ -82,7 +82,6 @@ export const Repos = (props: pageProps) => {
           numOfElements={user.public_repos} 
           fetchUserData={fetchUserData}
           mainUserName={mainUserName}
-          subordinateUserName={subordinateUserName}
           per_page={5}/>
       </ReposBody>
       <ReposFooter>

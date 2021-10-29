@@ -4,12 +4,11 @@ import { dataTypes } from "../../interface";
 import "./styles.css";
 
 interface paginatorProps {
-  typePage:string,
-  showData: (value:dataTypes) => ReactNode,
-  numOfElements:number | undefined,
-  fetchUserData: (value1: string, value2: boolean) => void, 
-  mainUserName:string,
-  subordinateUserName: string,
+  typePage: string,
+  showData: (value: dataTypes) => ReactNode,
+  numOfElements: number | undefined,
+  fetchUserData: (value1: string, value2: boolean) => void,
+  mainUserName: string,
   per_page?: number,
 }
 
@@ -17,29 +16,30 @@ interface handlePageArgs {
   selected: number
 }
 
-export const Paginator = (Props: paginatorProps) => {
-  const { showData, typePage, fetchUserData, mainUserName,subordinateUserName, numOfElements = 0, per_page = 7 } = Props
+export const Paginator = (props: paginatorProps) => {
+  const { showData, typePage, fetchUserData, mainUserName,  numOfElements = 0, per_page = 7 } = props
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
 
 
   useEffect(() => {
     const fetchPageData = (page: number) => {
-      fetch(`https://api.github.com/users/${mainUserName || subordinateUserName}/${typePage}?per_page=${per_page}&page=${page}`)
+      fetch(`https://api.github.com/users/${mainUserName}/${typePage}?per_page=${per_page}&page=${page}`)
         .then((res) => res.json())
         .then((value) => setData(value))
     }
     fetchPageData(currentPage);
-  }, [currentPage, mainUserName, typePage, per_page ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
-    useEffect(() => {
-        fetchUserData(mainUserName || subordinateUserName, false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mainUserName]);
+  useEffect(() => {
+    fetchUserData(mainUserName , false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mainUserName]);
 
 
 
-  const handlePageClick = ({selected}: handlePageArgs) => {
+  const handlePageClick = ({ selected }: handlePageArgs) => {
     setCurrentPage(selected + 1);
   }
 

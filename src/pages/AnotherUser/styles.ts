@@ -27,9 +27,8 @@ export const HomeHeaderFollow = styled.div`
     justify-items: center;
 `
 
-export const LoginName = styled(Link)`
+export const LoginName = styled.div`
    font-weight: bold;
-   cursor: pointer;
    color: inherit;
    text-decoration: none;
 `
@@ -144,12 +143,11 @@ export const Name = styled.div`
     font-size: 1.5rem;
 `
 
-export const InfoContainer = styled(Link)`
+export const InfoContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     align-items: center;
-    cursor: pointer;
     color: inherit;
     text-decoration: none;
 `

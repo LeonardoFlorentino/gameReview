@@ -30,7 +30,7 @@ import { useEffect } from 'react'
 
 
 export const AnotherUser = (props: profileProps) => {
-    const { mainUserName, pageType, subordinateUserName }: RouteParams = useParams()
+    const { mainUserName,pageType, subordinateUserName }: RouteParams = useParams()
     const { userName, user, fetchUserData } = props
 
     useEffect(() => {
@@ -44,7 +44,7 @@ export const AnotherUser = (props: profileProps) => {
                 <ExitContainer to={`/${mainUserName}/${pageType}`}>
                     <ExitIcon />
                 </ExitContainer>
-                <LoginName to={`/${subordinateUserName}`}>
+                <LoginName >
                     #{user.login}
                 </LoginName>
                 <ChangeProfileContainer
@@ -69,15 +69,15 @@ export const AnotherUser = (props: profileProps) => {
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
-                    <InfoContainer to={`/anotheruser/${subordinateUserName}/followers`}>
+                    <InfoContainer >
                         <InfoNumber>{user.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/anotheruser/${subordinateUserName}/followings`}>
+                    <InfoContainer >
                         <InfoNumber>{user.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/anotheruser/${subordinateUserName}/repos`}>
+                    <InfoContainer >
                         <InfoNumber>{user.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>

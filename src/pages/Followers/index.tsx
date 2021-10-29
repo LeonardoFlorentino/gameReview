@@ -21,12 +21,12 @@ import { dataTypes, pageProps, RouteParams } from '../../interface'
 import { Paginator } from '../../components/Paginator'
 
 export const Followers = (props: pageProps) => {
-  const { mainUserName, subordinateUserName }: RouteParams = useParams()
+  const { mainUserName }: RouteParams = useParams()
   const { userName, user, fetchUserData } = props
 
   const showData = (follower: dataTypes) => {
     return (
-      <FollowerContainer key={follower.id} to={`/anotheruser/${follower.login}`}>
+      <FollowerContainer key={follower.id} to={`followers/${follower.login}`}>
         <Square />
         <ProfilePic src={follower.avatar_url} />
         <LoginName>#{follower.login}</LoginName>
@@ -40,7 +40,7 @@ export const Followers = (props: pageProps) => {
     <FollowersContainer>
       <FollowersHeader>
         <ExitContainer
-          to={userName === mainUserName? `/${mainUserName}`: `/anotheruser/${subordinateUserName}`}
+          to={`/${mainUserName}`}
         >
           <ExitIcon />
         </ExitContainer>
@@ -55,7 +55,6 @@ export const Followers = (props: pageProps) => {
           numOfElements={user.followers}
           fetchUserData={fetchUserData}
           mainUserName={mainUserName}
-          subordinateUserName={subordinateUserName}
            />
       </FollowersBody>
       <FollowersFooter>
