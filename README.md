@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# [Softplan](https://www.softplan.com.br/) challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## This project was made to show some of my developer skills. You can check below for more information as consumed API, demonstration, requirements, differentials and used technologies.
 
-## Available Scripts
+### Used API
 
-In the project directory, you can run:
+https://rickandmortyapi.com/documentation/#graphql
 
-### `yarn start`
+## Demo:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Navigate through character pages
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![showing-navigation](https://github.com/eduardoformighieri/softplan-challenge/blob/main/public/demo/navigation.gif)
 
-### `yarn test`
+### Edit characters
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![showing-edition](https://github.com/eduardoformighieri/softplan-challenge/blob/main/public/demo/edit.gif)
 
-### `yarn build`
+### Search characters
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![showing-search](https://github.com/eduardoformighieri/softplan-challenge/blob/main/public/demo/search.gif)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Responsive
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![showing-responsive](https://github.com/eduardoformighieri/softplan-challenge/blob/main/public/demo/respon.gif)
 
-### `yarn eject`
+## Requirements:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [x] Use React
+- [x] Use create-react-app to start project
+- [ ] ~~Use redux for state management~~ (Apollo Client used)
+- [x] Use react-router for page switch
+- [x] Use @testing-library/react for testing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Differentials:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [x] Use Typescript
+- [x] Corret use of git
+- [ ] Create a pipeline in GitLab
+- [x] Use Apollo Client instead of Redux
+- [x] Design da interface
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Technologies
 
-## Learn More
+This project has been developed with the following technologies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [React](https://reactjs.org/)
+- [GraphQL](https://graphql.org)
+- [Apollo Client](https://www.apollographql.com/docs/react/)
+- [Chakra UI](https://chakra-ui.com/)
+- [TypeScript](https://www.typescriptlang.org/)
