@@ -27,13 +27,14 @@ import { useEffect } from 'react'
 
 
 export const Profile = (props: profileProps) => {
-    const { mainUserName  }: RouteParams = useParams()
-    const { userName, setUserName, user, setUser, fetchData } = props
+    const { mainUserName }: RouteParams = useParams()
+    const { userName, user, fetchData } = props
+    // const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
-            fetchData(mainUserName, 'mainUser');
-    }, [userName, fetchData,mainUserName]);
-
+        fetchData(mainUserName, 'subordinateUser');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [mainUserName]);
 
 
     return (
@@ -42,7 +43,7 @@ export const Profile = (props: profileProps) => {
                 <LoginName to={`/${mainUserName}`} style={{ marginLeft: '20px' }}>
                     #{user.login}
                 </LoginName  >
-                <ChangeProfileContainer to='/' onClick={() => { setUserName(''); setUser({}) }} style={{ right: '10px' }}>
+                <ChangeProfileContainer to='/' style={{ right: '10px' }}>
                     Sair<LogOutIcon color={'red'} />
                 </ChangeProfileContainer>
             </HomeHeaderMain>
@@ -81,7 +82,7 @@ export const Profile = (props: profileProps) => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage='home' />
+                <Navbar activePage='home' userName={userName} />
             </HomeFooter>
         </HomeContainer>
     )

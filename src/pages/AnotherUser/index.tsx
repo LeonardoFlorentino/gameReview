@@ -5,6 +5,7 @@ import {
     ExitContainer,
     ExitIcon,
     ChangeProfileContainer,
+    ButtonChangeProfile,
     LogInIcon,
     HomeBody,
     ProfileContainer,
@@ -30,11 +31,12 @@ import { useEffect } from 'react'
 
 export const AnotherUser = (props: profileProps) => {
     const { mainUserName, pageType, subordinateUserName }: RouteParams = useParams()
-    const { userName, user, setUser, fetchData } = props
+    const { userName, user, fetchData } = props
 
     useEffect(() => {
-            fetchData(subordinateUserName, 'subordinateUser');
-    }, [userName, fetchData, subordinateUserName]);
+        fetchData(subordinateUserName, 'subordinateUser');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [subordinateUserName]);
 
     return (
         <HomeContainer>
@@ -42,14 +44,16 @@ export const AnotherUser = (props: profileProps) => {
                 <ExitContainer to={`/${mainUserName}/${pageType}`}>
                     <ExitIcon />
                 </ExitContainer>
-                <LoginName to={`/${pageType}/${subordinateUserName}`}>
+                <LoginName to={`/${subordinateUserName}`}>
                     #{user.login}
                 </LoginName>
                 <ChangeProfileContainer
-                    to={`/${subordinateUserName}`}
-                    onClick={() => { fetchData(subordinateUserName, 'mainUser'); setUser({}) }}
-                    style={{ right: '30px' }}>
-                    Salvar<LogInIcon color={'green'} />
+                    to={`/${subordinateUserName}`}>
+                    <ButtonChangeProfile
+                        onClick={() => { fetchData(subordinateUserName, 'mainUser'); }}
+                        style={{ right: '30px' }}>
+                        Salvar<LogInIcon color={'green'} />
+                    </ButtonChangeProfile>
                 </ChangeProfileContainer>
             </HomeHeaderFollow>
             <HomeBody>
@@ -65,15 +69,15 @@ export const AnotherUser = (props: profileProps) => {
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
-                    <InfoContainer to={`/${mainUserName}/followers`}>
+                    <InfoContainer to={`/anotheruser/${subordinateUserName}/followers`}>
                         <InfoNumber>{user.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/${mainUserName}/followings`}>
+                    <InfoContainer to={`/anotheruser/${subordinateUserName}/followings`}>
                         <InfoNumber>{user.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/${mainUserName}/repos`}>
+                    <InfoContainer to={`/anotheruser/${subordinateUserName}/repos`}>
                         <InfoNumber>{user.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>
@@ -87,7 +91,7 @@ export const AnotherUser = (props: profileProps) => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage={`${pageType}`} />
+                <Navbar activePage={`${pageType}`} userName={userName} />
             </HomeFooter>
         </HomeContainer>
     )

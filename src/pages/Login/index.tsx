@@ -11,28 +11,37 @@ import {
 } from "./styles"
 
 import { useHistory } from 'react-router-dom';
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 
+import {dataTypes} from '../../interface'
 interface loginProps {
     userName: string,
+    setUser: (value: dataTypes | ((prevState:  dataTypes) =>  dataTypes)) => void,
     setUserName: (value:  string | ((prevState:  string) =>  string)) => void 
 }
 
-export const Login = ({userName, setUserName }:loginProps) => {
+export const Login = ({userName, setUserName, setUser }:loginProps) => {
     const history = useHistory();
     const [submitedNull, setSubmitedNull] = useState(false);
+    const [nameInput, setNameInput] = useState('')
+
+    useEffect(() => {
+        setUserName('')
+        setUser({})
+    }, [setUserName,setUser])
 
     const updateName = (event: React.ChangeEvent<HTMLInputElement> ) => {
+        setNameInput(event.target.value)
         setSubmitedNull(false)
-        setUserName(event.target.value);
     };
 
     const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
-        if (userName.length === 0) {
+        if (nameInput.length === 0) {
             setSubmitedNull(true);
           }
         else{
-            history.push(`/${userName}`)
+            history.push(`/${nameInput}`)
+            setUserName(nameInput);
         }
     }
 

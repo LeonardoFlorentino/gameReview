@@ -6,10 +6,10 @@ import "./styles.css";
 interface paginatorProps {
   typePage:string,
   showData: (value:dataTypes) => ReactNode,
-  userName:string,
   numOfElements:number | undefined,
   fetchUserData: (value1: string, value2: string) => void, 
   mainUserName:string,
+  subordinateUserName: string,
   per_page?: number,
 }
 
@@ -18,24 +18,25 @@ interface handlePageArgs {
 }
 
 export const Paginator = (Props: paginatorProps) => {
-  const { showData, userName, typePage, fetchUserData, mainUserName, numOfElements = 0, per_page = 7 } = Props
+  const { showData, typePage, fetchUserData, mainUserName,subordinateUserName, numOfElements = 0, per_page = 7 } = Props
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
 
 
   useEffect(() => {
     const fetchData = (page: number) => {
-      fetch(`https://api.github.com/users/${mainUserName}/${typePage}?per_page=${per_page}&page=${page}`)
+      fetch(`https://api.github.com/users/${mainUserName || subordinateUserName}/${typePage}?per_page=${per_page}&page=${page}`)
         .then((res) => res.json())
         .then((value) => setData(value))
     }
     fetchData(currentPage);
   }, [currentPage, mainUserName, typePage, per_page ]);
 
-  useEffect(() => {
-    fetchUserData(mainUserName, 'mainUser')
-  }
-    , [userName,fetchUserData, mainUserName])
+    useEffect(() => {
+        fetchUserData(mainUserName || subordinateUserName, 'subordinateUser');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [mainUserName]);
+
 
 
   const handlePageClick = ({selected}: handlePageArgs) => {

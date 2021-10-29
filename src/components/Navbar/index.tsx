@@ -10,32 +10,30 @@ import {
   Text
 } from './styles';
 
-import {useParams} from 'react-router-dom'
-import { RouteParams } from '../../interface';
 
 interface navBarProps {
-  activePage: string
+  activePage: string,
+  userName: string 
 }
 
-export const Navbar = ({activePage}:navBarProps) => {
-  const {mainUserName}:RouteParams = useParams()
+export const Navbar = ({activePage, userName}:navBarProps) => {
   return (
     <>
       <Nav>
         <NavMenu>
-          <NavLink to={`/${mainUserName}`} color={activePage === 'home'? '#222': '#aaa'}>
+          <NavLink to={`/${userName}`} color={activePage === 'home'? '#222': '#aaa'}>
             <IconHome />
             <Text>Home</Text>
           </NavLink>
-          <NavLink to={`/${mainUserName}/repos`} color={activePage === 'repos'? '#222': '#aaa'}>
+          <NavLink to={`/${userName}/repos`} color={activePage === 'repos'? '#222': '#aaa'}>
             <IconRepos/>
             <Text>Repos</Text>
           </NavLink>
-          <NavLink to={`/${mainUserName}/followers` } color={activePage === 'followers'? '#222': '#aaa'}>
+          <NavLink to={`/${userName}/followers` } color={activePage === 'followers'? '#222': '#aaa'}>
             <IconFollowers/>
             <Text>Seguidores</Text>
           </NavLink>
-          <NavLink to={`/${mainUserName}/followings`} color={activePage === 'followings'? '#222': '#aaa'}>
+          <NavLink to={`/${userName}/followings`} color={activePage === 'followings'? '#222': '#aaa'}>
             <IconFollowing/>
             <Text>Seguindo</Text>
           </NavLink>

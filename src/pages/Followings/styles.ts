@@ -51,7 +51,7 @@ export const FollowingsBody = styled.div`
         width: 100%
     }
 `
-export const FollowingContainer = styled.div`
+export const FollowingContainer = styled(Link)`
     height: 100px;
     width: 100%;
     display: grid;
@@ -61,6 +61,9 @@ export const FollowingContainer = styled.div`
     font-size: 1.5rem;
     background-color: #343434;
     margin-bottom: 4px;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
 `
 
 export const Square = styled.div`
@@ -88,15 +91,12 @@ export const LoginName = styled.div`
    margin-left: 10px;
 `
 
-export const AcessContainerFollowing = styled(Link)`
+export const AcessContainerFollowing = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-right: 20px;
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
 `
 
 export const AcessFollowingIcon = styled(FiArrowRight)`

@@ -14,7 +14,7 @@ interface routerProps {
   user: dataTypes,
   setUser: (value: dataTypes | ((prevState:  dataTypes) =>  dataTypes)) => void,
   fetchData: (value1: string, value2: string) => void,
-  subordinateUser: Object
+  // subordinateUser: Object
 }
 
 export const Router = (props: routerProps) => {
@@ -23,11 +23,12 @@ export const Router = (props: routerProps) => {
     <Switch>
       <Route path="/" exact>
         <Login
+          setUser={props.setUser}
           userName={props.userName}
           setUserName={props.setUserName}
         />
       </Route>
-      <Route path="/:mainUserName" exact>
+      <Route path={["/:mainUserName" ]} exact>
         <Profile
           userName={props.userName}
           setUserName={props.setUserName}
@@ -36,32 +37,32 @@ export const Router = (props: routerProps) => {
           fetchData={props.fetchData}
         />
       </Route>
-      <Route path="/:mainUserName/repos" exact>
+      <Route path={["/:mainUserName/repos","/anotheruser/:subordinateUserName/repos"]} exact>
         <Repos
           user={props.user}
           fetchData={props.fetchData}
           userName={props.userName}
         />
       </Route>
-      <Route path="/:mainUserName/followers" exact>
+      <Route path={["/:mainUserName/followers", "/anotheruser/:subordinateUserName/followers"]} exact>
         <Followers
           user={props.user}
           fetchData={props.fetchData}
           userName={props.userName}
         />
       </Route>
-      <Route path="/:mainUserName/followings" exact>
+      <Route path={["/:mainUserName/followings", "/anotheruser/:subordinateUserName/followings"]} exact>
         <Followings
           user={props.user}
           fetchData={props.fetchData}
           userName={props.userName}
         />
       </Route>
-      <Route path="/:mainUserName/:pageType/:subordinateUserName" exact>
+      <Route path="/anotheruser/:subordinateUserName" exact>
         <AnotherUser
           userName={props.userName}
           setUserName={props.setUserName}
-          user={props.subordinateUser}
+          user={props.user}
           setUser={props.setUser}
           fetchData={props.fetchData}
         />

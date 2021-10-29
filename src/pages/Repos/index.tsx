@@ -39,7 +39,7 @@ interface reposProps {
 
 
 export const Repos = (props: reposProps) => {
-  const { mainUserName }: RouteParams = useParams();
+  const { mainUserName, subordinateUserName }: RouteParams = useParams();
   const { userName, user, fetchData} = props
 
 
@@ -73,7 +73,9 @@ export const Repos = (props: reposProps) => {
   return (
     <ReposContainer>
       <ReposHaeder>
-        <ExitContainer to={`/${mainUserName}`}>
+        <ExitContainer  
+          to={userName === mainUserName? `/${mainUserName}`: `/anotheruser/${subordinateUserName}`}
+        >
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -84,14 +86,14 @@ export const Repos = (props: reposProps) => {
         <Paginator
           typePage={'repos'}
           showData={showData}
-          userName={userName}
           numOfElements={user.public_repos} 
           fetchUserData={fetchData}
           mainUserName={mainUserName}
+          subordinateUserName={subordinateUserName}
           per_page={5}/>
       </ReposBody>
       <ReposFooter>
-        <Navbar activePage='repos' />
+        <Navbar activePage='repos' userName={userName}/>
       </ReposFooter>
     </ReposContainer >
   )
