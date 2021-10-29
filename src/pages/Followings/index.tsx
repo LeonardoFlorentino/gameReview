@@ -18,17 +18,11 @@ import { useParams } from 'react-router-dom';
 import { Paginator } from '../../components/Paginator';
 import { Navbar } from '../../components/Navbar'
 
-import { RouteParams, dataTypes } from '../../interface';
+import { RouteParams, dataTypes, pageProps } from '../../interface';
 
-interface followingsProps {
-  user: dataTypes,
-  fetchData: (value1: string, value2: string) => void,
-  userName: string,
-}
-
-export const Followings = (props: followingsProps) => {
+export const Followings = (props: pageProps) => {
   const { mainUserName, subordinateUserName }: RouteParams = useParams()
-  const { user, fetchData, userName } = props
+  const { user, fetchUserData, userName } = props
 
   const showData = (following: dataTypes) => {
     return (
@@ -59,7 +53,7 @@ export const Followings = (props: followingsProps) => {
           typePage={'following'}
           showData={showData}
           numOfElements={user.following}
-          fetchUserData={fetchData}
+          fetchUserData={fetchUserData}
           mainUserName={mainUserName}
           subordinateUserName={subordinateUserName}
         />

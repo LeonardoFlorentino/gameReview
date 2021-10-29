@@ -7,15 +7,7 @@ import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
 import { AnotherUser } from '../pages/AnotherUser'
 
-import { dataTypes } from '../interface'
-interface routerProps {
-  userName: string,
-  setUserName: (value:  string | ((prevState:  string) =>  string)) => void,
-  user: dataTypes,
-  setUser: (value: dataTypes | ((prevState:  dataTypes) =>  dataTypes)) => void,
-  fetchData: (value1: string, value2: string) => void,
-  // subordinateUser: Object
-}
+import { dataTypes, routerProps } from '../interface'
 
 export const Router = (props: routerProps) => {
   return (
@@ -34,27 +26,27 @@ export const Router = (props: routerProps) => {
           setUserName={props.setUserName}
           user={props.user}
           setUser={props.setUser}
-          fetchData={props.fetchData}
+          fetchUserData={props.fetchUserData}
         />
       </Route>
       <Route path={["/:mainUserName/repos","/anotheruser/:subordinateUserName/repos"]} exact>
         <Repos
           user={props.user}
-          fetchData={props.fetchData}
+          fetchUserData={props.fetchUserData}
           userName={props.userName}
         />
       </Route>
       <Route path={["/:mainUserName/followers", "/anotheruser/:subordinateUserName/followers"]} exact>
         <Followers
           user={props.user}
-          fetchData={props.fetchData}
+          fetchUserData={props.fetchUserData}
           userName={props.userName}
         />
       </Route>
       <Route path={["/:mainUserName/followings", "/anotheruser/:subordinateUserName/followings"]} exact>
         <Followings
           user={props.user}
-          fetchData={props.fetchData}
+          fetchUserData={props.fetchUserData}
           userName={props.userName}
         />
       </Route>
@@ -64,7 +56,7 @@ export const Router = (props: routerProps) => {
           setUserName={props.setUserName}
           user={props.user}
           setUser={props.setUser}
-          fetchData={props.fetchData}
+          fetchUserData={props.fetchUserData}
         />
       </Route>
     </Switch>

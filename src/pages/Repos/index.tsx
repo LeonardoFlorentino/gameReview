@@ -26,21 +26,14 @@ import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
 import { Paginator } from '../../components/Paginator'
 
-import { RouteParams } from '../../interface';
+import { pageProps, RouteParams } from '../../interface';
 
 import {dataTypes} from '../../interface'
 
 
-interface reposProps {
-  user: dataTypes,
-  fetchData: (value1: string, value2: string) => void,
-  userName: string,
-}
-
-
-export const Repos = (props: reposProps) => {
+export const Repos = (props: pageProps) => {
   const { mainUserName, subordinateUserName }: RouteParams = useParams();
-  const { userName, user, fetchData} = props
+  const { userName, user, fetchUserData} = props
 
 
   const showData = (repo: dataTypes) => {
@@ -87,7 +80,7 @@ export const Repos = (props: reposProps) => {
           typePage={'repos'}
           showData={showData}
           numOfElements={user.public_repos} 
-          fetchUserData={fetchData}
+          fetchUserData={fetchUserData}
           mainUserName={mainUserName}
           subordinateUserName={subordinateUserName}
           per_page={5}/>

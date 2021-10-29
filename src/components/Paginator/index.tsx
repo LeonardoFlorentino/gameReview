@@ -7,7 +7,7 @@ interface paginatorProps {
   typePage:string,
   showData: (value:dataTypes) => ReactNode,
   numOfElements:number | undefined,
-  fetchUserData: (value1: string, value2: string) => void, 
+  fetchUserData: (value1: string, value2: boolean) => void, 
   mainUserName:string,
   subordinateUserName: string,
   per_page?: number,
@@ -24,16 +24,16 @@ export const Paginator = (Props: paginatorProps) => {
 
 
   useEffect(() => {
-    const fetchData = (page: number) => {
+    const fetchPageData = (page: number) => {
       fetch(`https://api.github.com/users/${mainUserName || subordinateUserName}/${typePage}?per_page=${per_page}&page=${page}`)
         .then((res) => res.json())
         .then((value) => setData(value))
     }
-    fetchData(currentPage);
+    fetchPageData(currentPage);
   }, [currentPage, mainUserName, typePage, per_page ]);
 
     useEffect(() => {
-        fetchUserData(mainUserName || subordinateUserName, 'subordinateUser');
+        fetchUserData(mainUserName || subordinateUserName, false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mainUserName]);
 

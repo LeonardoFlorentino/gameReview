@@ -8,8 +8,8 @@ const App = () => {
   const [userName, setUserName] = useState('')
   const [user, setUser] = useState({})
 
-  const fetchData = (nameLogin: string, profile: string) => {
-    if (profile === 'mainUser' || Object.entries(user).length === 0) {
+  const fetchUserData = (nameLogin: string, setToMainUser: boolean) => {
+    if (setToMainUser || Object.entries(user).length === 0) {
       setUserName(nameLogin)
     }
 
@@ -24,7 +24,7 @@ const App = () => {
       setUserName={setUserName}
       user={user}
       setUser={setUser}
-      fetchData={fetchData}
+      fetchUserData={fetchUserData}
     />
   );
 }

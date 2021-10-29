@@ -31,10 +31,10 @@ import { useEffect } from 'react'
 
 export const AnotherUser = (props: profileProps) => {
     const { mainUserName, pageType, subordinateUserName }: RouteParams = useParams()
-    const { userName, user, fetchData } = props
+    const { userName, user, fetchUserData } = props
 
     useEffect(() => {
-        fetchData(subordinateUserName, 'subordinateUser');
+        fetchUserData(subordinateUserName, false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [subordinateUserName]);
 
@@ -50,7 +50,7 @@ export const AnotherUser = (props: profileProps) => {
                 <ChangeProfileContainer
                     to={`/${subordinateUserName}`}>
                     <ButtonChangeProfile
-                        onClick={() => { fetchData(subordinateUserName, 'mainUser'); }}
+                        onClick={() => { fetchUserData(subordinateUserName, true); }}
                         style={{ right: '30px' }}>
                         Salvar<LogInIcon color={'green'} />
                     </ButtonChangeProfile>

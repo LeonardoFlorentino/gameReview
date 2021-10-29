@@ -28,11 +28,11 @@ import { useEffect } from 'react'
 
 export const Profile = (props: profileProps) => {
     const { mainUserName }: RouteParams = useParams()
-    const { userName, user, fetchData } = props
+    const { userName, user, fetchUserData } = props
     // const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
-        fetchData(mainUserName, 'subordinateUser');
+        fetchUserData(mainUserName, false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mainUserName]);
 

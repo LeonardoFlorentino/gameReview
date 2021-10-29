@@ -16,6 +16,14 @@ export interface dataTypes {
     stargazers_count?: number
 }
 
+export interface routerProps {
+    userName: string,
+    setUserName: (value:  string | ((prevState:  string) =>  string)) => void,
+    user: dataTypes,
+    setUser: (value: dataTypes | ((prevState:  dataTypes) =>  dataTypes)) => void,
+    fetchUserData: (value1: string, value2: boolean) => void,
+  }
+
 export interface dataReposTypes {
     name?: string,
     description?: string,
@@ -33,5 +41,11 @@ export interface profileProps {
     setUserName: (value: string | ((prevState: string) => string)) => void,
     user: dataTypes,
     setUser: (value: dataTypes | ((prevState: dataTypes) => dataTypes)) => void,
-    fetchData: (value1: string, value2: string) => void
+    fetchUserData: (value1: string, value2: boolean) => void
+}
+
+export interface pageProps {
+  user: dataTypes,
+  fetchUserData: (value1: string, value2: boolean) => void,
+  userName: string,
 }
