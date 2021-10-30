@@ -103,7 +103,6 @@ export const AcessFollowingIcon = styled(FiArrowRight)`
 
 `
 
-
 export const FollowingsFooter = styled.div`
     position: fixed;
     left: 0;

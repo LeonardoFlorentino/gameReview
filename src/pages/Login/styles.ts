@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-// import {GitHub} from '@styled-icons/bootstrap/Github'
 import { AiFillGithub } from 'react-icons/ai'
 import { FiArrowRight } from 'react-icons/fi'
 
@@ -33,7 +32,6 @@ export const Button = styled.button`
     border: 1px solid #eee;
     &:hover{
         color: #444;
-        /* background-color: #ffe166; */
         -webkit-box-shadow: 0px 0px 5px 1px #ffe100;
         -moz-box-shadow: 0px 0px 5px 1px #ffe100;
         box-shadow: 0px 0px 5px 1px white;
