@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FiLogIn, FiArrowLeft} from 'react-icons/fi'
+import { FiLogIn, FiArrowLeft } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
 export const HomeContainer = styled.div`
@@ -27,9 +27,8 @@ export const HomeHeaderFollow = styled.div`
     justify-items: center;
 `
 
-export const LoginName = styled(Link)`
+export const LoginName = styled.div`
    font-weight: bold;
-   cursor: pointer;
    color: inherit;
    text-decoration: none;
 `
@@ -50,16 +49,25 @@ export const ExitIcon = styled(FiArrowLeft)`
 `
 
 export const ChangeProfileContainer = styled(Link)`
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    margin-right: 60px;
     cursor: pointer;
     color: inherit;
     text-decoration: none;
 `
-
+export const ButtonChangeProfile = styled.button`
+	background: none;
+	color: inherit;
+	border: none;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+`
 
 export const LogInIcon = styled(FiLogIn)`
     margin-left: 5px;
@@ -135,12 +143,11 @@ export const Name = styled.div`
     font-size: 1.5rem;
 `
 
-export const InfoContainer = styled(Link)`
+export const InfoContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     align-items: center;
-    cursor: pointer;
     color: inherit;
     text-decoration: none;
 `
@@ -149,7 +156,7 @@ export const InfoName = styled.div`
     font-size: 0.8rem;
 `
 
-export const InfosContainer= styled.div`
+export const InfosContainer = styled.div`
     width: 100%;
     padding: 20px 0px;
     background-color:#3C3C3C ;

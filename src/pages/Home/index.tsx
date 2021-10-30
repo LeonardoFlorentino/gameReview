@@ -18,7 +18,7 @@ import {
     HomeFooter
 } from './styles';
 
-import { RouteParams } from '../../interface'
+import { profileProps, RouteParams } from '../../interface'
 
 import { Navbar } from '../../components/Navbar'
 
@@ -26,23 +26,24 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
 
 
-export const Profile = (props: any) => {
-    const { mainUserName  }: RouteParams = useParams()
-    const { userName, setUserName, user, setUser, fetchData } = props
+export const Profile = (props: profileProps) => {
+    const { mainUserName }: RouteParams = useParams()
+    const { userName, user, fetchUserData } = props
+    // const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
-            fetchData(mainUserName, 'mainUser');
-    }, [userName, fetchData,mainUserName]);
-
+        fetchUserData(mainUserName, false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [mainUserName]);
 
 
     return (
         <HomeContainer>
             <HomeHeaderMain>
-                <LoginName to={`/user/${mainUserName}`} style={{ marginLeft: '20px' }}>
+                <LoginName to={`/${mainUserName}`} style={{ marginLeft: '20px' }}>
                     #{user.login}
                 </LoginName  >
-                <ChangeProfileContainer to='/' onClick={() => { setUserName(''); setUser({}) }} style={{ right: '10px' }}>
+                <ChangeProfileContainer to='/' style={{ right: '10px' }}>
                     Sair<LogOutIcon color={'red'} />
                 </ChangeProfileContainer>
             </HomeHeaderMain>
@@ -59,15 +60,15 @@ export const Profile = (props: any) => {
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
-                    <InfoContainer to={`/user/${mainUserName}/followers`}>
+                    <InfoContainer to={`/${mainUserName}/followers`}>
                         <InfoNumber>{user.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/user/${mainUserName}/followings`}>
+                    <InfoContainer to={`/${mainUserName}/followings`}>
                         <InfoNumber>{user.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/user/${mainUserName}/repos`}>
+                    <InfoContainer to={`/${mainUserName}/repos`}>
                         <InfoNumber>{user.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>
@@ -81,7 +82,7 @@ export const Profile = (props: any) => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage='home' />
+                <Navbar activePage='home' userName={userName} />
             </HomeFooter>
         </HomeContainer>
     )

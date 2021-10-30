@@ -14,24 +14,23 @@ import {
   FollowingsFooter
 } from './styles'
 
-import { dataTypes } from '../../interface'
 import { useParams } from 'react-router-dom';
 import { Paginator } from '../../components/Paginator';
 import { Navbar } from '../../components/Navbar'
 
-import { RouteParams } from '../../interface';
+import { RouteParams, dataTypes, pageProps } from '../../interface';
 
-export const Followings = (props: any) => {
+export const Followings = (props: pageProps) => {
   const { mainUserName }: RouteParams = useParams()
-  const { user, fetchData, setUserName, userName} = props
+  const { user, fetchUserData, userName } = props
 
   const showData = (following: dataTypes) => {
     return (
-      <FollowingContainer key={following.id}>
+      <FollowingContainer key={following.id} to={`followings/${following.login}`}>
         <Square />
         <ProfilePic src={following.avatar_url} />
         <LoginName>#{following.login}</LoginName>
-        <AcessContainerFollowing to={`/user/${mainUserName}/followings/${following.login}`}>
+        <AcessContainerFollowing >
           <AcessFollowingIcon />
         </AcessContainerFollowing>
       </FollowingContainer>)
@@ -40,26 +39,26 @@ export const Followings = (props: any) => {
   return (
     <FollowingsContainer>
       <FollowingsHeader>
-        <ExitContainer to={`/user/${mainUserName}`}>
+        <ExitContainer
+          to={`/${mainUserName}`}
+        >
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
-          {user.following} seguidores
+          Seguindo {user.following}
         </NumberOfFollowers>
       </FollowingsHeader>
       <FollowingsBody>
         <Paginator
           typePage={'following'}
           showData={showData}
-          userName={userName}
           numOfElements={user.following}
-          fetchUserData={fetchData}
+          fetchUserData={fetchUserData}
           mainUserName={mainUserName}
-          setUserName={setUserName}
-           />
+        />
       </FollowingsBody>
       <FollowingsFooter>
-        <Navbar activePage='followings' />
+        <Navbar activePage='followings' userName={userName} />
       </FollowingsFooter>
     </FollowingsContainer>
   )

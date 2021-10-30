@@ -5,6 +5,7 @@ import {
     ExitContainer,
     ExitIcon,
     ChangeProfileContainer,
+    ButtonChangeProfile,
     LogInIcon,
     HomeBody,
     ProfileContainer,
@@ -20,7 +21,7 @@ import {
     HomeFooter
 } from './styles';
 
-import { RouteParams } from '../../interface'
+import { profileProps, RouteParams } from '../../interface'
 
 import { Navbar } from '../../components/Navbar'
 
@@ -28,28 +29,31 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
 
 
-export const AnotherUser = (props: any) => {
-    const { mainUserName, pageType, subordinateUserName }: RouteParams = useParams()
-    const { userName, user, setUser, fetchData } = props
+export const AnotherUser = (props: profileProps) => {
+    const { mainUserName,pageType, subordinateUserName }: RouteParams = useParams()
+    const { userName, user, fetchUserData } = props
 
     useEffect(() => {
-            fetchData(subordinateUserName, 'subordinateUser');
-    }, [userName, fetchData, subordinateUserName]);
+        fetchUserData(subordinateUserName, false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [subordinateUserName]);
 
     return (
         <HomeContainer>
             <HomeHeaderFollow>
-                <ExitContainer to={`/user/${mainUserName}/${pageType}`}>
+                <ExitContainer to={`/${mainUserName}/${pageType}`}>
                     <ExitIcon />
                 </ExitContainer>
-                <LoginName to={`/user/${pageType}/${subordinateUserName}`}>
+                <LoginName >
                     #{user.login}
                 </LoginName>
                 <ChangeProfileContainer
-                    to={`/user/${subordinateUserName}`}
-                    onClick={() => { fetchData(subordinateUserName, 'mainUser'); setUser({}) }}
-                    style={{ right: '30px' }}>
-                    Salvar<LogInIcon color={'green'} />
+                    to={`/${subordinateUserName}`}>
+                    <ButtonChangeProfile
+                        onClick={() => { fetchUserData(subordinateUserName, true); }}
+                        style={{ right: '30px' }}>
+                        Salvar<LogInIcon color={'green'} />
+                    </ButtonChangeProfile>
                 </ChangeProfileContainer>
             </HomeHeaderFollow>
             <HomeBody>
@@ -65,15 +69,15 @@ export const AnotherUser = (props: any) => {
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
-                    <InfoContainer to={`/user/${mainUserName}/followers`}>
+                    <InfoContainer >
                         <InfoNumber>{user.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/user/${mainUserName}/followings`}>
+                    <InfoContainer >
                         <InfoNumber>{user.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/user/${mainUserName}/repos`}>
+                    <InfoContainer >
                         <InfoNumber>{user.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>
@@ -87,7 +91,7 @@ export const AnotherUser = (props: any) => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage={`${pageType}`} />
+                <Navbar activePage={`${pageType}`} userName={userName} />
             </HomeFooter>
         </HomeContainer>
     )

@@ -17,20 +17,20 @@ import {
 
 import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
-import { dataTypes, RouteParams } from '../../interface'
+import { dataTypes, pageProps, RouteParams } from '../../interface'
 import { Paginator } from '../../components/Paginator'
 
-export const Followers = (props: any) => {
+export const Followers = (props: pageProps) => {
   const { mainUserName }: RouteParams = useParams()
-  const { userName, user, fetchData} = props
+  const { userName, user, fetchUserData } = props
 
   const showData = (follower: dataTypes) => {
     return (
-      <FollowerContainer key={follower.id}>
+      <FollowerContainer key={follower.id} to={`followers/${follower.login}`}>
         <Square />
         <ProfilePic src={follower.avatar_url} />
         <LoginName>#{follower.login}</LoginName>
-        <AcessContainerFollower to={`/user/${mainUserName}/followers/${follower.login}`}>
+        <AcessContainerFollower >
           <AcessFollowerIcon />
         </AcessContainerFollower>
       </FollowerContainer>)
@@ -39,7 +39,9 @@ export const Followers = (props: any) => {
   return (
     <FollowersContainer>
       <FollowersHeader>
-        <ExitContainer to={`/user/${mainUserName}`}>
+        <ExitContainer
+          to={`/${mainUserName}`}
+        >
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -50,13 +52,13 @@ export const Followers = (props: any) => {
         <Paginator
           typePage={'followers'}
           showData={showData}
-          userName={userName}
           numOfElements={user.followers}
-          fetchUserData={fetchData}
-          mainUserName={mainUserName} />
+          fetchUserData={fetchUserData}
+          mainUserName={mainUserName}
+           />
       </FollowersBody>
       <FollowersFooter>
-        <Navbar activePage='followers' />
+        <Navbar activePage='followers' userName={userName} />
       </FollowersFooter>
     </FollowersContainer>
   )

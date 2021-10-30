@@ -26,15 +26,17 @@ import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
 import { Paginator } from '../../components/Paginator'
 
-import { RouteParams } from '../../interface';
+import { pageProps, RouteParams } from '../../interface';
+
+import {dataTypes} from '../../interface'
 
 
-export const Repos = (props: any) => {
+export const Repos = (props: pageProps) => {
   const { mainUserName }: RouteParams = useParams();
-  const { userName, user, fetchData} = props
+  const { userName, user, fetchUserData} = props
 
 
-  const showData = (repo: any) => {
+  const showData = (repo: dataTypes) => {
     return (
       <RepoContainer key={repo.id}>
         <NameContainer>
@@ -64,7 +66,9 @@ export const Repos = (props: any) => {
   return (
     <ReposContainer>
       <ReposHaeder>
-        <ExitContainer to={`/user/${mainUserName}`}>
+        <ExitContainer  
+          to={`/${mainUserName}`}
+        >
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -75,14 +79,13 @@ export const Repos = (props: any) => {
         <Paginator
           typePage={'repos'}
           showData={showData}
-          userName={userName}
           numOfElements={user.public_repos} 
-          fetchUserData={fetchData}
+          fetchUserData={fetchUserData}
           mainUserName={mainUserName}
           per_page={5}/>
       </ReposBody>
       <ReposFooter>
-        <Navbar activePage='repos' />
+        <Navbar activePage='repos' userName={userName}/>
       </ReposFooter>
     </ReposContainer >
   )

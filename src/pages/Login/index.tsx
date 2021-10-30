@@ -1,4 +1,3 @@
-// import {useState} from 'react'
 import {
     LoginContainer,
     Button,
@@ -11,25 +10,37 @@ import {
 } from "./styles"
 
 import { useHistory } from 'react-router-dom';
-import { useState } from "react";
+import React,{ useState, useEffect } from "react";
 
+import {dataTypes} from '../../interface'
+interface loginProps {
+    userName: string,
+    setUser: (value: dataTypes | ((prevState:  dataTypes) =>  dataTypes)) => void,
+    setUserName: (value:  string | ((prevState:  string) =>  string)) => void 
+}
 
-export const Login = (Props:any) => {
+export const Login = ({userName, setUserName, setUser }:loginProps) => {
     const history = useHistory();
-    const {userName, setUserName } = Props
     const [submitedNull, setSubmitedNull] = useState(false);
+    const [nameInput, setNameInput] = useState('')
 
-    const updateName = (event: any) => {
+    useEffect(() => {
+        setUserName('')
+        setUser({})
+    }, [setUserName,setUser])
+
+    const updateName = (event: React.ChangeEvent<HTMLInputElement> ) => {
+        setNameInput(event.target.value)
         setSubmitedNull(false)
-        setUserName(event.target.value);
     };
 
-    const onSubmit = async (event: any) => {
-        if (userName.length === 0) {
+    const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (nameInput.length === 0) {
             setSubmitedNull(true);
           }
         else{
-            history.push(`/user/${userName}`)
+            history.push(`/${nameInput}`)
+            setUserName(nameInput);
         }
     }
 

@@ -10,9 +10,6 @@ export const Nav = styled.nav`
   border-top-right-radius: 20px;
   height: 60px;
   width: 100vw;
-  /* @media (max-width: 360px) {
-    width: 300px;
-  } */
 `;
 
 export const NavMenu = styled.div`
@@ -21,10 +18,6 @@ export const NavMenu = styled.div`
   grid-template-columns: repeat(4,1fr);
   align-items: center;
   justify-content: center;
-
-  /* @media (min-width: 300px) {
-    width: 200px;
-  } */
 `;
 
 export const NavLink = styled(Link)`
@@ -42,7 +35,6 @@ export const NavLink = styled(Link)`
     color: #222;
   }
 `;
-
 
 const sizeIcon = 25
 
