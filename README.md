@@ -27,19 +27,27 @@ The prototype of the application was enabled by this [link](https://xd.adobe.com
  
 ## Functional requirements
 
-You must allow a user to be authenticated by searching for the github username
+### <ul><li>- [x] You must allow a user to be authenticated by searching for the github username </li></ul>
+![reactjs](https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/react.gif)
 
- You must store the information for (login, name, email, location, company, bio, avatar_url, followers_url, following_url, organizations_url, starred_url, public_repos, public_gists, followers, following)
+### <ul><li>- [x]  You must store the information for (login, name, email, location, company, bio, avatar_url, followers_url, following_url, organizations_url, starred_url, public_repos, public_gists, followers, following)</li></ul>
+![reactjs](https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/react.gif)
 
- You must have tabbed browsing with items ("Home", "Repositories", "Followers", "Following")
+### <ul><li>- [x]  You must have tabbed browsing with items ("Home", "Repositories", "Followers", "Following")</li></ul>
+![reactjs](https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/react.gif)
 
- When clicked on the tabs, the respective listings of ("Home", Repositories: repos_url, Followers: followers_url and Following: following_url) should be displayed
+### <ul><li>- [x] When clicked on the tabs, the respective listings of ("Home", Repositories: repos_url, Followers: followers_url and Following: following_url) should be displayed </li></ul>
+![reactjs](https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/react.gif)
 
- When the user is inside a follower or following tab, you must have a button that makes that user the main application, replacing the user saved in the authentication with the current screen user.
+### <ul><li>- [x] When the user is inside a follower or following tab, you must have a button that makes that user the main application, replacing the user saved in the authentication with the current screen user </li></ul>
+![reactjs](https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/react.gif)
 
- On the home screen, you should have a button that allows the user to exit the application, redirecting him to the authentication screen
+### <ul><li> On the home screen, you should have a button that allows the user to exit the application, redirecting him to the authentication screen </li></ul>
+![reactjs](https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/react.gif)
 
- On the home screen, you should only render the prototype information if the information actually exists in the authentication request's return.
+### <ul><li>- [x] On the home screen, you should only render the prototype information if the information actually exists in the authentication request's return</li></ul>
+![reactjs](https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/react.gif)
+
 
 ## Technologies
 
