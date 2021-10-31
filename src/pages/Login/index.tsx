@@ -13,6 +13,7 @@ import { useHistory } from "react-router";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { loginProps } from '../../interface'
+import { treatResponse } from "../../components/Toast";
 
 export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginProps) => {
     const [submitedNull, setSubmitedNull] = useState(false);
@@ -40,24 +41,10 @@ export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginPr
         else {
             fetchUserData(nameInput, true)
                 .then(response => {
+                    treatResponse(response,[])
                     if (response === 200) {
                         history.push(`/${nameInput}`)
                         setUserName(nameInput)
-                        toast.success(`Usuário encontrado`, 
-                        {
-                            position: "top-center",
-                            autoClose: 1500
-                        })
-                    }
-                    else if (response === 404) {
-                        toast.error("Usuário não encontrado",{
-                            autoClose: 3000
-                        })
-                    }
-                    else if (response === 403) {
-                        toast.error("Limite de tentativas excedido", {
-                            autoClose: 3000
-                        })
                     }
                 })
         }

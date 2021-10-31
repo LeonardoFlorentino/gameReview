@@ -1,4 +1,4 @@
-
+import { ReactNode } from "react";
 export interface dataTypes {
     user?: Object,
     id?: string,
@@ -19,7 +19,7 @@ export interface dataTypes {
 interface userProps {
     setUserName: (value:  string | ((prevState:  string) =>  string)) => void,
     userName: string,
-    fetchUserData: (value1: string, value2: boolean) => Promise<unknown>,
+    fetchUserData: (value1: string, value2: boolean) => Promise<number>,
     setUser: (value: dataTypes | ((prevState:  dataTypes) =>  dataTypes)) => void,
 }
 
@@ -45,9 +45,18 @@ export interface profileProps extends userProps{
 
 export interface pageProps {
   user: dataTypes,
-  fetchUserData: (value1: string, value2: boolean) => void,
+  fetchUserData: (value1: string, value2: boolean) => Promise<number>,
   userName: string,
 }
 
 export interface loginProps extends userProps{
 }
+
+export interface paginatorProps {
+    typePage: string,
+    showData: (value: dataTypes) => ReactNode,
+    numOfElements: number | undefined,
+    fetchUserData: (value1: string, value2: boolean) => Promise<number>,
+    mainUserName: string,
+    per_page?: number,
+  }

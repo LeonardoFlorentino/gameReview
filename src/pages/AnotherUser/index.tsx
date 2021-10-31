@@ -27,14 +27,23 @@ import { Navbar } from '../../components/Navbar'
 
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react'
+import { useHistory } from 'react-router';
+import { treatResponse } from '../../components/Toast';
 
 
 export const AnotherUser = (props: profileProps) => {
     const { mainUserName,pageType, subordinateUserName }: RouteParams = useParams()
     const { userName, user, fetchUserData } = props
+    const history = useHistory()
 
     useEffect(() => {
-        fetchUserData(subordinateUserName, false);
+        fetchUserData(subordinateUserName, false)
+            .then(response => {
+                treatResponse(response, [200])
+                if (response !== 200) {
+                    history.push('/')
+                }
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [subordinateUserName]);
 

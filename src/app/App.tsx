@@ -27,7 +27,7 @@ const App = () => {
         }
       }
       catch (error) {
-        return error
+        return 0
       }
       
     }
