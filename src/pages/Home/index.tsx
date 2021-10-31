@@ -34,7 +34,7 @@ export const Profile = (props: profileProps) => {
     useEffect(() => {
         fetchUserData(mainUserName, false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mainUserName]);
+    }, []);
 
 
     return (

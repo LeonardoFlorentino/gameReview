@@ -18,6 +18,7 @@ export const Router = (props: routerProps) => {
           setUser={props.setUser}
           userName={props.userName}
           setUserName={props.setUserName}
+          fetchUserData={props.fetchUserData}
         />
       </Route>
       <Route path="/:mainUserName"  exact>
