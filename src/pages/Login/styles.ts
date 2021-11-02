@@ -21,9 +21,8 @@ export const Logo = styled(AiFillGithub)`
 
 export const Button = styled.button`
     font-size: 15px;
-    width: 20vw;
-    min-width: 250px;
-    height: 40px;
+    width: 250px;
+    min-height: 40px;
     margin: 5px 0px;
     border-radius: 10px;
     background-color: #ffce00;

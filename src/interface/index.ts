@@ -1,4 +1,4 @@
-
+import { ReactNode } from "react";
 export interface dataTypes {
     user?: Object,
     id?: string,
@@ -16,12 +16,15 @@ export interface dataTypes {
     stargazers_count?: number
 }
 
-export interface routerProps {
-    userName: string,
+interface userProps {
     setUserName: (value:  string | ((prevState:  string) =>  string)) => void,
-    user: dataTypes,
+    userName: string,
+    fetchUserData: (value1: string, value2: boolean) => Promise<number>,
     setUser: (value: dataTypes | ((prevState:  dataTypes) =>  dataTypes)) => void,
-    fetchUserData: (value1: string, value2: boolean) => void,
+}
+
+export interface routerProps extends userProps {
+    user: dataTypes,
   }
 
 export interface dataReposTypes {
@@ -36,16 +39,24 @@ export interface RouteParams {
     subordinateUserName: string
 }
 
-export interface profileProps {
-    userName: string,
-    setUserName: (value: string | ((prevState: string) => string)) => void,
+export interface profileProps extends userProps{
     user: dataTypes,
-    setUser: (value: dataTypes | ((prevState: dataTypes) => dataTypes)) => void,
-    fetchUserData: (value1: string, value2: boolean) => void
 }
 
 export interface pageProps {
   user: dataTypes,
-  fetchUserData: (value1: string, value2: boolean) => void,
+  fetchUserData: (value1: string, value2: boolean) => Promise<number>,
   userName: string,
 }
+
+export interface loginProps extends userProps{
+}
+
+export interface paginatorProps {
+    typePage: string,
+    showData: (value: dataTypes) => ReactNode,
+    numOfElements: number | undefined,
+    fetchUserData: (value1: string, value2: boolean) => Promise<number>,
+    mainUserName: string,
+    per_page?: number,
+  }
