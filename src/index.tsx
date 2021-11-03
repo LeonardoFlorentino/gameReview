@@ -5,9 +5,12 @@ import App from './app/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
+import userReducer from './features/user'
 
 const store = configureStore({
-  reducer: {}
+  reducer: {
+    user:userReducer
+  }
 })
 
 ReactDOM.render(
