@@ -3,7 +3,7 @@ import { AiFillGithub } from 'react-icons/ai'
 import { FiArrowRight } from 'react-icons/fi'
 
 export const LoginContainer = styled.div`
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
     display: flex;
     flex-direction: column;

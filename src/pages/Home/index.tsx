@@ -32,7 +32,6 @@ export const Profile = (props: profileProps) => {
     const { mainUserName }: RouteParams = useParams()
     const { userName, user, fetchUserData } = props
     const history = useHistory()
-    // const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
         fetchUserData(mainUserName, false)

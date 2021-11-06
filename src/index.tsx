@@ -3,15 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import { configureStore } from '@reduxjs/toolkit'
+import store from './store'
 import { Provider } from 'react-redux'
-import userReducer from './features/user'
 
-const store = configureStore({
-  reducer: {
-    user:userReducer
-  }
-})
+
 
 ReactDOM.render(
   <React.StrictMode>

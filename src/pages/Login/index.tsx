@@ -41,10 +41,11 @@ export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginPr
         else {
             fetchUserData(nameInput, true)
                 .then(response => {
-                    treatResponse(response,[])
+                    treatResponse(response, [])
                     if (response === 200) {
-                        history.push(`/${nameInput}`)
                         setUserName(nameInput)
+                        history.push(`/${nameInput}`)
+
                     }
                 })
         }
