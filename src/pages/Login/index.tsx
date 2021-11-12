@@ -10,21 +10,18 @@ import {
 } from "./styles"
 
 import { useHistory } from "react-router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { loginProps } from '../../interface'
-import { treatResponse } from "../../components/Toast";
 
-export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginProps) => {
+import { useDispatch } from "react-redux";
+import { getUserAsync } from "../../store/user/userSlice";
+
+export const Login = () => {
     const [submitedNull, setSubmitedNull] = useState(false);
     const [nameInput, setNameInput] = useState('')
     const history = useHistory()
 
-
-    useEffect(() => {
-        setUserName('')
-        setUser({})
-    }, [setUserName, setUser])
+    const dispatch = useDispatch()
 
     const updateName = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNameInput(event.target.value)
@@ -39,15 +36,8 @@ export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginPr
             setSubmitedNull(true);
         }
         else {
-            fetchUserData(nameInput, true)
-                .then(response => {
-                    treatResponse(response, [])
-                    if (response === 200) {
-                        setUserName(nameInput)
-                        history.push(`/${nameInput}`)
-
-                    }
-                })
+            dispatch(getUserAsync(nameInput))
+            history.push(`/${nameInput}`)
         }
     }
 
@@ -57,8 +47,6 @@ export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginPr
             onSubmit()
         }
     }
-
-
 
     return (
         <div>

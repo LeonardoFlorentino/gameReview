@@ -27,14 +27,16 @@ import { Navbar } from '../../components/Navbar'
 import { Paginator } from '../../components/Paginator'
 
 import { pageProps, RouteParams } from '../../interface';
-
+import { useSelector } from 'react-redux';
 import {dataTypes} from '../../interface'
 
 
 export const Repos = (props: pageProps) => {
   const { mainUserName }: RouteParams = useParams();
-  const { userName, user, fetchUserData} = props
+  const { fetchUserData} = props
 
+  const user = useSelector((state:any) => state.user)
+  const userName = user.login
 
   const showData = (repo: dataTypes) => {
     return (

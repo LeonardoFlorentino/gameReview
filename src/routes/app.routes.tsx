@@ -14,21 +14,10 @@ export const Router = (props: routerProps) => {
     < BrowserRouter >
     <Switch>
       <Route path="/" exact>
-        <Login
-          setUser={props.setUser}
-          userName={props.userName}
-          setUserName={props.setUserName}
-          fetchUserData={props.fetchUserData}
-        />
+        <Login/>
       </Route>
       <Route path="/:mainUserName"  exact>
-        <Profile
-          userName={props.userName}
-          setUserName={props.setUserName}
-          user={props.user}
-          setUser={props.setUser}
-          fetchUserData={props.fetchUserData}
-        />
+        <Profile/>
       </Route>
       <Route path="/:mainUserName/repos" exact>
         <Repos

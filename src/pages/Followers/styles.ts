@@ -3,8 +3,6 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import {Link} from 'react-router-dom'
 
 export const FollowersContainer = styled.div`
-    height: 100vh;
-    width: 100vw;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;

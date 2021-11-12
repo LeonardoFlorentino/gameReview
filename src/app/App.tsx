@@ -18,8 +18,8 @@ const App = () => {
       try {
         const response = await fetch(`https://api.github.com/users/${nameLogin}`)
         if (response.ok) {
-          const reponseJson = await response.json()
-          setUser(reponseJson)
+          const responseJSON = await response.json()
+          setUser(responseJSON)
           return response.status
         }
         else {
