@@ -15,7 +15,11 @@ const initialUser = {
 	repos: 0,
 	email: '',
 	avatar_url: '',
-	isLogged: false,
+	bio: '',
+	node_id: '',
+    description:'',
+    stargazers_count: 0,
+	isLogged: false
 }
 
 export const getUserAsync = createAsyncThunk(
@@ -24,15 +28,30 @@ export const getUserAsync = createAsyncThunk(
 		const resp = await fetch(`https://api.github.com/users/${name}`);
 		handleStatus(resp.status | 0)
 		try {
-			const user = (await resp.json());
-			if (resp.ok) {
-				return user;
+			const respJSON = (await resp.json());
+			if (respJSON.ok) {
+				const user = {
+					login: respJSON.login,
+					name: respJSON.name,
+					location: respJSON.location,
+					followers: respJSON.followers,
+					following: respJSON.following,
+					repos: respJSON.repos,
+					email: respJSON.email,
+					avatar_url: respJSON.avatar_url,
+					bio: respJSON.bio,
+					node_id: respJSON.node_id,
+					description:respJSON.description,
+					stargazers_count: respJSON.stargazers_count,
+					isLogged: true
+				}
+				return respJSON;
 			}
-			else{
+			else {
 				return initialUser
 			}
 		}
-		catch(e){
+		catch (e) {
 			console.log(e)
 		}
 	}
@@ -103,7 +122,7 @@ export const handleStatus = (status: number) => {
 			autoClose: 3000,
 		})
 	}
-	if(status ===0){
+	if (status === 0) {
 		toast.error('Ocorreu um problema na rede', {
 			autoClose: 3000,
 		})
@@ -132,7 +151,6 @@ export const userSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(getUserAsync.fulfilled, (state, action) => {
-				console.log(action.payload)
 				return action.payload
 			})
 		// .addCase(addTodoAsync.fulfilled, (state, action:any) => {

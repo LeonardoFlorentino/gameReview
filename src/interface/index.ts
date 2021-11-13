@@ -13,7 +13,8 @@ export interface dataTypes {
     bio?: string,
     node_id?: string,
     description?:string,
-    stargazers_count?: number
+    stargazers_count?: number,
+    isLogged?: boolean
 }
 
 interface userProps {
