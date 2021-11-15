@@ -20,11 +20,12 @@ import {
 
 import { Navbar } from '../../components/Navbar'
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 
 export const Profile = () => {
 
-    const user = useSelector((state:any) => state.user)
+    const user = useSelector((state:RootState) => state.user)
     const userName = user.login
 
     return (

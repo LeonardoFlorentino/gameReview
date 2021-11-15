@@ -57,7 +57,7 @@ export interface paginatorProps {
     typePage: string,
     showData: (value: dataTypes) => ReactNode,
     numOfElements: number | undefined,
-    fetchUserData: (value1: string, value2: boolean) => Promise<number>,
-    mainUserName: string,
+    // fetchUserData: (value1: string, value2: boolean) => Promise<number>,
+    userName: string,
     per_page?: number,
   }

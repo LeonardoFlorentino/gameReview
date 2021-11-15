@@ -28,7 +28,7 @@ export const Login = () => {
         setSubmitedNull(false)
     };
 
-    const onSubmit = async () => {
+    const onSubmit = () => {
         if (nameInput.length === 0) {
             toast.warning("Insira o nome do usuário", {
                 autoClose: 3000
@@ -37,7 +37,7 @@ export const Login = () => {
         }
         else {
             dispatch(getUserAsync(nameInput))
-            history.push(`/${nameInput}`)
+            history.push(`/home`)
         }
     }
 

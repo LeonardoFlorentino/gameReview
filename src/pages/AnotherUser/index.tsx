@@ -21,45 +21,39 @@ import {
     HomeFooter
 } from './styles';
 
-import { profileProps, RouteParams } from '../../interface'
+import { RouteParams } from '../../interface'
 
 import { Navbar } from '../../components/Navbar'
 
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { getUserAsync } from '../../store/user/userSlice';
 import { useHistory } from 'react-router';
-import { treatResponse } from '../../components/Toast';
 
 
-export const AnotherUser = (props: profileProps) => {
-    const { mainUserName,pageType, subordinateUserName }: RouteParams = useParams()
-    const { userName, user, fetchUserData } = props
+export const AnotherUser = () => {
+    const { pageType }: RouteParams = useParams()
+
+    const user = useSelector((state:RootState) => state.anotherUser)
+    const userName = user.login
+
+    const dispatch = useDispatch()
     const history = useHistory()
-
-    useEffect(() => {
-        fetchUserData(subordinateUserName, false)
-            .then(response => {
-                treatResponse(response, [200])
-                if (response !== 200) {
-                    history.push('/')
-                }
-            })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [subordinateUserName]);
 
     return (
         <HomeContainer>
             <HomeHeaderFollow>
-                <ExitContainer to={`/${mainUserName}/${pageType}`}>
+                <ExitContainer onClick={()=> history.goBack()}>
                     <ExitIcon />
                 </ExitContainer>
                 <LoginName >
                     #{user.login}
                 </LoginName>
                 <ChangeProfileContainer
-                    to={`/${subordinateUserName}`}>
+                    to={`/home`}>
                     <ButtonChangeProfile
-                        onClick={() => { fetchUserData(subordinateUserName, true); }}
+                        onClick={() => {dispatch(getUserAsync(userName))}}
                         style={{ right: '30px' }}>
                         Salvar<LogInIcon color={'green'} />
                     </ButtonChangeProfile>

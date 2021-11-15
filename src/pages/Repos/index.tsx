@@ -22,20 +22,17 @@ import {
 } from './styles'
 
 
-import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar'
 import { Paginator } from '../../components/Paginator'
 
-import { pageProps, RouteParams } from '../../interface';
 import { useSelector } from 'react-redux';
 import {dataTypes} from '../../interface'
+import { RootState } from '../../store';
 
 
-export const Repos = (props: pageProps) => {
-  const { mainUserName }: RouteParams = useParams();
-  const { fetchUserData} = props
+export const Repos = () => {
 
-  const user = useSelector((state:any) => state.user)
+  const user = useSelector((state:RootState) => state.user)
   const userName = user.login
 
   const showData = (repo: dataTypes) => {
@@ -68,9 +65,7 @@ export const Repos = (props: pageProps) => {
   return (
     <ReposContainer>
       <ReposHaeder>
-        <ExitContainer  
-          to={`/${mainUserName}`}
-        >
+        <ExitContainer  to={`/home`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -82,8 +77,7 @@ export const Repos = (props: pageProps) => {
           typePage={'repos'}
           showData={showData}
           numOfElements={user.public_repos} 
-          fetchUserData={fetchUserData}
-          mainUserName={mainUserName}
+          userName={userName}
           per_page={5}/>
       </ReposBody>
       <ReposFooter>

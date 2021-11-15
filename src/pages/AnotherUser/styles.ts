@@ -31,7 +31,7 @@ export const LoginName = styled.div`
    text-decoration: none;
 `
 
-export const ExitContainer = styled(Link)`
+export const ExitContainer = styled.a`
     display: flex;
     flex-direction: row;
     justify-content: center;

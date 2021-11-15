@@ -12,7 +12,7 @@ const initialUser = {
 	location: '',
 	followers: 0,
 	following: 0,
-	repos: 0,
+	public_repos: 0,
 	email: '',
 	avatar_url: '',
 	bio: '',
@@ -29,14 +29,14 @@ export const getUserAsync = createAsyncThunk(
 		handleStatus(resp.status | 0)
 		try {
 			const respJSON = (await resp.json());
-			if (respJSON.ok) {
+			if (resp.ok) {
 				const user = {
 					login: respJSON.login,
 					name: respJSON.name,
 					location: respJSON.location,
 					followers: respJSON.followers,
 					following: respJSON.following,
-					repos: respJSON.repos,
+					public_repos: respJSON.public_repos,
 					email: respJSON.email,
 					avatar_url: respJSON.avatar_url,
 					bio: respJSON.bio,
@@ -45,7 +45,7 @@ export const getUserAsync = createAsyncThunk(
 					stargazers_count: respJSON.stargazers_count,
 					isLogged: true
 				}
-				return respJSON;
+				return user;
 			}
 			else {
 				return initialUser
