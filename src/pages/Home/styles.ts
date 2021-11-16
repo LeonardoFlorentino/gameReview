@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FiLogOut} from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
 export const HomeContainer = styled.div`
@@ -20,12 +20,13 @@ export const HomeHeaderMain = styled.div`
 export const HomeHeaderFollow = styled.div`
     height: 60px;
     display: grid;
-    grid-template-columns: 60px 1fr 60px;
+    grid-template-columns: 60px 1fr 100px;
     align-items: center;
     justify-items: center;
 `
 
 export const LoginName = styled(Link)`
+
    font-weight: bold;
    cursor: pointer;
    color: inherit;
@@ -43,7 +44,7 @@ export const ExitContainer = styled(Link)`
 `
 
 export const ChangeProfileContainer = styled(Link)`
-    margin-right: 15px;
+    margin-right: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -142,7 +143,7 @@ export const InfoName = styled.div`
     font-size: 0.8rem;
 `
 
-export const InfosContainer= styled.div`
+export const InfosContainer = styled.div`
     width: 100%;
     padding: 20px 0px;
     background-color:#3C3C3C ;
