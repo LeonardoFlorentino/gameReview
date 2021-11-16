@@ -19,22 +19,41 @@ import {
 } from './styles';
 
 import { Navbar } from '../../components/Navbar'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { withRouter } from 'react-router';
+import { logout } from '../../store/user/userSlice';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 
+export const Profile = withRouter(() => {
 
-export const Profile = () => {
-
-    const user = useSelector((state:RootState) => state.user)
+    const user = useSelector((state: RootState) => state.user)
     const userName = user.login
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    useEffect(() => {
+        if (!user.isLogged) {
+            history.push('/')
+            toast.error("Usuário não logado", {
+                autoClose: 3000
+            })
+        }
+    }, [user])
+
+    const onSubmit = () => {
+        dispatch(logout())
+    }
 
     return (
         <HomeContainer>
             <HomeHeaderMain>
-                <LoginName to={`/${userName}`} style={{ marginLeft: '20px' }}>
+                <LoginName to={`/home`} style={{ marginLeft: '20px' }}>
                     #{user.login}
                 </LoginName  >
-                <ChangeProfileContainer to='/' style={{ right: '10px' }}>
+                <ChangeProfileContainer to='/' style={{ right: '10px' }} onClick={() => onSubmit()}>
                     Sair<LogOutIcon color={'red'} />
                 </ChangeProfileContainer>
             </HomeHeaderMain>
@@ -77,5 +96,5 @@ export const Profile = () => {
             </HomeFooter>
         </HomeContainer>
     )
-}
+})
 

@@ -12,16 +12,26 @@ import {
 import { useHistory } from "react-router";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserAsync } from "../../store/user/userSlice";
+import { withRouter } from "react-router";
+import { RootState } from "../../store";
 
-export const Login = () => {
+export const Login = withRouter(() => {
     const [submitedNull, setSubmitedNull] = useState(false);
     const [nameInput, setNameInput] = useState('')
-    const history = useHistory()
 
+    const history = useHistory()
     const dispatch = useDispatch()
+    const user = useSelector((state:RootState) => state.user)
+
+    useEffect(() => {
+        if(user.isLogged){
+            history.push('/home')
+        }
+    }, [user])
 
     const updateName = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNameInput(event.target.value)
@@ -37,7 +47,6 @@ export const Login = () => {
         }
         else {
             dispatch(getUserAsync(nameInput))
-            history.push(`/home`)
         }
     }
 
@@ -73,4 +82,4 @@ export const Login = () => {
             </LoginContainer>
         </div>
     )
-}
+})

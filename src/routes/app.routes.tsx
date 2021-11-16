@@ -6,14 +6,15 @@ import { Followers } from '../pages/Followers';
 import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
 import { AnotherUser } from '../pages/AnotherUser'
+import { createBrowserHistory } from 'history';
 
-import {  routerProps } from '../interface'
 
-export const Router = (props: routerProps) => {
+
+export const Routes = () => {
   return (
-    < BrowserRouter >
+    <BrowserRouter >
     <Switch>
-      <Route path="/" exact>
+      <Route path="/" exact >
         <Login/>
       </Route>
       <Route path="/home"  exact>

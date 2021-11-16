@@ -1,10 +1,10 @@
 import {
 	createAsyncThunk,
 	createSlice,
+	Middleware
 } from '@reduxjs/toolkit';
 
 import { toast } from 'react-toastify'
-
 
 const initialUser = {
 	login: '',
@@ -28,8 +28,8 @@ export const getUserAsync = createAsyncThunk(
 		const resp = await fetch(`https://api.github.com/users/${name}`);
 		handleStatus(resp.status | 0)
 		try {
-			const respJSON = (await resp.json());
 			if (resp.ok) {
+				const respJSON = (await resp.json());
 				const user = {
 					login: respJSON.login,
 					name: respJSON.name,
@@ -57,59 +57,12 @@ export const getUserAsync = createAsyncThunk(
 	}
 );
 
-// export const addTodoAsync = createAsyncThunk(
-// 	'todos/addTodoAsync',
-// 	async (payload: todoProps) => {
-// 		const resp = await fetch('http://localhost:7000/todos', {
-// 			method: 'POST',
-// 			headers: {
-// 				'Content-Type': 'application/json',
-// 			},
-// 			body: JSON.stringify({ title: payload.title }),
-// 		});
 
-// 		if (resp.ok) {
-// 			const todo = await resp.json();
-// 			return { todo } as todoProps;
-// 		}
-// 	}
-// );
-
-// export const toggleCompleteAsync = createAsyncThunk(
-// 	'todos/completeTodoAsync',
-// 	async (payload: todoProps) => {
-// 		const resp = await fetch(`http://localhost:7000/todos/${payload.id}`, {
-// 			method: 'PATCH',
-// 			headers: {
-// 				'Content-Type': 'application/json',
-// 			},
-// 			body: JSON.stringify({ completed: payload.completed }),
-// 		});
-
-// 		if (resp.ok) {
-// 			const todo = await resp.json();
-// 			return { todo } as todoProps;
-// 		}
-// 	}
-// );
-
-// export const deleteTodoAsync = createAsyncThunk(
-// 	'todos/deleteTodoAsync',
-// 	async (payload: todoProps) => {
-// 		const resp = await fetch(`http://localhost:7000/todos/${payload.id}`, {
-// 			method: 'DELETE',
-// 		});
-
-// 		if (resp.ok) {
-// 			return { id: payload.id };
-// 		}
-// 	}
-// );
-
-export const handleStatus = (status: number) => {
+const handleStatus = (status: number) => {
 	if (status === 200) {
 		toast.success(`Usuário logado`, {
-			autoClose: 3000,
+			position: "top-center",
+			autoClose: 1500,
 		})
 	}
 	if (status === 404) {
@@ -129,6 +82,15 @@ export const handleStatus = (status: number) => {
 	}
 }
 
+export const confirmFindUserMiddleware:Middleware = (store) => (next) => (action) => {
+	if (action.type === 'user') {
+	  if (window.confirm("Você deseja realmente excluir ?")) {
+		next(action);
+	  }
+	} else {
+	  next(action);
+	}
+  };
 
 export const userSlice = createSlice({
 	name: 'user',
@@ -137,38 +99,18 @@ export const userSlice = createSlice({
 		changeUser: (state, { payload }) => {
 			return { ...state, isLogged: true, ...payload }
 		},
-		logout: (state, { payload }) => {
+		logout: () => {
 			return initialUser
 		}
-		// toggleComplete: (state: Array<todoProps>, action: PayloadAction<todoProps>) => {
-		// 	const index = state.findIndex((todo) => todo.id === action.payload.id);
-		// 	state[index].completed = action.payload.completed;
-		// },
-		// deleteTodo: (state: Array<todoProps>, action: PayloadAction<todoProps>) => {
-		// 	return state.filter((todo) => todo.id !== action.payload.id);
-		// },
 	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getUserAsync.fulfilled, (state, action) => {
 				return action.payload
 			})
-		// .addCase(addTodoAsync.fulfilled, (state, action:any) => {
-		// 	state.push(action.payload.todo)
-		// })
-		// .addCase(toggleCompleteAsync.fulfilled, (state, action:any) => {
-		// 	const index = state.findIndex(
-		// 		(todo) => todo.id === action.payload.todo.id
-		// 	)
-		// 	state[index].completed = action.payload.todo.completed
-		// })
-		// .addCase(deleteTodoAsync.fulfilled, (state, action:any) => {
-		// 	return state.filter((todo) => todo.id !== action.payload.id)
-		// })
 	}
 });
 
-// export const { addTodo, toggleComplete, deleteTodo } = userSlice.actions;
 export const { changeUser, logout } = userSlice.actions;
 
 

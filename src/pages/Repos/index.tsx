@@ -29,11 +29,27 @@ import { useSelector } from 'react-redux';
 import {dataTypes} from '../../interface'
 import { RootState } from '../../store';
 
+import { useHistory } from 'react-router';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+
 
 export const Repos = () => {
 
   const user = useSelector((state:RootState) => state.user)
   const userName = user.login
+
+  const history = useHistory()
+
+  useEffect(() => {
+      if (!user.isLogged) {
+          history.push('/')
+          toast.error("Usuário não logado", {
+              autoClose: 3000
+          })
+      }
+  }, [user])
+
 
   const showData = (repo: dataTypes) => {
     return (
