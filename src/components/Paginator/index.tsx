@@ -1,7 +1,5 @@
 import { useState, useEffect,  } from "react";
 import ReactPaginate from "react-paginate";
-import { useHistory } from "react-router";
-import { treatResponse } from "../Toast";
 import "./styles.css";
 import {paginatorProps} from '../../interface'
 
@@ -10,26 +8,14 @@ interface handlePageArgs {
 }
 
 export const Paginator = (props: paginatorProps) => {
-  const { showData, typePage, fetchUserData, mainUserName, numOfElements = 0, per_page = 7 } = props
+  const { showData, typePage, userName, numOfElements = 0, per_page = 7 } = props
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
-  const history = useHistory()
 
-
-  useEffect(() => {
-    fetchUserData(mainUserName, false)
-      .then(response => {
-        treatResponse(response, [200])
-        if (response !== 200) {
-          history.push('/')
-        }
-      })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     const fetchPageData = async (page: number) => {
-      fetch(`https://api.github.com/users/${mainUserName}/${typePage}?per_page=${per_page}&page=${page}`)
+      fetch(`https://api.github.com/users/${userName}/${typePage}?per_page=${per_page}&page=${page}`)
         .then((res) => res.json())
         .then((value) => setData(value))
     }

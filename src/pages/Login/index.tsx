@@ -10,28 +10,35 @@ import {
 } from "./styles"
 
 import { useHistory } from "react-router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { loginProps } from '../../interface'
-import { treatResponse } from "../../components/Toast";
+import { useEffect } from "react";
 
-export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginProps) => {
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAsync } from "../../store/user/userSlice";
+import { RootState } from "../../store";
+
+export const Login = () => {
     const [submitedNull, setSubmitedNull] = useState(false);
     const [nameInput, setNameInput] = useState('')
-    const history = useHistory()
 
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const user = useSelector((state: RootState) => state.user)
 
     useEffect(() => {
-        setUserName('')
-        setUser({})
-    }, [setUserName, setUser])
+        if (user.isLogged) {
+            history.push('/home')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
 
     const updateName = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNameInput(event.target.value)
         setSubmitedNull(false)
     };
 
-    const onSubmit = async () => {
+    const onSubmit = () => {
         if (nameInput.length === 0) {
             toast.warning("Insira o nome do usuário", {
                 autoClose: 3000
@@ -39,14 +46,7 @@ export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginPr
             setSubmitedNull(true);
         }
         else {
-            fetchUserData(nameInput, true)
-                .then(response => {
-                    treatResponse(response,[])
-                    if (response === 200) {
-                        history.push(`/${nameInput}`)
-                        setUserName(nameInput)
-                    }
-                })
+            dispatch(getUserAsync(nameInput))
         }
     }
 
@@ -56,8 +56,6 @@ export const Login = ({ userName, setUserName, setUser, fetchUserData }: loginPr
             onSubmit()
         }
     }
-
-
 
     return (
         <div>

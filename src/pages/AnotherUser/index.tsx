@@ -21,45 +21,55 @@ import {
     HomeFooter
 } from './styles';
 
-import { profileProps, RouteParams } from '../../interface'
 
 import { Navbar } from '../../components/Navbar'
 
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { getUserAsync } from '../../store/user/userSlice';
+
 import { useHistory } from 'react-router';
-import { treatResponse } from '../../components/Toast';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useLastLocation } from 'react-router-last-location';
 
 
-export const AnotherUser = (props: profileProps) => {
-    const { mainUserName,pageType, subordinateUserName }: RouteParams = useParams()
-    const { userName, user, fetchUserData } = props
+export const AnotherUser = () => {
+
+    const lastLocation = useLastLocation()
+    console.log((lastLocation.pathname.substring(1)))
+
+    const user = useSelector((state: RootState) => state.user)
+    const anotherUser = useSelector((state: RootState) => state.anotherUser)
+    const anotherUserName = anotherUser.login
+
+    const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
-        fetchUserData(subordinateUserName, false)
-            .then(response => {
-                treatResponse(response, [200])
-                if (response !== 200) {
-                    history.push('/')
-                }
+        if (!user.isLogged) {
+            history.push('/')
+            toast.error("Usuário não logado", {
+                autoClose: 3000
             })
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [subordinateUserName]);
+    }, [user])
 
     return (
         <HomeContainer>
             <HomeHeaderFollow>
-                <ExitContainer to={`/${mainUserName}/${pageType}`}>
+                <ExitContainer onClick={() => history.goBack()}>
                     <ExitIcon />
                 </ExitContainer>
                 <LoginName >
-                    #{user.login}
+                    #{anotherUser.login}
                 </LoginName>
                 <ChangeProfileContainer
-                    to={`/${subordinateUserName}`}>
+                    to={`/home`}>
                     <ButtonChangeProfile
-                        onClick={() => { fetchUserData(subordinateUserName, true); }}
+                        onClick={() => { dispatch(getUserAsync(anotherUserName)) }}
                         style={{ right: '30px' }}>
                         Salvar<LogInIcon color={'green'} />
                     </ButtonChangeProfile>
@@ -67,27 +77,27 @@ export const AnotherUser = (props: profileProps) => {
             </HomeHeaderFollow>
             <HomeBody>
                 <ProfileContainer>
-                    <ProfilePic src={user.avatar_url} />
+                    <ProfilePic src={anotherUser.avatar_url} />
                 </ProfileContainer>
                 <MainInfoContainer>
                     <Square />
                     <NameLocationContainer>
-                        <Name>{user.name}</Name>
-                        <InfoName>{user.email}</InfoName>
-                        <InfoName>{user.location}</InfoName>
+                        <Name>{anotherUser.name}</Name>
+                        <InfoName>{anotherUser.email}</InfoName>
+                        <InfoName>{anotherUser.location}</InfoName>
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
                     <InfoContainer >
-                        <InfoNumber>{user.followers}</InfoNumber>
+                        <InfoNumber>{anotherUser.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
                     <InfoContainer >
-                        <InfoNumber>{user.following}</InfoNumber>
+                        <InfoNumber>{anotherUser.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
                     <InfoContainer >
-                        <InfoNumber>{user.public_repos}</InfoNumber>
+                        <InfoNumber>{anotherUser.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>
                 </InfosContainer>
@@ -95,12 +105,12 @@ export const AnotherUser = (props: profileProps) => {
                     <Square />
                     <NameLocationContainer>
                         <Name>Bio</Name>
-                        <InfoName>{user.bio}</InfoName>
+                        <InfoName>{anotherUser.bio}</InfoName>
                     </NameLocationContainer>
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage={`${pageType}`} userName={userName} />
+                <Navbar activePage={`${lastLocation.pathname.substring(1)}`} />
             </HomeFooter>
         </HomeContainer>
     )

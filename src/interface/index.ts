@@ -13,7 +13,8 @@ export interface dataTypes {
     bio?: string,
     node_id?: string,
     description?:string,
-    stargazers_count?: number
+    stargazers_count?: number,
+    isLogged?: boolean
 }
 
 interface userProps {
@@ -56,7 +57,7 @@ export interface paginatorProps {
     typePage: string,
     showData: (value: dataTypes) => ReactNode,
     numOfElements: number | undefined,
-    fetchUserData: (value1: string, value2: boolean) => Promise<number>,
-    mainUserName: string,
+    // fetchUserData: (value1: string, value2: boolean) => Promise<number>,
+    userName: string,
     per_page?: number,
   }

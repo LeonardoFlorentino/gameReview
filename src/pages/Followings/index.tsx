@@ -14,19 +14,42 @@ import {
   FollowingsFooter
 } from './styles'
 
-import { useParams } from 'react-router-dom';
 import { Paginator } from '../../components/Paginator';
 import { Navbar } from '../../components/Navbar'
 
-import { RouteParams, dataTypes, pageProps } from '../../interface';
+import { dataTypes } from '../../interface';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAnotherUserAsync } from '../../store/anotherUser/anotherUserSlice';
+import { RootState } from '../../store';
 
-export const Followings = (props: pageProps) => {
-  const { mainUserName }: RouteParams = useParams()
-  const { user, fetchUserData, userName } = props
+import { useHistory } from 'react-router';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+
+export const Followings = () => {
+  const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state.user)
+  const userName = user.login
+
+  const history = useHistory()
+
+  useEffect(() => {
+    if (!user.isLogged) {
+      history.push('/')
+      toast.error("Usuário não logado", {
+        autoClose: 3000
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
+
+  const onSubmit = (name: string) => {
+    dispatch(getAnotherUserAsync(name))
+  }
 
   const showData = (following: dataTypes) => {
     return (
-      <FollowingContainer key={following.id} to={`followings/${following.login}`}>
+      <FollowingContainer key={following.id} onClick={() => onSubmit(following.login || '')} to={`/anotherUser`}>
         <Square />
         <ProfilePic src={following.avatar_url} />
         <LoginName>#{following.login}</LoginName>
@@ -39,9 +62,7 @@ export const Followings = (props: pageProps) => {
   return (
     <FollowingsContainer>
       <FollowingsHeader>
-        <ExitContainer
-          to={`/${mainUserName}`}
-        >
+        <ExitContainer to={`/home`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -53,12 +74,11 @@ export const Followings = (props: pageProps) => {
           typePage={'following'}
           showData={showData}
           numOfElements={user.following}
-          fetchUserData={fetchUserData}
-          mainUserName={mainUserName}
+          userName={userName}
         />
       </FollowingsBody>
       <FollowingsFooter>
-        <Navbar activePage='followings' userName={userName} />
+        <Navbar activePage='followings' />
       </FollowingsFooter>
     </FollowingsContainer>
   )

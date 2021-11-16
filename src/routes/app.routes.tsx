@@ -6,61 +6,35 @@ import { Followers } from '../pages/Followers';
 import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
 import { AnotherUser } from '../pages/AnotherUser'
+import { LastLocationProvider } from 'react-router-last-location';
 
-import {  routerProps } from '../interface'
 
-export const Router = (props: routerProps) => {
+
+export const Routes = () => {
   return (
-    < BrowserRouter >
+    <BrowserRouter >
+    <LastLocationProvider>
     <Switch>
-      <Route path="/" exact>
-        <Login
-          setUser={props.setUser}
-          userName={props.userName}
-          setUserName={props.setUserName}
-          fetchUserData={props.fetchUserData}
-        />
+      <Route path="/" exact >
+        <Login/>
       </Route>
-      <Route path="/:mainUserName"  exact>
-        <Profile
-          userName={props.userName}
-          setUserName={props.setUserName}
-          user={props.user}
-          setUser={props.setUser}
-          fetchUserData={props.fetchUserData}
-        />
+      <Route path="/home"  exact>
+        <Profile/>
       </Route>
-      <Route path="/:mainUserName/repos" exact>
-        <Repos
-          user={props.user}
-          fetchUserData={props.fetchUserData}
-          userName={props.userName}
-        />
+      <Route path="/repos" exact>
+        <Repos/>
       </Route>
-      <Route path="/:mainUserName/followers" exact>
-        <Followers
-          user={props.user}
-          fetchUserData={props.fetchUserData}
-          userName={props.userName}
-        />
+      <Route path="/followers" exact>
+        <Followers/>
       </Route>
-      <Route path="/:mainUserName/followings" exact>
-        <Followings
-          user={props.user}
-          fetchUserData={props.fetchUserData}
-          userName={props.userName}
-        />
+      <Route path="/following" exact>
+        <Followings/>
       </Route>
-      <Route path="/:mainUserName/:pageType/:subordinateUserName" exact>
-        <AnotherUser
-          userName={props.userName}
-          setUserName={props.setUserName}
-          user={props.user}
-          setUser={props.setUser}
-          fetchUserData={props.fetchUserData}
-        />
+      <Route path="/anotherUser" exact>
+        <AnotherUser/>
       </Route>
     </Switch>
+    </LastLocationProvider>
     </BrowserRouter >
   );
 }

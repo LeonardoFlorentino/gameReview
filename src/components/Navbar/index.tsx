@@ -12,27 +12,26 @@ import {
 
 interface navBarProps {
   activePage: string,
-  userName: string 
 }
 
-export const Navbar = ({activePage, userName}:navBarProps) => {
+export const Navbar = ({activePage}:navBarProps) => {
   return (
     <>
       <Nav>
         <NavMenu>
-          <NavLink to={`/${userName}`} color={activePage === 'home'? '#222': '#aaa'}>
+          <NavLink to={`/home`} color={activePage === 'home'? '#222': '#aaa'}>
             <IconHome />
             <Text>Home</Text>
           </NavLink>
-          <NavLink to={`/${userName}/repos`} color={activePage === 'repos'? '#222': '#aaa'}>
+          <NavLink to={`/repos`} color={activePage === 'repos'? '#222': '#aaa'}>
             <IconRepos/>
             <Text>Repos</Text>
           </NavLink>
-          <NavLink to={`/${userName}/followers` } color={activePage === 'followers'? '#222': '#aaa'}>
+          <NavLink to={`/followers` } color={activePage === 'followers'? '#222': '#aaa'}>
             <IconFollowers/>
             <Text>Seguidores</Text>
           </NavLink>
-          <NavLink to={`/${userName}/followings`} color={activePage === 'followings'? '#222': '#aaa'}>
+          <NavLink to={`/following`} color={activePage === 'following'? '#222': '#aaa'}>
             <IconFollowing/>
             <Text>Seguindo</Text>
           </NavLink>

@@ -18,41 +18,45 @@ import {
     HomeFooter
 } from './styles';
 
-import { profileProps, RouteParams } from '../../interface'
-
 import { Navbar } from '../../components/Navbar'
-
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { logout } from '../../store/user/userSlice';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { treatResponse } from '../../components/Toast';
+import { toast } from 'react-toastify';
 
+export const Profile = () => {
 
-export const Profile = (props: profileProps) => {
-    const { mainUserName }: RouteParams = useParams()
-    const { userName, user, fetchUserData } = props
+    const user = useSelector((state: RootState) => state.user)
+    const userName = user.login
+    const dispatch = useDispatch()
     const history = useHistory()
-    // const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
-        fetchUserData(mainUserName, false)
-            .then(response => {
-                treatResponse(response, [200])
-                if (response !== 200) {
-                    history.push('/')
-                }
+        if (!user.isLogged) {
+            history.push('/')
+            toast.error("Usuário não logado", {
+                autoClose: 3000
             })
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [user])
 
+    const onSubmit = () => {
+        dispatch(logout())
+        toast.error("Usuário deslogado", {
+            autoClose: 3000
+        })
+    }
 
     return (
         <HomeContainer>
             <HomeHeaderMain>
-                <LoginName to={`/${mainUserName}`} style={{ marginLeft: '20px' }}>
+                <LoginName to={`/home`} style={{ marginLeft: '20px' }}>
                     #{user.login}
                 </LoginName  >
-                <ChangeProfileContainer to='/' style={{ right: '10px' }}>
+                <ChangeProfileContainer to='/' style={{ right: '10px' }} onClick={() => onSubmit()}>
                     Sair<LogOutIcon color={'red'} />
                 </ChangeProfileContainer>
             </HomeHeaderMain>
@@ -69,15 +73,15 @@ export const Profile = (props: profileProps) => {
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
-                    <InfoContainer to={`/${mainUserName}/followers`}>
+                    <InfoContainer to={`/${userName}/followers`}>
                         <InfoNumber>{user.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/${mainUserName}/followings`}>
+                    <InfoContainer to={`/${userName}/followings`}>
                         <InfoNumber>{user.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/${mainUserName}/repos`}>
+                    <InfoContainer to={`/${userName}/repos`}>
                         <InfoNumber>{user.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>
@@ -91,7 +95,7 @@ export const Profile = (props: profileProps) => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage='home' userName={userName} />
+                <Navbar activePage='home' />
             </HomeFooter>
         </HomeContainer>
     )

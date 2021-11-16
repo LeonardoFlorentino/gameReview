@@ -3,12 +3,11 @@ import { AiFillGithub } from 'react-icons/ai'
 import { FiArrowRight } from 'react-icons/fi'
 
 export const LoginContainer = styled.div`
-    height: 100vh;
-    width: 100vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 `
 
 export const Logo = styled(AiFillGithub)`
@@ -62,8 +61,7 @@ export const InputContainer = styled.div`
 export const Input = styled.input`
     padding-left: 10px;
     font-size: 15px;
-    width: 20vw;
-    min-width: 250px;
+    width: 250px;
     height: 40px;
     margin: 5px 0px;
     border: 2px solid #fff;

@@ -3,8 +3,6 @@ import { FiLogIn, FiArrowLeft } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
 export const HomeContainer = styled.div`
-    height: 100vh;
-    width: 100vw;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
@@ -33,7 +31,7 @@ export const LoginName = styled.div`
    text-decoration: none;
 `
 
-export const ExitContainer = styled(Link)`
+export const ExitContainer = styled.a`
     display: flex;
     flex-direction: row;
     justify-content: center;
