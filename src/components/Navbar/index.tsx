@@ -12,10 +12,9 @@ import {
 
 interface navBarProps {
   activePage: string,
-  userName: string 
 }
 
-export const Navbar = ({activePage, userName}:navBarProps) => {
+export const Navbar = ({activePage}:navBarProps) => {
   return (
     <>
       <Nav>
@@ -32,7 +31,7 @@ export const Navbar = ({activePage, userName}:navBarProps) => {
             <IconFollowers/>
             <Text>Seguidores</Text>
           </NavLink>
-          <NavLink to={`/following`} color={activePage === 'followings'? '#222': '#aaa'}>
+          <NavLink to={`/following`} color={activePage === 'following'? '#222': '#aaa'}>
             <IconFollowing/>
             <Text>Seguindo</Text>
           </NavLink>

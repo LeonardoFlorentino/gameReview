@@ -26,7 +26,7 @@ import { Navbar } from '../../components/Navbar'
 import { Paginator } from '../../components/Paginator'
 
 import { useSelector } from 'react-redux';
-import {dataTypes} from '../../interface'
+import { dataTypes } from '../../interface'
 import { RootState } from '../../store';
 
 import { useHistory } from 'react-router';
@@ -36,18 +36,19 @@ import { toast } from 'react-toastify';
 
 export const Repos = () => {
 
-  const user = useSelector((state:RootState) => state.user)
+  const user = useSelector((state: RootState) => state.user)
   const userName = user.login
 
   const history = useHistory()
 
   useEffect(() => {
-      if (!user.isLogged) {
-          history.push('/')
-          toast.error("Usuário não logado", {
-              autoClose: 3000
-          })
-      }
+    if (!user.isLogged) {
+      history.push('/')
+      toast.error("Usuário não logado", {
+        autoClose: 3000
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
 
@@ -81,7 +82,7 @@ export const Repos = () => {
   return (
     <ReposContainer>
       <ReposHaeder>
-        <ExitContainer  to={`/home`}>
+        <ExitContainer to={`/home`}>
           <ExitIcon />
         </ExitContainer>
         <NumberOfFollowers>
@@ -92,12 +93,12 @@ export const Repos = () => {
         <Paginator
           typePage={'repos'}
           showData={showData}
-          numOfElements={user.public_repos} 
+          numOfElements={user.public_repos}
           userName={userName}
-          per_page={5}/>
+          per_page={5} />
       </ReposBody>
       <ReposFooter>
-        <Navbar activePage='repos' userName={userName}/>
+        <Navbar activePage='repos' />
       </ReposFooter>
     </ReposContainer >
   )

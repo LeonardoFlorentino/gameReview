@@ -11,7 +11,6 @@ export const Paginator = (props: paginatorProps) => {
   const { showData, typePage, userName, numOfElements = 0, per_page = 7 } = props
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
-  console.log(userName)
 
 
   useEffect(() => {

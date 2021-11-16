@@ -29,27 +29,30 @@ import { toast } from 'react-toastify';
 export const Followers = () => {
 
   const dispatch = useDispatch()
-  const user = useSelector((state:RootState) => state.user)
+  const user = useSelector((state: RootState) => state.user)
   const userName = user.login
 
   const history = useHistory()
 
   useEffect(() => {
-      if (!user.isLogged) {
-          history.push('/')
-          toast.error("Usuário não logado", {
-              autoClose: 3000
-          })
-      }
+    if (!user.isLogged) {
+      history.push('/')
+      toast.error("Usuário não logado", {
+        autoClose: 3000
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   const onSubmit = (name: string) => {
-    dispatch(getAnotherUserAsync(name)) 
+    dispatch(getAnotherUserAsync(name))
   }
 
   const showData = (follower: dataTypes) => {
     return (
-      <FollowerContainer key={follower.id}  onClick={() => onSubmit(follower.login || '')} to={`/anotherUser`}>
+      <FollowerContainer key={follower.id}
+        onClick={() => onSubmit(follower.login || '')}
+        to={{ pathname: `/anotherUser` }}>
         <Square />
         <ProfilePic src={follower.avatar_url} />
         <LoginName>#{follower.login}</LoginName>
@@ -75,10 +78,10 @@ export const Followers = () => {
           showData={showData}
           numOfElements={user.followers}
           userName={userName}
-           />
+        />
       </FollowersBody>
       <FollowersFooter>
-        <Navbar activePage='followers' userName={userName} />
+        <Navbar activePage='followers' />
       </FollowersFooter>
     </FollowersContainer>
   )

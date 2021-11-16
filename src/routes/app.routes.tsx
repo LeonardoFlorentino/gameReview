@@ -6,13 +6,14 @@ import { Followers } from '../pages/Followers';
 import { Followings } from '../pages/Followings';
 import { Repos } from '../pages/Repos';
 import { AnotherUser } from '../pages/AnotherUser'
-import { createBrowserHistory } from 'history';
+import { LastLocationProvider } from 'react-router-last-location';
 
 
 
 export const Routes = () => {
   return (
     <BrowserRouter >
+    <LastLocationProvider>
     <Switch>
       <Route path="/" exact >
         <Login/>
@@ -33,6 +34,7 @@ export const Routes = () => {
         <AnotherUser/>
       </Route>
     </Switch>
+    </LastLocationProvider>
     </BrowserRouter >
   );
 }

@@ -16,21 +16,21 @@ import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAsync } from "../../store/user/userSlice";
-import { withRouter } from "react-router";
 import { RootState } from "../../store";
 
-export const Login = withRouter(() => {
+export const Login = () => {
     const [submitedNull, setSubmitedNull] = useState(false);
     const [nameInput, setNameInput] = useState('')
 
     const history = useHistory()
     const dispatch = useDispatch()
-    const user = useSelector((state:RootState) => state.user)
+    const user = useSelector((state: RootState) => state.user)
 
     useEffect(() => {
-        if(user.isLogged){
+        if (user.isLogged) {
             history.push('/home')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     const updateName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,4 +82,4 @@ export const Login = withRouter(() => {
             </LoginContainer>
         </div>
     )
-})
+}

@@ -21,13 +21,12 @@ import {
 import { Navbar } from '../../components/Navbar'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { withRouter } from 'react-router';
 import { logout } from '../../store/user/userSlice';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 
-export const Profile = withRouter(() => {
+export const Profile = () => {
 
     const user = useSelector((state: RootState) => state.user)
     const userName = user.login
@@ -41,10 +40,14 @@ export const Profile = withRouter(() => {
                 autoClose: 3000
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     const onSubmit = () => {
         dispatch(logout())
+        toast.error("Usuário deslogado", {
+            autoClose: 3000
+        })
     }
 
     return (
@@ -92,9 +95,9 @@ export const Profile = withRouter(() => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage='home' userName={userName} />
+                <Navbar activePage='home' />
             </HomeFooter>
         </HomeContainer>
     )
-})
+}
 

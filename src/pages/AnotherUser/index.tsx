@@ -21,39 +21,55 @@ import {
     HomeFooter
 } from './styles';
 
-import { RouteParams } from '../../interface'
 
 import { Navbar } from '../../components/Navbar'
 
-import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { getUserAsync } from '../../store/user/userSlice';
+
 import { useHistory } from 'react-router';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useLastLocation } from 'react-router-last-location';
 
 
 export const AnotherUser = () => {
-    const { pageType }: RouteParams = useParams()
 
-    const user = useSelector((state:RootState) => state.anotherUser)
-    const userName = user.login
+    const lastLocation = useLastLocation()
+    console.log((lastLocation.pathname.substring(1)))
+
+    const user = useSelector((state: RootState) => state.user)
+    const anotherUser = useSelector((state: RootState) => state.anotherUser)
+    const anotherUserName = anotherUser.login
 
     const dispatch = useDispatch()
     const history = useHistory()
 
+    useEffect(() => {
+        if (!user.isLogged) {
+            history.push('/')
+            toast.error("Usuário não logado", {
+                autoClose: 3000
+            })
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
+
     return (
         <HomeContainer>
             <HomeHeaderFollow>
-                <ExitContainer onClick={()=> history.goBack()}>
+                <ExitContainer onClick={() => history.goBack()}>
                     <ExitIcon />
                 </ExitContainer>
                 <LoginName >
-                    #{user.login}
+                    #{anotherUser.login}
                 </LoginName>
                 <ChangeProfileContainer
                     to={`/home`}>
                     <ButtonChangeProfile
-                        onClick={() => {dispatch(getUserAsync(userName))}}
+                        onClick={() => { dispatch(getUserAsync(anotherUserName)) }}
                         style={{ right: '30px' }}>
                         Salvar<LogInIcon color={'green'} />
                     </ButtonChangeProfile>
@@ -61,27 +77,27 @@ export const AnotherUser = () => {
             </HomeHeaderFollow>
             <HomeBody>
                 <ProfileContainer>
-                    <ProfilePic src={user.avatar_url} />
+                    <ProfilePic src={anotherUser.avatar_url} />
                 </ProfileContainer>
                 <MainInfoContainer>
                     <Square />
                     <NameLocationContainer>
-                        <Name>{user.name}</Name>
-                        <InfoName>{user.email}</InfoName>
-                        <InfoName>{user.location}</InfoName>
+                        <Name>{anotherUser.name}</Name>
+                        <InfoName>{anotherUser.email}</InfoName>
+                        <InfoName>{anotherUser.location}</InfoName>
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
                     <InfoContainer >
-                        <InfoNumber>{user.followers}</InfoNumber>
+                        <InfoNumber>{anotherUser.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
                     <InfoContainer >
-                        <InfoNumber>{user.following}</InfoNumber>
+                        <InfoNumber>{anotherUser.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
                     <InfoContainer >
-                        <InfoNumber>{user.public_repos}</InfoNumber>
+                        <InfoNumber>{anotherUser.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>
                 </InfosContainer>
@@ -89,12 +105,12 @@ export const AnotherUser = () => {
                     <Square />
                     <NameLocationContainer>
                         <Name>Bio</Name>
-                        <InfoName>{user.bio}</InfoName>
+                        <InfoName>{anotherUser.bio}</InfoName>
                     </NameLocationContainer>
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage={`${pageType}`} userName={userName} />
+                <Navbar activePage={`${lastLocation.pathname.substring(1)}`} />
             </HomeFooter>
         </HomeContainer>
     )

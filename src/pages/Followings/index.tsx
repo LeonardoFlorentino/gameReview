@@ -28,22 +28,23 @@ import { toast } from 'react-toastify';
 
 export const Followings = () => {
   const dispatch = useDispatch()
-  const user = useSelector((state:RootState) => state.user)
+  const user = useSelector((state: RootState) => state.user)
   const userName = user.login
 
   const history = useHistory()
 
   useEffect(() => {
-      if (!user.isLogged) {
-          history.push('/')
-          toast.error("Usuário não logado", {
-              autoClose: 3000
-          })
-      }
+    if (!user.isLogged) {
+      history.push('/')
+      toast.error("Usuário não logado", {
+        autoClose: 3000
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   const onSubmit = (name: string) => {
-    dispatch(getAnotherUserAsync(name)) 
+    dispatch(getAnotherUserAsync(name))
   }
 
   const showData = (following: dataTypes) => {
@@ -77,7 +78,7 @@ export const Followings = () => {
         />
       </FollowingsBody>
       <FollowingsFooter>
-        <Navbar activePage='followings' userName={userName} />
+        <Navbar activePage='followings' />
       </FollowingsFooter>
     </FollowingsContainer>
   )
