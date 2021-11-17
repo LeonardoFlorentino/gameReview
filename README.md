@@ -61,7 +61,7 @@ The prototype of the application was enabled by this [link](https://xd.adobe.com
 <li>- [x] On the home screen, you should only render the prototype information if the information actually exists in the authentication request's return</li>
 
 <br/>
-<img src="https://github.com/LeonardoFlorentino/UserProfileGit/blob/main/public/demo/userNotFound.gif" alt="user not found" width="100%">
+<img src="https://github.com/LeonardoFlorentino/UserProfileGit/blob/redux/public/demo/userNotFound.gif" alt="user not found" width="100%">
 </ul>
 
 
