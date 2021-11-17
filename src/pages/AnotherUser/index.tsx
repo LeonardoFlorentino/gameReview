@@ -32,12 +32,11 @@ import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useLastLocation } from 'react-router-last-location';
-
+import { LastLocationType } from 'react-router-last-location';
 
 export const AnotherUser = () => {
 
-    const lastLocation = useLastLocation()
-    console.log((lastLocation.pathname.substring(1)))
+    const lastLocation:LastLocationType = useLastLocation()
 
     const user = useSelector((state: RootState) => state.user)
     const anotherUser = useSelector((state: RootState) => state.anotherUser)
@@ -53,7 +52,6 @@ export const AnotherUser = () => {
                 autoClose: 3000
             })
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
@@ -110,7 +108,7 @@ export const AnotherUser = () => {
                 </MainInfoContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage={`${lastLocation.pathname.substring(1)}`} />
+                <Navbar activePage={`${lastLocation?.pathname.substring(1) }`} />
             </HomeFooter>
         </HomeContainer>
     )
