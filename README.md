@@ -1,5 +1,7 @@
 # [Luby Software](https://www.luby.com.br/en/home/) challenge
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b654c94e-08a6-4b79-b443-7837581b1d8d/deploy-status)](https://user-profile-github.netlify.app/)
+
 This project was developed based on a selective processing for a job application at the company [Luby Software](https://www.luby.com.br/en/home/), in Brazil, which established the requirements for this task, named [ReactJS Challenge](https://github.com/lubysoftware/join/tree/react). The web application was a PWA (Progressive Web App) which works based on the [GITHUB API documentation](https://docs.github.com/en/rest), with the following implemented criterias:
 
 ## Web application prototype
