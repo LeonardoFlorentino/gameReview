@@ -19,9 +19,6 @@ import {
 } from './styles';
 
 import { Navbar } from '../../components/Navbar'
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { logout } from '../../store/user/userSlice';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
@@ -29,11 +26,7 @@ import { useAuth } from '../../providers/auth';
 
 export const Profile = () => {
 
-    // const user = useSelector((state: RootState) => state.user)
-    // const userName = user.login
     const {user, logout} = useAuth()
-    const userName =user.login
-    const dispatch = useDispatch()
     const history = useHistory()
 
 
@@ -49,7 +42,6 @@ export const Profile = () => {
 
     const onSubmit = () => {
         logout()
-        // dispatch(logout())
         toast.error("Usuário deslogado", {
             autoClose: 3000
         })

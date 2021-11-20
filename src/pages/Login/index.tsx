@@ -10,13 +10,10 @@ import {
 } from "./styles"
 
 import { useHistory } from "react-router";
-import React, { ContextType, useState } from "react";
+import React, {  useState } from "react";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getUserAsync } from "../../store/user/userSlice";
-import { RootState } from "../../store";
 import { useAuth } from "../../providers/auth";
 
 export const Login = () => {
@@ -24,10 +21,7 @@ export const Login = () => {
     const [nameInput, setNameInput] = useState('')
 
     const history = useHistory()
-    // const dispatch = useDispatch()
-    // const user = useSelector((state: RootState) => state.user)
     const { login, user } = useAuth() 
-    console.log(user.isLogged)
 
     useEffect(() => {
         if (user.isLogged) {
@@ -49,7 +43,6 @@ export const Login = () => {
             setSubmitedNull(true);
         }
         else {
-            // dispatch(getUserAsync(nameInput))
             login(nameInput)
         }
     }

@@ -18,9 +18,6 @@ import {
 import { Navbar } from '../../components/Navbar'
 import { dataTypes } from '../../interface'
 import { Paginator } from '../../components/Paginator'
-import { useSelector, useDispatch } from 'react-redux';
-import { getAnotherUserAsync } from '../../store/anotherUser/anotherUserSlice';
-import { RootState } from '../../store';
 
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
@@ -29,9 +26,6 @@ import { useAuth } from '../../providers/auth';
 
 export const Followers = () => {
 
-  // const dispatch = useDispatch()
-  // const user = useSelector((state: RootState) => state.user)
-  // const userName = user.login
   const {user, getAnotherUser} = useAuth()
   const userName= user.login
 
@@ -49,7 +43,6 @@ export const Followers = () => {
 
   const onSubmit = (name: string) => {
     getAnotherUser(name)
-    // dispatch(getAnotherUserAsync(name))
   }
 
   const showData = (follower: dataTypes) => {

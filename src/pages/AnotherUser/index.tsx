@@ -24,10 +24,6 @@ import {
 
 import { Navbar } from '../../components/Navbar'
 
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
-import { getUserAsync } from '../../store/user/userSlice';
-
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -39,13 +35,9 @@ export const AnotherUser = () => {
 
     const lastLocation:LastLocationType = useLastLocation()
 
-    // const user = useSelector((state: RootState) => state.user)
-    // const anotherUser = useSelector((state: RootState) => state.anotherUser)
-    // const anotherUserName = anotherUser.login
     const {user, anotherUser, login} = useAuth()
     const anotherUserName = anotherUser.login
 
-    // const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
