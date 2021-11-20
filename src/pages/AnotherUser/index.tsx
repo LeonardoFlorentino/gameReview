@@ -24,25 +24,20 @@ import {
 
 import { Navbar } from '../../components/Navbar'
 
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
-import { getUserAsync } from '../../store/user/userSlice';
-
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useLastLocation } from 'react-router-last-location';
 import { LastLocationType } from 'react-router-last-location';
+import { useAuth } from '../../providers/auth';
 
 export const AnotherUser = () => {
 
     const lastLocation:LastLocationType = useLastLocation()
 
-    const user = useSelector((state: RootState) => state.user)
-    const anotherUser = useSelector((state: RootState) => state.anotherUser)
+    const {user, anotherUser, login} = useAuth()
     const anotherUserName = anotherUser.login
 
-    const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
@@ -67,7 +62,7 @@ export const AnotherUser = () => {
                 <ChangeProfileContainer
                     to={`/home`}>
                     <ButtonChangeProfile
-                        onClick={() => { dispatch(getUserAsync(anotherUserName)) }}
+                        onClick={() => {login(anotherUserName)}}
                         style={{ right: '30px' }}>
                         Salvar<LogInIcon color={'green'} />
                     </ButtonChangeProfile>

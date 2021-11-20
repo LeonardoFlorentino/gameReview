@@ -18,17 +18,14 @@ import { Paginator } from '../../components/Paginator';
 import { Navbar } from '../../components/Navbar'
 
 import { dataTypes } from '../../interface';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAnotherUserAsync } from '../../store/anotherUser/anotherUserSlice';
-import { RootState } from '../../store';
 
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../providers/auth';
 
 export const Followings = () => {
-  const dispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.user)
+  const {user, getAnotherUser} = useAuth()
   const userName = user.login
 
   const history = useHistory()
@@ -44,7 +41,7 @@ export const Followings = () => {
   }, [user])
 
   const onSubmit = (name: string) => {
-    dispatch(getAnotherUserAsync(name))
+    getAnotherUser(name) 
   }
 
   const showData = (following: dataTypes) => {
