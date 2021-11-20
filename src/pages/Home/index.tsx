@@ -25,13 +25,17 @@ import { logout } from '../../store/user/userSlice';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../providers/auth';
 
 export const Profile = () => {
 
-    const user = useSelector((state: RootState) => state.user)
-    const userName = user.login
+    // const user = useSelector((state: RootState) => state.user)
+    // const userName = user.login
+    const {user, logout} = useAuth()
+    const userName =user.login
     const dispatch = useDispatch()
     const history = useHistory()
+
 
     useEffect(() => {
         if (!user.isLogged) {
@@ -44,7 +48,8 @@ export const Profile = () => {
     }, [user])
 
     const onSubmit = () => {
-        dispatch(logout())
+        logout()
+        // dispatch(logout())
         toast.error("Usuário deslogado", {
             autoClose: 3000
         })
@@ -73,15 +78,15 @@ export const Profile = () => {
                     </NameLocationContainer>
                 </MainInfoContainer>
                 <InfosContainer>
-                    <InfoContainer to={`/${userName}/followers`}>
+                    <InfoContainer to={`/followers`}>
                         <InfoNumber>{user.followers}</InfoNumber>
                         <InfoName>Seguidores</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/${userName}/followings`}>
+                    <InfoContainer to={`/following`}>
                         <InfoNumber>{user.following}</InfoNumber>
                         <InfoName>Seguindo</InfoName>
                     </InfoContainer>
-                    <InfoContainer to={`/${userName}/repos`}>
+                    <InfoContainer to={`/repos`}>
                         <InfoNumber>{user.public_repos}</InfoNumber>
                         <InfoName>Repos</InfoName>
                     </InfoContainer>

@@ -33,16 +33,19 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useLastLocation } from 'react-router-last-location';
 import { LastLocationType } from 'react-router-last-location';
+import { useAuth } from '../../providers/auth';
 
 export const AnotherUser = () => {
 
     const lastLocation:LastLocationType = useLastLocation()
 
-    const user = useSelector((state: RootState) => state.user)
-    const anotherUser = useSelector((state: RootState) => state.anotherUser)
+    // const user = useSelector((state: RootState) => state.user)
+    // const anotherUser = useSelector((state: RootState) => state.anotherUser)
+    // const anotherUserName = anotherUser.login
+    const {user, anotherUser, login} = useAuth()
     const anotherUserName = anotherUser.login
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
@@ -67,7 +70,7 @@ export const AnotherUser = () => {
                 <ChangeProfileContainer
                     to={`/home`}>
                     <ButtonChangeProfile
-                        onClick={() => { dispatch(getUserAsync(anotherUserName)) }}
+                        onClick={() => {login(anotherUserName)}}
                         style={{ right: '30px' }}>
                         Salvar<LogInIcon color={'green'} />
                     </ButtonChangeProfile>

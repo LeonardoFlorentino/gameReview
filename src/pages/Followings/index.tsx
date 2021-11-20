@@ -25,10 +25,14 @@ import { RootState } from '../../store';
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../providers/auth';
+import { Login } from '../Login';
 
 export const Followings = () => {
-  const dispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.user)
+  // const dispatch = useDispatch()
+  // const user = useSelector((state: RootState) => state.user)
+  // const userName = user.login
+  const {user, getAnotherUser} = useAuth()
   const userName = user.login
 
   const history = useHistory()
@@ -44,7 +48,8 @@ export const Followings = () => {
   }, [user])
 
   const onSubmit = (name: string) => {
-    dispatch(getAnotherUserAsync(name))
+    getAnotherUser(name) 
+    // dispatch(getAnotherUserAsync(name))
   }
 
   const showData = (following: dataTypes) => {

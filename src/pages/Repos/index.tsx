@@ -32,11 +32,14 @@ import { RootState } from '../../store';
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../providers/auth';
 
 
 export const Repos = () => {
 
-  const user = useSelector((state: RootState) => state.user)
+  // const user = useSelector((state: RootState) => state.user)
+  // const userName = user.login
+  const {user} = useAuth()
   const userName = user.login
 
   const history = useHistory()
