@@ -1,22 +1,23 @@
+import { useState } from 'react';
+
 import {
-    LoginContainer,
+    HomeContainer,
+    Logo,
     Button,
     Input,
-    Logo,
     NameButton,
     IconArrow,
     InputContainer,
     InputError
-} from "./styles"
+} from './styles';
 
-import { useHistory } from "react-router";
-import React, {  useState } from "react";
-import { toast } from "react-toastify";
-import { useEffect } from "react";
-
-import { useAuth } from "../../providers/auth";
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../providers/auth';
 
 export const Login = () => {
+
     const [submitedNull, setSubmitedNull] = useState(false);
     const [nameInput, setNameInput] = useState('')
 
@@ -53,16 +54,15 @@ export const Login = () => {
             onSubmit()
         }
     }
-
     return (
-        <div>
-            <LoginContainer>
-                <Logo />
-                <InputContainer>
+        <HomeContainer>
+            <Logo/>
+            <InputContainer>
                     <Input
+                        mask={[/^\S*@?\S*$/] }
                         onChange={(event) => updateName(event)}
                         onKeyPress={handleKeyPress}
-                        placeholder="Usuário"
+                        placeholder="Endereço de e-mail"
                         type="text"
                         id='inputGit'
                         autoFocus={true}
@@ -76,7 +76,7 @@ export const Login = () => {
                         <IconArrow />
                     </NameButton >
                 </Button>
-            </LoginContainer>
-        </div>
+        </HomeContainer>
     )
 }
+

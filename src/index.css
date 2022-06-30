@@ -1,5 +1,30 @@
+@font-face{
+  font-family: 'Montserrat';
+  src: local('Montserrat'), url(./assets/fonts/Montserrat-Regular.ttf) format('truetype')
+}
+
+@font-face{
+  font-family: 'Blox';
+  src: local('Blox'), url(./assets/fonts/Blox2.ttf) format('truetype')
+}
+
+@font-face{
+  font-family: '256Bytes';
+  src: local('256Bytes'), url(./assets/fonts/256BYTES.TTF) format('truetype')
+}
+
+@font-face{
+  font-family: 'ka1';
+  src: local('ka1'), url(./assets/fonts/ka1.ttf) format('truetype')
+}
+
+@font-face{
+  font-family: 'KarmaFuture';
+  src: local('KarmaFuture'), url(./assets/fonts/KarmaFuture.ttf) format('truetype')
+}
+
 * {
-  font-family: 'Helvetica';
+  font-family: 'Montserrat';
   box-sizing: border-box;
   border-collapse: separate;
 }

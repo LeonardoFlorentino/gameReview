@@ -3,9 +3,10 @@ import {
   NavLink,
   NavMenu,
   IconHome,
-  IconRepos,
-  IconFollowers,
-  IconFollowing,
+  // IconRepos,
+  // IconFollowers,
+  // IconFollowing,
+  IconAward,
   Text
 } from './styles';
 
@@ -23,17 +24,9 @@ export const Navbar = ({activePage}:navBarProps) => {
             <IconHome />
             <Text>Home</Text>
           </NavLink>
-          <NavLink to={`/repos`} color={activePage === 'repos'? '#222': '#aaa'}>
-            <IconRepos/>
-            <Text>Repos</Text>
-          </NavLink>
-          <NavLink to={`/followers` } color={activePage === 'followers'? '#222': '#aaa'}>
-            <IconFollowers/>
-            <Text>Seguidores</Text>
-          </NavLink>
-          <NavLink to={`/following`} color={activePage === 'following'? '#222': '#aaa'}>
-            <IconFollowing/>
-            <Text>Seguindo</Text>
+          <NavLink to={`/rating`} color={activePage === 'rating'? '#222': '#aaa'}>
+            <IconAward />
+            <Text>Avaliação</Text>
           </NavLink>
         </NavMenu>
       </Nav>

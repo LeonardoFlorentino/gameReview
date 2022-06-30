@@ -1,6 +1,7 @@
 import { FiGithub } from 'react-icons/fi'
 import { BiHomeAlt } from 'react-icons/bi'
 import { BiGroup } from 'react-icons/bi'
+import { FiAward } from 'react-icons/fi'
 import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -15,7 +16,7 @@ export const Nav = styled.nav`
 export const NavMenu = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(2,1fr);
   align-items: center;
   justify-content: center;
 `;
@@ -71,6 +72,17 @@ export const IconFollowers = styled(BiGroup)`
 `
 
 export const IconFollowing = styled(BiGroup)`
+    width: ${sizeIcon}px;
+    height: ${sizeIcon}px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: baseline;
+    justify-items: baseline;
+
+`
+
+export const IconAward = styled(FiAward)`
     width: ${sizeIcon}px;
     height: ${sizeIcon}px;
     display: flex;

@@ -1,40 +1,27 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { Login } from '../pages/Login';
-import { Profile } from '../pages/Home';
-import { Followers } from '../pages/Followers';
-import { Followings } from '../pages/Followings';
-import { Repos } from '../pages/Repos';
-import { AnotherUser } from '../pages/AnotherUser'
+import { Login } from '../pages/Login'
+import { Home } from '../pages/Home';
+import { Rating } from '../pages/Rating';
 import { LastLocationProvider } from 'react-router-last-location';
-
 
 
 export const Routes = () => {
   return (
     <BrowserRouter >
-    <LastLocationProvider>
-    <Switch>
-      <Route path="/" exact >
-        <Login/>
-      </Route>
-      <Route path="/home"  exact>
-        <Profile/>
-      </Route>
-      <Route path="/repos" exact>
-        <Repos/>
-      </Route>
-      <Route path="/followers" exact>
-        <Followers/>
-      </Route>
-      <Route path="/following" exact>
-        <Followings/>
-      </Route>
-      <Route path="/anotherUser" exact>
-        <AnotherUser/>
-      </Route>
-    </Switch>
-    </LastLocationProvider>
+      <LastLocationProvider>
+        <Switch>
+          <Route path="/" exact >
+            <Login />
+          </Route>
+          <Route path="/home" exact>
+            <Home />
+          </Route>
+          <Route path="/rating" exact>
+            <Rating />
+          </Route>
+        </Switch>
+      </LastLocationProvider>
     </BrowserRouter >
   );
 }

@@ -6,15 +6,19 @@ import {
     LogOutIcon,
     HomeBody,
     TitlePage,
-    SlidesContainer,
-    CardSlide,
+    ListRateContainer,
+    ElementRateContainer,
     TitleCard,
+    InputContainer,
+    InputCard,
+    RateDisplay,
+    ButtonRate,
+    ButtonInput,
     ImageCardContainer,
     ImageCard,
     ScoreContainer,
     StarGradeEmpty,
     StarGradeFull,
-    AwardIcon,
     HomeFooter
 } from './styles';
 
@@ -26,24 +30,15 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 import { useGame } from '../../providers/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../providers/auth';
 
-const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000
-};
 
-export const Home = () => {
+export const Rating = () => {
 
     const { logout, user } = useAuth()
-    const { DB, loadGames } = useGame()
+    const { DB, loadGames, alterGame } = useGame()
 
     useEffect(() => {
         if (!DB.isLoaded) {
@@ -58,6 +53,20 @@ export const Home = () => {
             autoClose: 3000
         })
     }
+
+    const RateComponent = (gameId: number, originalRate: number) => {
+        const [rateValue, setRateValue] = useState(0 || originalRate)
+        return (
+            <>
+                <InputContainer>
+                    <RateDisplay>{rateValue}</RateDisplay>
+                    <ButtonInput onClick={() => setRateValue(rateValue + 1)} >+</ButtonInput >
+                    <ButtonInput onClick={() => setRateValue(rateValue - 1)}>-</ButtonInput >
+                </InputContainer>
+                <ButtonRate onClick={() => alterGame(gameId, user.email, rateValue)}>Enviar</ButtonRate>
+            </>
+        )
+    }
     return (
         <HomeContainer>
             <HomeHeaderMain>
@@ -69,29 +78,30 @@ export const Home = () => {
                 </ChangeProfileContainer>
             </HomeHeaderMain>
             <HomeBody>
-                <TitlePage>Lista de Jogos</TitlePage>
-                <SlidesContainer>
+                <TitlePage>Notas dos Jogos</TitlePage>
+                <ListRateContainer>
                     {DB.isLoaded ?
-                        <Slider {...settings}>
-                            {DB.games.map(game =>
-                                <CardSlide>
-                                    <TitleCard>{game.title}</TitleCard>
+                        DB.games.map(game => {
+                            return (
+                                <ElementRateContainer>
                                     <ImageCardContainer>
                                         <ImageCard src={game.image} alt={game.title} />
                                     </ImageCardContainer>
-                                    <ScoreContainer >
-                                        <AwardIcon/>{game.score} de 10
-                                    </ScoreContainer >
-                                </CardSlide>)}
-                        </Slider>
+                                    <TitleCard>{game.title}</TitleCard>
+                                    <InputCard>
+                                        {RateComponent(game.gameId, game.score)}
+                                    </InputCard>
+                                </ElementRateContainer>
+                            )
+                        })
                         : <></>
                     }
-                </SlidesContainer>
+                </ListRateContainer>
             </HomeBody>
             <HomeFooter>
-                <Navbar activePage='home' />
+                <Navbar activePage='rating' />
             </HomeFooter>
-        </HomeContainer >
+        </HomeContainer>
     )
 }
 

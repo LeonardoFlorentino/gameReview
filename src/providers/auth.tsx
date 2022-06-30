@@ -2,18 +2,7 @@ import { useEffect, useState, createContext, useContext } from "react";
 import { toast } from 'react-toastify'
 
 const initialUser = {
-  login: '',
-  name: '',
-  location: '',
-  followers: 0,
-  following: 0,
-  public_repos: 0,
   email: '',
-  avatar_url: '',
-  bio: '',
-  node_id: '',
-  description: '',
-  stargazers_count: 0,
   isLogged: false
 }
 
@@ -71,8 +60,10 @@ export const AuthProvider = (props: any) => {
     }
   }
 
-  const login = (name:string) =>{
-    getUser(name,setUser,true)
+  const login = (email:string) =>{
+    if(email.length !== 0){
+      setUser({email, isLogged: true})
+    }
   }
 
   const logout = () => {
