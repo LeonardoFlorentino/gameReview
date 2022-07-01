@@ -12,8 +12,6 @@ import {
     ImageCardContainer,
     ImageCard,
     ScoreContainer,
-    StarGradeEmpty,
-    StarGradeFull,
     AwardIcon,
     HomeFooter
 } from './styles';
@@ -89,7 +87,7 @@ export const Home = () => {
                                         <ImageCard src={game.image} alt={game.title} />
                                     </ImageCardContainer>
                                     <ScoreContainer >
-                                        <AwardIcon />{game.score} de 10
+                                        <AwardIcon />{`${(Math.round(game.score*100)/100).toFixed(1)} de 10`} 
                                     </ScoreContainer >
                                 </CardSlide>)}
                         </Slider>

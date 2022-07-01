@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from "axios";
 import { useEffect, useState, createContext, useContext } from "react";
 import { toast } from 'react-toastify'
 
@@ -38,7 +37,6 @@ export const GameProvider = (props: any) => {
 
   const [game, setGame] = useState<typeof initalGameData>(initalGameData);
   const [DB, setDB] = useState<typeof initialDB>(initialDB);
-  const [reload, setReload] = useState<boolean>(true)
 
   const getGame = async (id: number, showStatus: boolean) => {
     const resp = await fetch(`${URL_API}/${id}`);

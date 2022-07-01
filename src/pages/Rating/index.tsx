@@ -16,15 +16,12 @@ import {
     ButtonInput,
     ImageCardContainer,
     ImageCard,
-    ScoreContainer,
-    StarGradeEmpty,
-    StarGradeFull,
+    AverageSocore,
     HomeFooter
 } from './styles';
 
 import { Navbar } from '../../components/Navbar';
 
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -117,6 +114,9 @@ export const Rating = () => {
                                 <ElementRateContainer key={key}>
                                     <ImageCardContainer>
                                         <ImageCard src={game.image} alt={game.title} />
+                                        <AverageSocore>
+                                            {`média: ${(Math.round(game.score*100)/100).toFixed(1)}`}
+                                        </AverageSocore>
                                     </ImageCardContainer>
                                     <TitleCard>{game.title}</TitleCard>
                                     <InputCard>

@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { FiLogOut } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
-import { MdOutlineGrade } from 'react-icons/md'
-import { MdGrade } from 'react-icons/md'
 
 export const HomeContainer = styled.div`
     display: flex ;
@@ -91,11 +89,15 @@ export const ListRateContainer = styled.div`
 export const ElementRateContainer = styled.div`
     display:grid ;
     grid-template-columns: 1fr 1fr 1fr ;
+    align-items:center ;
     width:100% ;
     padding:20px ;
 `
 
 export const TitleCard = styled.h3`
+    display:flex ;
+    justify-content:center ;
+    align-items:center ;
     color: #ddd ;
     font-weight:100 ;
     font-size:30px ;
@@ -116,7 +118,6 @@ export const InputContainer = styled.div`
     display:flex ;
     justify-content:center ;
     align-items:center ;
-    width:100% ;
 `
 
 export const RateDisplay = styled.div`
@@ -133,7 +134,6 @@ export const RateDisplay = styled.div`
     background-color:#00fa9a ;
     color:#292929 ;
 `
-
 export const ButtonInput = styled.button`
 	border: none;
 	padding: 0;
@@ -174,17 +174,38 @@ export const ButtonRate = styled.button`
 
 export const ImageCardContainer = styled.div`
     display:flex;
+    flex-direction:column ;
     justify-content:center ;
     align-items:center ;
 `
+
+export const AverageSocore = styled.text`
+    width:100px ;
+    color:black ;
+    font-family:'KarmaFuture' ;
+    border-top:4px solid #00fa9a ;
+    border-right:4px solid #00fa9a ;
+    border-bottom:4px solid #00fa9a ;
+    border-left:4px solid #00fa9a ;
+    border-radius: 10px 10px 10px 10px ;
+    display:flex ;
+    justify-content:center ;
+    align-items:center ;
+    position:relative ;
+    left:75px ;
+    bottom:18px ;
+    background-color:#eee ;
+`
+
+
 
 export const ImageCard = styled.img`
     display:flex;
     justify-content:center ;
     align-items:center ;
-    width:150px ;
+    height: 130px;
     border-radius:5px ;
-    border: 5px solid #00ae6b  ;
+    border: 5px solid #00fa9a  ;
 `
 
 export const ScoreContainer = styled.div`
@@ -197,14 +218,6 @@ export const ScoreContainer = styled.div`
     border-radius: 0px 0px 10px 10px ;
 `
 
-export const StarGradeEmpty = styled(MdOutlineGrade)`
-    width:40px ;
-    height: 40px;
-`
-export const StarGradeFull = styled(MdGrade)`
-    width:40px ;
-    height: 40px;
-`
 
 export const HomeFooter = styled.div`
     position: fixed;
