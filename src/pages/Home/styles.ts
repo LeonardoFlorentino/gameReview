@@ -3,7 +3,8 @@ import { FiLogOut } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import { MdOutlineGrade } from 'react-icons/md'
 import { MdGrade } from 'react-icons/md'
-import {FaAward} from 'react-icons/fa'
+import { FaAward } from 'react-icons/fa'
+import Slider from "react-slick";
 
 export const HomeContainer = styled.div`
     display: flex ;
@@ -74,8 +75,29 @@ export const TitlePage = styled.h1`
     font-weight:100 ;
     color: #fff ;
     font-family: 'Blox' ;
-    font-size:80px ;
     font-style: initial ;
+    ${props => props.theme.breakpoints.up("sm")} {
+        font-size:60px ;
+    }
+    ${props => props.theme.breakpoints.up("md")} {
+        font-size:80px ;
+    }
+    ${props => props.theme.breakpoints.up("lg")} {
+        font-size:80px ;
+    }
+`
+
+export const LoadingPage = styled.div`
+    height:50vh ;
+    padding:20px 20px ;
+    display: flex ;
+    font-weight:100 ;
+    color: #fff ;
+    font-family: 'ka1';
+    font-size:50px ;
+    font-style: initial ; 
+    justify-content: center ;
+    align-items:center ;
 `
 
 export const SlidesContainer = styled.div`
@@ -85,17 +107,30 @@ export const SlidesContainer = styled.div`
 `
 
 export const CardSlide = styled.div`
-    display:flex ;
-    flex-direction: column;
+    display:grid ;
+    grid-template-columns:1fr 1fr 80px ;
 `
 
 export const TitleCard = styled.h3`
+    display:flex ;
+    align-items:center ;
+    justify-content:center ;
     color: #ddd ;
     font-weight:100 ;
-    font-size:40px ;
     text-shadow: 1px 1px #00fa9a ;
     font-family: 'ka1';
     text-align:center ;
+    ${props => props.theme.breakpoints.up("sm")} {
+        font-size:40px ;
+        height:100px ;
+    }
+    ${props => props.theme.breakpoints.up("md")} {
+        font-size:40px ;
+        height:100px ;
+    }
+    ${props => props.theme.breakpoints.up("lg")} {
+        font-size:40px ;
+    }
 `
 
 export const ImageCardContainer = styled.div`
@@ -114,24 +149,60 @@ export const ImageCard = styled.img`
 `
 
 export const ScoreContainer = styled.div`
+    position:bottom ;
     margin-top:20px ;
-    height:100% ;
     display:flex ;
     align-items:center ;
     justify-content: center ;
     background-color: #00ae6b ;
-    width:80vw ;
-    height:80px ;
-    font-family:  'KarmaFuture';
-    font-size:50px ;
-    border-radius:0px 0px 10px 10px;
+    height:40px ;
+    font-family: 'KarmaFuture';
+    font-size: 20px;
+    ${props => props.theme.breakpoints.up("sm")} {
+        font-size:40px ;
+        height:100px ;
+    }
+    ${props => props.theme.breakpoints.up("md")} {
+        font-size:40px ;
+        height:100px ;
+    }
+    ${props => props.theme.breakpoints.up("lg")} {
+        font-size:40px ;
+    }
 `
 
- export const AwardIcon = styled(FaAward)`
+export const SliderModified = styled(Slider).attrs((props:any) => {
+    const {theme} = props
+    if(theme.breakpoints.up("sm"))
+    return {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000
+    }
+})`
+`
+
+export const AwardIcon = styled(FaAward)`
     position:relative ;
-    width:60px ;
-    height: 60px;
     right: 40px;
+    width:30px ;
+    height: 30px;
+    ${props => props.theme.breakpoints.up("sm")} {
+        width:60px ;
+        height: 60px;
+    }
+    ${props => props.theme.breakpoints.up("md")} {
+        width:60px ;
+        height: 60px;
+    }
+    ${props => props.theme.breakpoints.up("lg")} {
+        width:60px ;
+        height: 60px;
+    }
  `
 
 export const StarGradeEmpty = styled(MdOutlineGrade)`
@@ -142,93 +213,6 @@ export const StarGradeFull = styled(MdGrade)`
     width:40px ;
     height: 40px;
 `
-
-// export const ProfileContainer = styled.div`
-//     display: flex;
-//     width: 100vw;
-//     padding: 20px 0px;
-//     justify-content: center;
-//     background: conic-gradient(#292929 0.25turn, #343434 0.25turn 0.5turn, #343434 0.5turn 0.75turn, #292929 0.75turn);
-// `
-
-// export const ProfilePic = styled.img`
-//     align-items: center;
-//     background-color: #eee;
-//     border: 3px solid white;
-//     border-radius: 100%;
-//     height: 150px;
-//     width:150px;
-// `
-
-// export const MainInfoContainer = styled.div`
-//     width: 100%;
-//     display: grid;
-//     grid-template-areas:
-//     "a b"
-//     "c d";
-//     grid-template-columns: 20px 1fr;
-//     grid-auto-rows: 1fr 1fr;
-//     justify-items: start;
-// `
-
-// export const NameLocationContainer = styled.div`
-//     display: flex;
-//     padding: 10px 0px;
-//     flex-direction: column;
-// `
-
-// export const Square = styled.div`
-//     grid-area:a;
-//     align-self: start;
-//     background-color: #e6cc12;
-//     height: 40px;
-//     width: 10px;
-//     border-radius: 0px 10px 10px 0px;
-//     margin-right: 20px;
-// `
-
-// export const Name = styled.div`
-//     width: 100%;
-//     padding-bottom: 5px;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: flex-start;
-//     align-items: center;
-//     font-weight: bold;
-//     font-size: 1.5rem;
-// `
-
-// export const InfoContainer = styled(Link)`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     align-items: center;
-//     cursor: pointer;
-//     color: inherit;
-//     text-decoration: none;
-// `
-
-// export const InfoName = styled.div`
-//     font-size: 0.8rem;
-// `
-
-// export const InfosContainer = styled.div`
-//     width: 100%;
-//     padding: 20px 0px;
-//     background-color:#3C3C3C ;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-around;
-//     align-items: center;
-//     margin-bottom: 40px;
-
-// `
-
-// export const InfoNumber = styled.div`
-//     font-weight: bold;
-//     font-size: 2rem;
-// `
-
 
 export const HomeFooter = styled.div`
     position: fixed;

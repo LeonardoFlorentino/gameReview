@@ -12,6 +12,7 @@ const initalGameData = {
 
 const initialDB = {
   games: [initalGameData],
+  totalElements: 0,
   isLoaded: false
 }
 
@@ -71,7 +72,7 @@ export const GameProvider = (props: any) => {
     try {
       if (resp.ok) {
         const respJSON = (await resp.json());
-        setDB({ isLoaded: true, games: respJSON.content })
+        setDB({ isLoaded: true, games: respJSON.content, totalElements: respJSON.totalElements })
       }
       else {
         setDB(initialDB)

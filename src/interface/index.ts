@@ -1,20 +1,6 @@
 import { ReactNode } from "react";
 export interface dataTypes {
-    user?: Object,
-    id?: string,
-    name?: string,
-    login?: string,
-    avatar_url?: string,
-    email?: string,
-    location?: string,
-    followers?: number,
-    following?: number,
-    public_repos?: number,
-    bio?: string,
-    node_id?: string,
-    description?:string,
-    stargazers_count?: number,
-    isLogged?: boolean
+  id:number
 }
 
 interface userProps {
@@ -52,10 +38,7 @@ export interface pageProps {
 
 
 export interface paginatorProps {
-    typePage: string,
-    showData: (value: dataTypes) => ReactNode,
     numOfElements: number | undefined,
-    // fetchUserData: (value1: string, value2: boolean) => Promise<number>,
-    userName: string,
     per_page?: number,
+    typeOfOrdenation?: string
   }
