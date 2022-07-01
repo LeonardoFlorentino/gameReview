@@ -63,12 +63,13 @@ export const RateComponent = ({ id }: { id: number }) => {
 export const RateList = ({ id, key, game }: { id: number, key: number,game:any }) => {
     const history = useHistory()
     const { user } = useAuth()
-    const { DB, loadGames } = useGame()
+    const { DB, loadGames, currentPageData } = useGame()
     const muiTheme = useTheme();
+    const {per_page, typeOfOrdenation, page} = currentPageData
 
     useEffect(() => {
         if (!DB.isLoaded) {
-            loadGames()
+            loadGames(per_page, typeOfOrdenation, page)
         }
         if (user.email.length === 0) {
             history.push('/')

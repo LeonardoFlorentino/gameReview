@@ -16,21 +16,31 @@ const initialDB = {
   isLoaded: false
 }
 
+const initalPageData = {
+  per_page: 10,
+  page: 1,
+  typeOfOrdenation: 'id'
+}
+
 const URL_API = 'https://uni-games.herokuapp.com'
 
 interface userContextInterface {
   getGameById: (id: number, showStatus: boolean) => void,
-  loadGames: () => void,
+  loadGames: (per_page: number, typeOfOrdenation: string, page:number) => void,
   DB: typeof initialDB,
-  alterGame: (id: number, email: string, score: number) => void
+  alterGame: (id: number, email: string, score: number) => void,
+  currentPageData: any,
+  setCurrentPageData: any
 }
 
 export const GameContext = createContext<userContextInterface>(
   {
     getGameById: (id) => { },
-    loadGames: () => { },
+    loadGames: (per_page, typeOfOrdenation, page) => { },
     DB: initialDB,
-    alterGame: (id, email, score) => { }
+    alterGame: (id, email, score) => { },
+    currentPageData: {},
+    setCurrentPageData: () => {}
   }
 );
 
@@ -38,6 +48,7 @@ export const GameProvider = (props: any) => {
 
   const [game, setGame] = useState<typeof initalGameData>(initalGameData);
   const [DB, setDB] = useState<typeof initialDB>(initialDB);
+  const [currentPageData, setCurrentPageData] = useState<typeof initalPageData>(initalPageData)
 
   const getGame = async (id: number, showStatus: boolean) => {
     const resp = await fetch(`${URL_API}/${id}`);
@@ -67,8 +78,8 @@ export const GameProvider = (props: any) => {
     getGame(id, showStatus)
   }
 
-  const getGames = async () => {
-    const resp = await fetch(`${URL_API}/?size=20&sort=id`);
+  const getGames = async (per_page: number, typeOfOrdenation: string, page:number) => {
+    const resp = await fetch(`${URL_API}/?size=${per_page}&sort=id&page=${page}`)
     try {
       if (resp.ok) {
         const respJSON = (await resp.json());
@@ -83,8 +94,8 @@ export const GameProvider = (props: any) => {
     }
   }
 
-  const loadGames = () => {
-    getGames()
+  const loadGames = (per_page: number, typeOfOrdenation: string, page:number) => {
+    getGames(per_page, typeOfOrdenation, page)
   }
 
   const alterGame = async (id: number, email: string, score: number) => {
@@ -100,7 +111,7 @@ export const GameProvider = (props: any) => {
       if (resp.ok) {
         const game = DB.games.filter(game => game.id === id)[0]
         handleStatus(200, game.title, score)
-        await getGames()
+        await getGames(currentPageData.per_page,currentPageData.typeOfOrdenation,currentPageData.page)
       }
     }
     catch (e) {
@@ -118,7 +129,7 @@ export const GameProvider = (props: any) => {
   }, [DB]);
 
   return (
-    <GameContext.Provider value={{ getGameById, DB, loadGames, alterGame }}>
+    <GameContext.Provider value={{ getGameById, DB, loadGames, alterGame, currentPageData, setCurrentPageData }}>
       {props.children}
     </GameContext.Provider>
   );

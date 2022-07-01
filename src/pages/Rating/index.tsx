@@ -30,12 +30,13 @@ export const Rating = () => {
 
     const history = useHistory()
     const { logout, user } = useAuth()
-    const { DB, loadGames } = useGame()
+    const { DB, loadGames,currentPageData } = useGame()
     const muiTheme = useTheme();
+    const {per_page, typeOfOrdenation, page} = currentPageData
 
     useEffect(() => {
         if (!DB.isLoaded) {
-            loadGames()
+            loadGames(per_page, typeOfOrdenation, page)
         }
         if (user.email.length === 0) {
             history.push('/')

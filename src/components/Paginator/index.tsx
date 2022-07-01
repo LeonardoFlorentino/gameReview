@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import "./styles.css";
 import { paginatorProps } from '../../interface'
 import { RateList } from "../../pages/Rating/components/GameRateItem";
+import { useGame } from "../../providers/store";
 
 interface handlePageArgs {
   selected: number
@@ -11,18 +12,14 @@ interface handlePageArgs {
 
 
 export const Paginator = (props: paginatorProps) => {
-  const {  numOfElements = 0, per_page = 7, typeOfOrdenation = 'id' } = props
+  const { numOfElements = 0, per_page = 7, typeOfOrdenation = 'id' } = props
   const [currentPage, setCurrentPage] = useState(1);
-  const [data, setData] = useState([]);
+  const { DB,  loadGames, setCurrentPageData } = useGame()
 
 
   useEffect(() => {
-    const fetchPageData = async (page: number) => {
-      fetch(`https://uni-games.herokuapp.com/?size=${per_page}&sort=${typeOfOrdenation}&page=${page}`)
-        .then((res) => res.json())
-        .then((value) => setData(value.content))
-    }
-    fetchPageData(currentPage);
+    setCurrentPageData({per_page, currentPage, typeOfOrdenation})
+    loadGames(per_page, typeOfOrdenation,currentPage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
@@ -33,14 +30,13 @@ export const Paginator = (props: paginatorProps) => {
     setCurrentPage(selected + 1);
   }
 
-
   const pageCount = Math.ceil(numOfElements / per_page);
 
   return (
     <div className="content">
       <div className="content-page">
-        {data.map((game:any, key:number) =>
-          <RateList id={game.id} key={key} game={game}/>
+        {DB.games.map((game: any, key: number) =>
+          <RateList id={game.id} key={key} game={game} />
         )}
       </div>
       <ReactPaginate
