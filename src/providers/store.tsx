@@ -3,7 +3,7 @@ import { useEffect, useState, createContext, useContext } from "react";
 import { toast } from 'react-toastify'
 
 const initalGameData = {
-  gameId: 0,
+  id: 0,
   email: '',
   image: '',
   score: 0,
@@ -15,6 +15,8 @@ const initialDB = {
   games: [initalGameData],
   isLoaded: false
 }
+
+const URL_API = 'https://uni-games.herokuapp.com'
 
 interface userContextInterface {
   getGameById: (id: number, showStatus: boolean) => void,
@@ -36,15 +38,15 @@ export const GameProvider = (props: any) => {
 
   const [game, setGame] = useState<typeof initalGameData>(initalGameData);
   const [DB, setDB] = useState<typeof initialDB>(initialDB);
+  const [reload, setReload] = useState<boolean>(true)
 
   const getGame = async (id: number, showStatus: boolean) => {
-    const resp = await fetch(`https://uni-games.herokuapp.com/${id}`);
-    if (showStatus) handleStatus(resp.status | 0)
+    const resp = await fetch(`${URL_API}/${id}`);
     try {
       if (resp.ok) {
         const respJSON = (await resp.json());
         const game = {
-          gameId: respJSON.gameId,
+          id: respJSON.id,
           email: respJSON.email,
           score: respJSON.score,
           count: respJSON.count,
@@ -67,7 +69,7 @@ export const GameProvider = (props: any) => {
   }
 
   const getGames = async () => {
-    const resp = await fetch(`https://uni-games.herokuapp.com`);
+    const resp = await fetch(`${URL_API}/?size=20&sort=id`);
     try {
       if (resp.ok) {
         const respJSON = (await resp.json());
@@ -87,45 +89,34 @@ export const GameProvider = (props: any) => {
   }
 
   const alterGame = async (id: number, email: string, score: number) => {
-    const axios = require('axios').default;
-    const config: AxiosRequestConfig = {
-      baseURL: "https://uni-games.herokuapp.com",
-      method: "PUT",
-      url: "/scores",
-      data:{
-        gameId: id,
-        email: email,
-        score: score
+    try {
+      const resp = await
+        fetch(`${URL_API}/scores`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ gameId: id, email: email, score: score })
+        })
+      if (resp.ok) {
+        const game = DB.games.filter(game => game.id === id)[0]
+        handleStatus(200, game.title, score)
+        await getGames()
       }
     }
-
-    axios.put()
-  //   try {
-  //     const resp = await
-  //       fetch(`https://uni-games.herokuapp.com/scores`, {
-  //         method: 'put',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify({ gameId: id, email: email, score: score })
-  //       })
-  //     if (resp.ok) {
-  //       await getGames()
-  //     }
-  //   }
-  //   catch (e) {
-  //     alert(e)
-  //   }
+    catch (e) {
+      alert(e)
+    }
   }
 
-  // useEffect(() => {
-  //   const gamesStorage = localStorage.getItem("games");
-  //   if (gamesStorage) {
-  //     setGame(JSON.parse(gamesStorage));
-  //   } else {
-  //     setGame(initalGameData);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const gamesStorage = localStorage.getItem("games");
+    if (gamesStorage) {
+      setGame(JSON.parse(gamesStorage));
+    } else {
+      setGame(initalGameData);
+    }
+  }, [DB]);
 
   return (
     <GameContext.Provider value={{ getGameById, DB, loadGames, alterGame }}>
@@ -134,15 +125,14 @@ export const GameProvider = (props: any) => {
   );
 };
 
-const handleStatus = (status: number) => {
+const handleStatus = (status: number, gameName: string, score: number) => {
   if (status === 200) {
-    toast.success(`Usuário logado`, {
-      position: "top-center",
-      autoClose: 1500,
+    toast.success(`${gameName} avaliado com nota: ${score}.0`, {
+      autoClose: 5000,
     })
   }
   if (status === 404) {
-    toast.error('Usuário não encontrado', {
+    toast.error('Jogo não encontrado', {
       autoClose: 3000,
     })
   }

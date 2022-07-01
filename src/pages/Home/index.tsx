@@ -29,6 +29,7 @@ import { useGame } from '../../providers/store';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../providers/auth';
+import { useHistory } from 'react-router';
 
 const settings = {
     dots: false,
@@ -42,6 +43,7 @@ const settings = {
 
 export const Home = () => {
 
+    const history = useHistory()
     const { logout, user } = useAuth()
     const { DB, loadGames } = useGame()
 
@@ -49,8 +51,15 @@ export const Home = () => {
         if (!DB.isLoaded) {
             loadGames()
         }
+        if (user.email.length === 0) {
+            history.push('/')
+            toast.error("Usuário não logado", {
+                autoClose: 3000
+            })
+        }
     }
-        , [DB, loadGames])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        , [DB, loadGames, user])
 
     const onSubmit = () => {
         logout()
@@ -62,7 +71,7 @@ export const Home = () => {
         <HomeContainer>
             <HomeHeaderMain>
                 <LoginName to={`/home`} style={{ marginLeft: '20px' }}>
-                    #{user.email}
+                    #{user?.email}
                 </LoginName  >
                 <ChangeProfileContainer to='/' style={{ right: '10px' }} onClick={() => onSubmit()}>
                     Sair<LogOutIcon color={'red'} />
@@ -73,14 +82,14 @@ export const Home = () => {
                 <SlidesContainer>
                     {DB.isLoaded ?
                         <Slider {...settings}>
-                            {DB.games.map(game =>
-                                <CardSlide>
+                            {DB.games.map((game, key) =>
+                                <CardSlide key={key}>
                                     <TitleCard>{game.title}</TitleCard>
                                     <ImageCardContainer>
                                         <ImageCard src={game.image} alt={game.title} />
                                     </ImageCardContainer>
                                     <ScoreContainer >
-                                        <AwardIcon/>{game.score} de 10
+                                        <AwardIcon />{game.score} de 10
                                     </ScoreContainer >
                                 </CardSlide>)}
                         </Slider>

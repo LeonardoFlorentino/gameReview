@@ -113,21 +113,62 @@ export const InputCard = styled.div`
 `
 
 export const InputContainer = styled.div`
+    display:flex ;
+    justify-content:center ;
+    align-items:center ;
+    width:100% ;
 `
 
 export const RateDisplay = styled.div`
-    font-size: 20px ;
+    border: 4px solid #292929 ;
+    border-radius:6px ;
+    height:60px ;
+    width:50px ;
+    display:flex ;
+    align-items: center;
+    justify-content:center ;
+    font-size: 25px ;
     font-family:'KarmaFuture' ;
     margin: 0px 10px ;
+    background-color:#00fa9a ;
+    color:#292929 ;
 `
 
 export const ButtonInput = styled.button`
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+    border-radius:100% ;
     width:40px ;
     height:40px ;
+    border: 4px solid #000 ;
+    &:hover {
+    cursor: pointer;
+    background-color:#00fa9a ;
+    border: 4px solid #fff ;
+    }
 `
 
 export const ButtonRate = styled.button`
-
+    font-family:'ka1' ;
+    margin: 20px ;
+    font-size:15px ;
+    background: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+    border: 4px solid #00fa9a  ;
+    border-radius:10px ;
+    background-color:#ddd ;
+    padding:10px;
+    &:hover {
+    cursor: pointer;
+    background-color:#00fa9a ;
+    border: 4px solid #fff ;
+    transform: translate(0%, -5%);
+    transition: 0.3s ease-out;
+  }
 `
 
 

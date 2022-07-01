@@ -9,13 +9,11 @@ import { GameProvider } from './providers/store'
 
 
 ReactDOM.render(
-  <React.StrictMode>
     <GameProvider>
       <AuthProvider>
         <App />
       </AuthProvider >
-    </GameProvider>
-  </React.StrictMode>,
+    </GameProvider>,
 
   document.getElementById('root')
 );

@@ -33,19 +33,62 @@ import { useGame } from '../../providers/store';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../providers/auth';
+import { useHistory } from 'react-router';
 
+const RateComponent = ({id}:{id:number}) => {
+
+    const { user } = useAuth()
+    const [rateValue, setRateValue] = useState(0)
+    const {  alterGame } = useGame()
+
+    const increment = (originalValue: number) => {
+        if( 0 > originalValue || originalValue >= 10 ){
+            return originalValue
+        }
+        else{
+            return originalValue + 1
+        }
+    }
+
+    const decrement = (originalValue: number) => {
+        if( 0 >= originalValue || originalValue > 10 ){
+            return originalValue
+        }
+        else{
+            return originalValue - 1
+        }
+    }
+    return (
+        <>
+            <InputContainer>
+                <ButtonInput onClick={() => setRateValue(increment(rateValue))} >+</ButtonInput >
+                <RateDisplay>{rateValue}</RateDisplay>
+                <ButtonInput onClick={() => setRateValue(decrement(rateValue))}>-</ButtonInput >
+            </InputContainer>
+            <ButtonRate onClick={async () => { alterGame(id, user.email, rateValue) }}>Enviar</ButtonRate>
+        </>
+    )
+}
 
 export const Rating = () => {
 
+    const history = useHistory()
     const { logout, user } = useAuth()
-    const { DB, loadGames, alterGame } = useGame()
+    const { DB, loadGames } = useGame()
 
     useEffect(() => {
         if (!DB.isLoaded) {
             loadGames()
         }
+        if (user.email.length === 0) {
+            history.push('/')
+            toast.error("Usuário não logado", {
+                autoClose: 3000
+            })
+        }
     }
-        , [DB, loadGames])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        , [DB, loadGames, user])
 
     const onSubmit = () => {
         logout()
@@ -54,19 +97,7 @@ export const Rating = () => {
         })
     }
 
-    const RateComponent = (gameId: number, originalRate: number) => {
-        const [rateValue, setRateValue] = useState(0 || originalRate)
-        return (
-            <>
-                <InputContainer>
-                    <RateDisplay>{rateValue}</RateDisplay>
-                    <ButtonInput onClick={() => setRateValue(rateValue + 1)} >+</ButtonInput >
-                    <ButtonInput onClick={() => setRateValue(rateValue - 1)}>-</ButtonInput >
-                </InputContainer>
-                <ButtonRate onClick={() => alterGame(gameId, user.email, rateValue)}>Enviar</ButtonRate>
-            </>
-        )
-    }
+
     return (
         <HomeContainer>
             <HomeHeaderMain>
@@ -81,15 +112,15 @@ export const Rating = () => {
                 <TitlePage>Notas dos Jogos</TitlePage>
                 <ListRateContainer>
                     {DB.isLoaded ?
-                        DB.games.map(game => {
+                        DB.games.map((game, key) => {
                             return (
-                                <ElementRateContainer>
+                                <ElementRateContainer key={key}>
                                     <ImageCardContainer>
                                         <ImageCard src={game.image} alt={game.title} />
                                     </ImageCardContainer>
                                     <TitleCard>{game.title}</TitleCard>
                                     <InputCard>
-                                        {RateComponent(game.gameId, game.score)}
+                                        <RateComponent id={game.id}/>
                                     </InputCard>
                                 </ElementRateContainer>
                             )

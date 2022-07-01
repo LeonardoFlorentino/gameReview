@@ -25,7 +25,7 @@ export const Login = () => {
     const { login, user } = useAuth() 
 
     useEffect(() => {
-        if (user.isLogged) {
+        if (user.email.length !== 0) {
             history.push('/home')
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
